@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yessine & Monica | Wedding</title>
+    <meta name="description" content="Wedding of Yessine & Monica - June 26, 2027 in Gela, Sicily">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+    <!-- Intro Envelope Overlay -->
+    <div id="intro-overlay" class="intro-overlay">
+        <div class="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-paper">
+                    <div class="invitation-card">
+                        <span class="card-subtitle">We're Getting Married</span>
+                        <h2 class="card-names">Yessine & Monica</h2>
+                        <p class="card-date">June 26, 2027</p>
+                        <button id="enter-btn" class="enter-btn" aria-label="Enter the website">Tap to enter</button>
+                    </div>
+                </div>
+                <div class="envelope-body"></div>
+                <div class="wax-seal" id="wax-seal" role="button" aria-label="Open invitation">
+                    <div class="seal-inner">
+                        <span class="initials">Y & M</span>
+                        <svg class="anchor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                            <path d="M12 5V19M12 5L9 8M12 5L15 8M12 19C9 19 6 17 6 14M12 19C15 19 18 17 18 14" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <button id="skip-intro" class="skip-intro">Skip Intro</button>
+        </div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <!-- Main Website Content -->
+    <main id="main-content" style="opacity: 0; visibility: hidden;">
+        <nav id="navbar">
+            <div class="nav-container">
+                <a href="#home" class="logo" aria-label="Home">Y&M</a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#story">Our Story</a></li>
+                    <li><a href="#details">Details</a></li>
+                    <li><a href="#timeline">Timeline</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#rsvp">RSVP</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h2 class="hero-subtitle">The Wedding of</h2>
+                <h1 class="hero-title">Yessine & Monica</h1>
+                <p class="hero-date">26.06.2027</p>
+                <div id="countdown" class="countdown" role="timer" aria-label="Countdown to wedding"></div>
+                <div class="scroll-indicator" aria-hidden="true">
+                    <span>Scroll</span>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story -->
+        <section id="story" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Our Journey</span>
+                    <h2 class="title">Our Story</h2>
+                </div>
+                <div class="story-grid">
+                    <div class="story-item">
+                        <div class="story-img reveal-up">
+                            <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=1000" alt="Yessine and Monica first meeting by the sea" loading="lazy">
+                        </div>
+                        <div class="story-text reveal-up">
+                            <h3>Where it all began</h3>
+                            <p>A chance encounter by the shores of the Mediterranean. Two souls found their path under the golden sun, beginning a journey that would lead to this very moment. Their love grew with every sunset shared over the crystalline waters of the coast.</p>
+                        </div>
+                    </div>
+                    <div class="story-item reverse">
+                        <div class="story-img reveal-up">
+                            <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=1000" alt="A romantic proposal at sunset" loading="lazy">
+                        </div>
+                        <div class="story-text reveal-up">
+                            <h3>The Proposal</h3>
+                            <p>Under a canopy of stars and the gentle sound of waves in Gela, a question was asked, and a lifetime of "Yes" began. It was a moment of pure magic, reflecting the deep connection they built through years of adventure and shared dreams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wedding Details -->
+        <section id="details" class="section bg-soft">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Join Us</span>
+                    <h2 class="title">Wedding Details</h2>
+                </div>
+                <div class="details-grid">
+                    <div class="details-card reveal-up">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M12 21s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 7.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="9" r="3"/></svg>
+                        </div>
+                        <h3>The Venue</h3>
+                        <p>B Cool Beach, Gela<br>Sicily, Italy</p>
+                        <a href="https://maps.google.com" target="_blank" class="btn-text" rel="noopener">Get Directions</a>
+                    </div>
+                    <div class="details-card reveal-up" style="transition-delay: 0.2s">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <h3>When</h3>
+                        <p>Saturday, June 26, 2027<br>At Half Past Four</p>
+                    </div>
+                    <div class="details-card reveal-up" style="transition-delay: 0.4s">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>
+                        </div>
+                        <h3>Dress Code</h3>
+                        <p>Mediterranean Elegant<br>Light fabrics & soft tones</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section id="timeline" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">The Celebration</span>
+                    <h2 class="title">The Schedule</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-item">
+                        <div class="time">16:30</div>
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>The Vows</h3>
+                            <p>A seaside ceremony at B Cool Beach</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">18:00</div>
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>Aperitivo</h3>
+                            <p>Signature cocktails & Mediterranean bites</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">20:00</div>
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>Dinner</h3>
+                            <p>Fine Sicilian cuisine under the stars</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">22:30</div>
+                        <div class="dot"></div>
+                        <div class="content">
+                            <h3>Party</h3>
+                            <p>Dancing the night away by the ocean</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="section bg-soft">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Memories</span>
+                    <h2 class="title">Gallery</h2>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800" alt="Wedding flowers and rings" loading="lazy"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Ceremony setup at the beach" loading="lazy"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&q=80&w=800" alt="Groom and bride celebrating" loading="lazy"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="Mediterranean wedding table setup" loading="lazy"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800" alt="Wedding party celebration" loading="lazy"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&q=80&w=800" alt="Bride at the sunset" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section id="rsvp" class="section">
+            <div class="container">
+                <div class="rsvp-card reveal-up">
+                    <div class="section-header">
+                        <span class="subtitle">Be Our Guest</span>
+                        <h2 class="title">RSVP</h2>
+                    </div>
+                    <form id="rsvp-form" class="rsvp-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" name="first-name" required placeholder="Elena">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" name="last-name" required placeholder="Rossi">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="elena@example.com">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="attendance">Will you attend?</label>
+                                <select id="attendance" name="attendance" required>
+                                    <option value="">Select an option</option>
+                                    <option value="yes">Yes, I'll be there</option>
+                                    <option value="no">Regretfully, I can't</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="guests">Number of Guests</label>
+                                <input type="number" id="guests" name="guests" min="1" max="10" value="1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="meal">Meal Preference</label>
+                            <select id="meal" name="meal">
+                                <option value="fish">Mediterranean Fish</option>
+                                <option value="meat">Premium Meat Selection</option>
+                                <option value="veg">Vegetarian Garden</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="allergies">Food Allergies</label>
+                            <input type="text" id="allergies" name="allergies" placeholder="e.g. Nuts, Gluten">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message to the couple (Optional)</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Your warm wishes..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Response</button>
+                        <div id="rsvp-message" class="form-status" aria-live="polite"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section bg-soft">
+            <div class="container">
+                <div class="section-header">
+                    <span class="subtitle">Information</span>
+                    <h2 class="title">FAQ</h2>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">What is the Dress Code? <span>+</span></button>
+                        <div class="faq-answer"><p>We'd love to see our guests in Mediterranean Elegant attire. For ladies, think airy midi or maxi dresses in soft tones. For gentlemen, linen suits or light-colored blazers without ties are perfect.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">Are children welcome? <span>+</span></button>
+                        <div class="faq-answer"><p>To allow all guests a night of relaxation and uninhibited revelry, we have chosen for our wedding to be an adults-only occasion. We hope this advance notice means you are still able to share our big day!</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">Is there parking available? <span>+</span></button>
+                        <div class="faq-answer"><p>Yes, B Cool Beach offers private, secure parking for all our wedding guests right at the venue entrance.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">Gifts and Registry? <span>+</span></button>
+                        <div class="faq-answer"><p>Your presence at our wedding is the greatest gift we could ask for. If you wish to honor us with a gift, a contribution towards our honeymoon in the Maldives would be sincerely appreciated.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <h2 class="footer-logo">Y&M</h2>
+                <p class="hashtag">#YessineAndMonica2027</p>
+                <div class="social-links">
+                    <a href="#" rel="noopener">Instagram</a>
+                    <a href="#" rel="noopener">Facebook</a>
+                </div>
+                <p class="thank-you">Thank you for being part of our story. See you in Sicily!</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- JS Modules -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

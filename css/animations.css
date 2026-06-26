@@ -1,0 +1,49 @@
+/* Global GSAP Classes */
+.reveal-up {
+    opacity: 0;
+}
+
+/* Floating Particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.4) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+}
+
+/* 3D Envelope Refinements */
+.envelope {
+    transition: transform 0.5s ease;
+}
+
+.envelope.opened .envelope-flap {
+    z-index: 1;
+}
+
+.envelope-flap {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* Scroll Animation classes */
+.reveal-left { opacity: 0; }
+.reveal-right { opacity: 0; }
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 4s ease-in-out infinite;
+}
