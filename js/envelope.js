@@ -2,7 +2,6 @@ export const initEnvelope = () => {
     const overlay = document.getElementById('intro-overlay');
     const envelope = document.getElementById('envelope');
     const waxSeal = document.getElementById('wax-seal');
-    const enterBtn = document.getElementById('enter-btn');
     const skipBtn = document.getElementById('skip-intro');
     const mainContent = document.getElementById('main-content');
     const introMusic = document.getElementById('intro-music');
@@ -14,79 +13,74 @@ export const initEnvelope = () => {
         overlay.style.display = 'none';
         mainContent.style.opacity = '1';
         mainContent.style.visibility = 'visible';
+        // Ensure entrance animations still play if needed
+        setTimeout(() => window.dispatchEvent(new CustomEvent('site-entered')), 100);
         return;
     }
 
     // GSAP Sequence
     const tl = gsap.timeline();
 
-    // 1. Initial fade in
     tl.to('.intro-labels', { opacity: 1, y: 0, duration: 1.5, ease: 'power2.out' })
-      .to('.envelope-wrapper', { opacity: 1, scale: 1, duration: 1.2, ease: 'back.out(1.7)' }, '-=0.5')
+      .to('.envelope-wrapper', { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, '-=0.5')
       .to('.skip-intro', { opacity: 1, duration: 1 }, '-=0.5');
 
-    // Floating particles
     createParticles();
 
-    // Handle Click to Open
-    const openEnvelope = () => {
+    // Handle Click to Open & Enter
+    const openAndEnter = () => {
         if (envelope.classList.contains('is-open')) return;
 
         envelope.classList.add('is-open');
 
-        // Play music on first interaction
         if (introMusic) {
             introMusic.play().catch(e => console.log('Autoplay blocked', e));
         }
 
+        // Realistic transition: Open then fade overlay
         const openTl = gsap.timeline();
-        openTl.to('.envelope-paper', {
-            y: -150,
-            duration: 1.5,
-            delay: 0.8,
-            ease: 'power2.inOut'
-        })
-        .to('.enter-btn', {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            ease: 'power2.out'
-        });
-    };
-
-    envelope.addEventListener('click', openEnvelope);
-    if (waxSeal) {
-        waxSeal.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openEnvelope();
-        });
-    }
-
-    // Handle Enter Website
-    const enterWebsite = () => {
-        sessionStorage.setItem('introShown', 'true');
-
-        gsap.to(overlay, {
+        openTl.to('.envelope-wrapper', {
+            scale: 1.2,
             opacity: 0,
             duration: 1.5,
-            ease: 'power2.inOut',
+            delay: 1,
+            ease: 'power2.inOut'
+        })
+        .to(overlay, {
+            opacity: 0,
+            duration: 1,
             onComplete: () => {
                 overlay.style.display = 'none';
+                sessionStorage.setItem('introShown', 'true');
                 gsap.to(mainContent, {
                     opacity: 1,
                     visibility: 'visible',
                     duration: 1,
                     onComplete: () => {
-                         // Trigger main site animations
                          window.dispatchEvent(new CustomEvent('site-entered'));
                     }
                 });
             }
-        });
+        }, '-=0.5');
     };
 
-    if (enterBtn) enterBtn.addEventListener('click', enterWebsite);
-    if (skipBtn) skipBtn.addEventListener('click', enterWebsite);
+    envelope.addEventListener('click', openAndEnter);
+    if (waxSeal) {
+        waxSeal.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openAndEnter();
+        });
+    }
+
+    if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            sessionStorage.setItem('introShown', 'true');
+            mainContent.style.opacity = '1';
+            mainContent.style.visibility = 'visible';
+            window.dispatchEvent(new CustomEvent('site-entered'));
+        });
+    }
 };
 
 function createParticles() {

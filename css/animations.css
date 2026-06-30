@@ -17,18 +17,20 @@
 .envelope-container {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    padding: 20px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    justify-content: center;
 }
 
 .intro-labels {
+    position: absolute;
+    top: 15%;
     text-align: center;
     opacity: 0;
     transform: translateY(-20px);
+    z-index: 10;
 }
 
 .intro-label-top {
@@ -45,14 +47,17 @@
     margin-top: 5px;
 }
 
-/* Envelope 3D Structure */
+/* Fullscreen Envelope Structure */
 .envelope-wrapper {
     position: relative;
-    width: 100%;
-    height: 320px;
-    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.15));
+    width: 90vw;
+    height: 60vh;
+    max-width: 800px;
+    max-height: 500px;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12));
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
+    z-index: 5;
 }
 
 .envelope {
@@ -76,7 +81,6 @@
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     z-index: 4;
     transform-origin: top;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     border-top: 1px solid rgba(0,0,0,0.02);
 }
 
@@ -88,7 +92,7 @@
     background-color: #fcfcfc;
     z-index: 3;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
-    background: linear-gradient(135deg, #fcfcfc 0%, #f0f0f0 100%);
+    background: linear-gradient(135deg, #fcfcfc 0%, #f1f1f1 100%);
 }
 
 .envelope::after {
@@ -98,74 +102,9 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: linear-gradient(45deg, #fcfcfc 0%, #f7f7f7 100%);
+    background: linear-gradient(45deg, #fcfcfc 0%, #f8f8f8 100%);
     clip-path: polygon(0 100%, 100% 100%, 50% 45%);
     z-index: 3;
-}
-
-/* The Paper/Invitation Card inside */
-.envelope-paper {
-    position: absolute;
-    top: 5px;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    background: white;
-    z-index: 2;
-    padding: 30px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.invitation-card {
-    text-align: center;
-    border: 1px solid var(--color-gold-light);
-    padding: 30px 20px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-}
-
-.card-subtitle {
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.6rem;
-    color: var(--color-gold);
-}
-
-.card-names {
-    font-size: 1.8rem;
-    color: var(--color-navy);
-    margin: 10px 0;
-}
-
-.card-date {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--color-text-muted);
-}
-
-.enter-btn {
-    margin-top: 20px;
-    background: var(--color-navy);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(10px);
 }
 
 /* Wax Seal */
@@ -174,53 +113,45 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: #a31d1d; /* Deep wax red */
+    width: 80px;
+    height: 80px;
+    background: #a31d1d;
     border-radius: 50%;
     z-index: 10;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s ease;
-}
-
-.wax-seal::before {
-    content: '';
-    position: absolute;
-    width: 110%;
-    height: 110%;
-    border-radius: 50%;
-    border: 2px solid #a31d1d;
-    opacity: 0.3;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .seal-inner {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.85);
     font-family: var(--font-serif);
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 
 .skip-intro {
+    position: absolute;
+    bottom: 10%;
     background: none;
     border: none;
     font-family: var(--font-sans);
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     color: var(--color-text-muted);
     cursor: pointer;
     opacity: 0;
-    transition: opacity 1s ease 2s;
+    z-index: 10;
 }
 
 /* State: Open */
@@ -232,7 +163,7 @@
 .envelope.is-open .wax-seal {
     opacity: 0;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(1.2);
+    transform: translate(-50%, -50%) scale(1.5);
 }
 
 /* Particles */
@@ -241,11 +172,12 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 1;
 }
 
 .particle {
     position: absolute;
     background: var(--color-gold-light);
     border-radius: 50%;
-    opacity: 0.3;
+    opacity: 0.25;
 }

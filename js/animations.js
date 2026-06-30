@@ -1,18 +1,16 @@
 export const initAnimations = () => {
-    // Register GSAP plugins
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
-    // Initial check: if site is already entered, trigger entrance
+    // Entrance logic
     if (sessionStorage.getItem('introShown')) {
-        triggerSiteEntrance();
+        setTimeout(triggerSiteEntrance, 100);
     }
 
-    // Listen for custom event from envelope.js
     window.addEventListener('site-entered', () => {
         triggerSiteEntrance();
     });
 
-    // Reveal animations on scroll with stagger for cards
+    // Reveal animations
     const revealContainers = ['.story-grid', '.details-grid', '.gallery-grid', '.timeline-wrapper', '.faq-accordion'];
 
     revealContainers.forEach(container => {
@@ -21,7 +19,7 @@ export const initAnimations = () => {
             gsap.to(elements, {
                 scrollTrigger: {
                     trigger: container,
-                    start: 'top 80%',
+                    start: 'top 85%',
                     toggleActions: 'play none none none'
                 },
                 opacity: 1,
@@ -33,7 +31,7 @@ export const initAnimations = () => {
         }
     });
 
-    // Parallax effect for story images
+    // Parallax
     const storyImages = document.querySelectorAll('.story-img img');
     storyImages.forEach((img) => {
         if (img.parentElement) {
@@ -51,7 +49,7 @@ export const initAnimations = () => {
         }
     });
 
-    // Smooth Scroll for Navigation
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -65,7 +63,6 @@ export const initAnimations = () => {
                     ease: 'power4.inOut'
                 });
 
-                // Close mobile menu if open
                 const navLinks = document.querySelector('.nav-links');
                 const toggle = document.querySelector('.mobile-menu-toggle');
                 if (navLinks && navLinks.classList.contains('active')) {
@@ -79,10 +76,9 @@ export const initAnimations = () => {
     });
 };
 
-function triggerSiteEntrance() {
+export function triggerSiteEntrance() {
     const tl = gsap.timeline();
 
-    // Check if elements exist before animating
     const nav = document.getElementById('navbar');
     if (nav) tl.to(nav, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
 
