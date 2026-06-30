@@ -1,167 +1,85 @@
-export function initAnimations() {
+export const initAnimations = () => {
+    // Register GSAP plugins
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero Entry Animations
-    const heroTl = gsap.timeline({ delay: 0.2 });
-
-    heroTl.from('.hero-subtitle', {
-        y: 30,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power3.out"
-    })
-    .from('.hero-title', {
-        y: 50,
-        opacity: 0,
-        duration: 1.8,
-        ease: "power4.out"
-    }, "-=1.2")
-    .from('.hero-date', {
-        opacity: 0,
-        duration: 2,
-        ease: "power2.out"
-    }, "-=1.0")
-    .from('.countdown-item', {
-        y: 20,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power2.out"
-    }, "-=1.5")
-    .from('.scroll-indicator', {
-        opacity: 0,
-        y: -20,
-        duration: 1,
-        ease: "power2.out"
-    }, "-=0.5");
-
-    // Reveal on scroll elements
-    const reveals = document.querySelectorAll('.reveal-up');
-    reveals.forEach((el) => {
-        gsap.from(el, {
-            scrollTrigger: {
-                trigger: el,
-                start: "top 88%",
-                toggleActions: "play none none none"
-            },
-            y: 80,
-            opacity: 0,
-            duration: 1.5,
-            ease: "power3.out"
-        });
-    });
-
-    // Timeline staggered animation
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    timelineItems.forEach((item, index) => {
-        const isEven = index % 2 !== 0;
-        gsap.from(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: "top 85%"
-            },
-            x: window.innerWidth > 768 ? (isEven ? 80 : -80) : -40,
-            opacity: 0,
-            duration: 1.5,
-            ease: "power2.out"
-        });
-    });
-
-    // Gallery staggered entry
-    gsap.from('.gallery-item', {
-        scrollTrigger: {
-            trigger: '.gallery-grid',
-            start: "top 85%"
-        },
-        y: 60,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 1.2,
-        ease: "power3.out"
-    });
-
-    // Parallax effect for Hero background
-    gsap.to('.hero-bg', {
-        scrollTrigger: {
-            trigger: '.hero',
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        },
-        y: 150,
-        scale: 1.3,
-        ease: "none"
-    });
-
-    // FAQ Accordion logic
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            faqItems.forEach(i => i.classList.remove('active'));
-            if (!isActive) item.classList.add('active');
-        });
-    });
-
-    // Navigation Smooth Scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                gsap.to(window, {
-                    duration: 1.5,
-                    scrollTo: {
-                        y: targetElement,
-                        offsetY: 80
-                    },
-                    ease: "power4.inOut"
-                });
-            }
-        });
-    });
-
-    // Masonry-like reveal for story images
-    const storyImgs = document.querySelectorAll('.story-img img');
-    storyImgs.forEach(img => {
-        gsap.to(img, {
-            scrollTrigger: {
-                trigger: img,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true
-            },
-            y: 30,
-            scale: 1.15
-        });
-    });
-
-    // Mobile Menu Toggle Animation
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            const spans = toggle.querySelectorAll('span');
-            if (toggle.classList.contains('open')) {
-                gsap.to(spans[0], { y: 0, rotation: 0, duration: 0.3 });
-                gsap.to(spans[1], { rotation: 0, duration: 0.3 });
-            } else {
-                gsap.to(spans[0], { y: 8, rotation: 45, duration: 0.3 });
-                gsap.to(spans[1], { rotation: -45, duration: 0.3 });
-            }
-        });
+    // Initial check: if site is already entered, trigger entrance
+    if (sessionStorage.getItem('introShown')) {
+        triggerSiteEntrance();
     }
 
-    // Micro-interactions for buttons
-    const buttons = document.querySelectorAll('button:not(.mobile-menu-toggle), .btn-text');
-    buttons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            gsap.to(btn, { scale: 1.05, duration: 0.3, ease: "power2.out" });
-        });
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, { scale: 1, duration: 0.3, ease: "power2.out" });
+    // Listen for custom event from envelope.js
+    window.addEventListener('site-entered', () => {
+        triggerSiteEntrance();
+    });
+
+    // Reveal animations on scroll with stagger for cards
+    const revealContainers = ['.story-grid', '.details-grid', '.gallery-grid', '.timeline-wrapper', '.faq-accordion'];
+
+    revealContainers.forEach(container => {
+        const elements = document.querySelectorAll(`${container} .reveal-up`);
+        if (elements.length > 0) {
+            gsap.to(elements, {
+                scrollTrigger: {
+                    trigger: container,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        }
+    });
+
+    // Parallax effect for story images
+    const storyImages = document.querySelectorAll('.story-img img');
+    storyImages.forEach((img) => {
+        gsap.to(img, {
+            scrollTrigger: {
+                trigger: img.parentElement,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            },
+            y: -60,
+            scale: 1.1,
+            ease: 'none'
         });
     });
+
+    // Smooth Scroll for Navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                gsap.to(window, {
+                    duration: 1.5,
+                    scrollTo: { y: target, offsetY: 70 },
+                    ease: 'power4.inOut'
+                });
+
+                // Close mobile menu if open
+                const navLinks = document.querySelector('.nav-links');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    toggle.classList.remove('active');
+                }
+            }
+        });
+    });
+};
+
+function triggerSiteEntrance() {
+    const tl = gsap.timeline();
+
+    tl.to('#navbar', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' })
+      .to('.hero-subtitle', { opacity: 1, y: 0, duration: 1 }, '-=0.5')
+      .to('.hero-title', { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=0.8')
+      .to('.hero-date', { opacity: 1, y: 0, duration: 1 }, '-=0.8')
+      .to('.countdown', { opacity: 1, y: 0, duration: 1 }, '-=0.8')
+      .to('.scroll-indicator', { opacity: 1, duration: 1, y: 0 }, '-=0.5');
 }

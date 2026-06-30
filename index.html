@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yessine & Monica | Wedding</title>
-    <meta name="description" content="Wedding of Yessine & Monica - June 26, 2027 in Gela, Sicily">
+    <title>Yessine & Monica | Matrimonio</title>
+    <meta name="description" content="Il matrimonio di Yessine & Monica - 26 Giugno 2027 a Gela, Sicilia">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
 
-    <!-- GSAP -->
+    <!-- GSAP & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
@@ -26,48 +26,50 @@
     <div id="intro-overlay" class="intro-overlay">
         <div class="envelope-container">
             <div class="intro-labels">
-                <span class="intro-label-top">You have an invitation from</span>
+                <span class="intro-label-top">Hai ricevuto un invito da</span>
                 <h1 class="intro-label-names">Yessine & Monica</h1>
             </div>
-            <div class="envelope" id="envelope">
-                <div class="envelope-flap"></div>
-                <div class="envelope-paper">
-                    <div class="invitation-card">
-                        <span class="card-subtitle">We're Getting Married</span>
-                        <h2 class="card-names">Yessine & Monica</h2>
-                        <p class="card-date">June 26, 2027</p>
-                        <button id="enter-btn" class="enter-btn" aria-label="Enter the website">Tap to enter</button>
+            <div class="envelope-wrapper">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-paper">
+                        <div class="invitation-card">
+                            <span class="card-subtitle">Ci Sposiamo</span>
+                            <h2 class="card-names">Yessine & Monica</h2>
+                            <p class="card-date">26 Giugno 2027</p>
+                            <button id="enter-btn" class="enter-btn" aria-label="Entra nel sito">Clicca per entrare</button>
+                        </div>
                     </div>
-                </div>
-                <div class="envelope-body"></div>
-                <div class="wax-seal" id="wax-seal" role="button" aria-label="Open invitation">
-                    <div class="seal-inner">
-                        <span class="initials">Y & M</span>
-                        <svg class="anchor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                            <path d="M12 5V19M12 5L9 8M12 5L15 8M12 19C9 19 6 17 6 14M12 19C15 19 18 17 18 14" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="envelope-body"></div>
+                    <div class="wax-seal" id="wax-seal" role="button" aria-label="Apri invito">
+                        <div class="seal-inner">
+                            <span class="initials">Y & M</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button id="skip-intro" class="skip-intro">Skip Intro</button>
+            <button id="skip-intro" class="skip-intro">Salta Intro</button>
         </div>
         <div class="particles" id="particles"></div>
+        <audio id="intro-music" loop>
+            <source src="https://nautical-template.thedigitalyes.com/assets/music/intro-music-wdGCmJlJ.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
     <!-- Main Website Content -->
     <main id="main-content" style="opacity: 0; visibility: hidden;">
-        <nav id="navbar">
+        <nav id="navbar" class="navbar">
             <div class="nav-container">
-                <a href="#home" class="logo" aria-label="Home">Y&M</a>
+                <a href="#home" class="logo">Y&M</a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#story">Our Story</a></li>
-                    <li><a href="#details">Details</a></li>
-                    <li><a href="#timeline">Timeline</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#story">La Nostra Storia</a></li>
+                    <li><a href="#details">Dettagli</a></li>
+                    <li><a href="#timeline">Programma</a></li>
+                    <li><a href="#gallery">Galleria</a></li>
                     <li><a href="#rsvp">RSVP</a></li>
                 </ul>
-                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <button class="mobile-menu-toggle" aria-label="Menu">
                     <span></span>
                     <span></span>
                 </button>
@@ -76,14 +78,19 @@
 
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="hero-bg"></div>
+            <div class="hero-video-container">
+                <video autoplay muted loop playsinline class="hero-video">
+                    <source src="https://nautical-template.thedigitalyes.com/assets/videos/hero-video-bg-DnQnwqbH.mp4" type="video/mp4">
+                </video>
+                <div class="hero-overlay"></div>
+            </div>
             <div class="hero-content">
-                <h2 class="hero-subtitle">The Wedding of</h2>
-                <h1 class="hero-title">Yessine & Monica</h1>
-                <p class="hero-date">26.06.2027</p>
-                <div id="countdown" class="countdown" role="timer" aria-label="Countdown to wedding"></div>
-                <div class="scroll-indicator" aria-hidden="true">
-                    <span>Scroll</span>
+                <h2 class="hero-subtitle reveal-up">Il Matrimonio di</h2>
+                <h1 class="hero-title reveal-up">Yessine & Monica</h1>
+                <p class="hero-date reveal-up">26.06.2027</p>
+                <div id="countdown" class="countdown reveal-up" role="timer"></div>
+                <div class="scroll-indicator">
+                    <span>Scorri</span>
                     <div class="line"></div>
                 </div>
             </div>
@@ -92,27 +99,27 @@
         <!-- Our Story -->
         <section id="story" class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="subtitle">Our Journey</span>
-                    <h2 class="title">Our Story</h2>
+                <div class="section-header text-center">
+                    <span class="subtitle reveal-up">Il Nostro Viaggio</span>
+                    <h2 class="title reveal-up">La Nostra Storia</h2>
                 </div>
                 <div class="story-grid">
                     <div class="story-item">
                         <div class="story-img reveal-up">
-                            <img src="https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=1000" alt="Yessine and Monica first meeting by the sea" loading="lazy">
+                            <img src="https://nautical-template.thedigitalyes.com/assets/images/story-1.jpg" alt="Inizio della storia" loading="lazy">
                         </div>
                         <div class="story-text reveal-up">
-                            <h3>Where it all began</h3>
-                            <p>A chance encounter by the shores of the Mediterranean. Two souls found their path under the golden sun, beginning a journey that would lead to this very moment. Their love grew with every sunset shared over the crystalline waters of the coast.</p>
+                            <h3>Com'è Iniziato</h3>
+                            <p>Un incontro casuale sulle rive del Mediterraneo. Due anime hanno trovato il loro cammino sotto il sole dorato, iniziando un viaggio che le avrebbe portate a questo preciso momento.</p>
                         </div>
                     </div>
                     <div class="story-item reverse">
                         <div class="story-img reveal-up">
-                            <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=1000" alt="A romantic proposal at sunset" loading="lazy">
+                            <img src="https://nautical-template.thedigitalyes.com/assets/images/story-2.jpg" alt="La proposta" loading="lazy">
                         </div>
                         <div class="story-text reveal-up">
-                            <h3>The Proposal</h3>
-                            <p>Under a canopy of stars and the gentle sound of waves in Gela, a question was asked, and a lifetime of "Yes" began. It was a moment of pure magic, reflecting the deep connection they built through years of adventure and shared dreams.</p>
+                            <h3>La Proposta</h3>
+                            <p>Sotto un cielo stellato e il dolce suono delle onde a Gela, è stata fatta una domanda e ha avuto inizio una vita di "Sì". Un momento di pura magia che riflette il profondo legame costruito negli anni.</p>
                         </div>
                     </div>
                 </div>
@@ -122,32 +129,26 @@
         <!-- Wedding Details -->
         <section id="details" class="section bg-soft">
             <div class="container">
-                <div class="section-header">
-                    <span class="subtitle">Join Us</span>
-                    <h2 class="title">Wedding Details</h2>
+                <div class="section-header text-center">
+                    <span class="subtitle reveal-up">Unitevi a Noi</span>
+                    <h2 class="title reveal-up">Dettagli del Matrimonio</h2>
                 </div>
                 <div class="details-grid">
                     <div class="details-card reveal-up">
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M12 21s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 7.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="9" r="3"/></svg>
-                        </div>
-                        <h3>The Venue</h3>
-                        <p>B Cool Beach, Gela<br>Sicily, Italy</p>
-                        <a href="https://maps.google.com" target="_blank" class="btn-text" rel="noopener">Get Directions</a>
+                        <div class="card-icon">⚓</div>
+                        <h3>La Location</h3>
+                        <p>B Cool Beach, Gela<br>Sicilia, Italia</p>
+                        <a href="https://maps.google.com/?q=B+Cool+Beach+Gela" target="_blank" class="btn-text">Ottieni Indicazioni</a>
+                    </div>
+                    <div class="details-card reveal-up" style="transition-delay: 0.1s">
+                        <div class="card-icon">📅</div>
+                        <h3>Quando</h3>
+                        <p>Sabato, 26 Giugno 2027<br>Ore 16:30</p>
                     </div>
                     <div class="details-card reveal-up" style="transition-delay: 0.2s">
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        </div>
-                        <h3>When</h3>
-                        <p>Saturday, June 26, 2027<br>At Half Past Four</p>
-                    </div>
-                    <div class="details-card reveal-up" style="transition-delay: 0.4s">
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>
-                        </div>
+                        <div class="card-icon">👔</div>
                         <h3>Dress Code</h3>
-                        <p>Mediterranean Elegant<br>Light fabrics & soft tones</p>
+                        <p>Elegant Mediterraneo<br>Tessuti leggeri e toni chiari</p>
                     </div>
                 </div>
             </div>
@@ -156,41 +157,42 @@
         <!-- Timeline -->
         <section id="timeline" class="section">
             <div class="container">
-                <div class="section-header">
-                    <span class="subtitle">The Celebration</span>
-                    <h2 class="title">The Schedule</h2>
+                <div class="section-header text-center">
+                    <span class="subtitle reveal-up">La Celebrazione</span>
+                    <h2 class="title reveal-up">Programma</h2>
                 </div>
-                <div class="timeline-container">
-                    <div class="timeline-item">
-                        <div class="time">16:30</div>
-                        <div class="dot"></div>
-                        <div class="content">
-                            <h3>The Vows</h3>
-                            <p>A seaside ceremony at B Cool Beach</p>
+                <div class="timeline-wrapper">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-item reveal-up">
+                        <div class="timeline-time">16:30</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>La Cerimonia</h3>
+                            <p>Promesse in riva al mare presso B Cool Beach</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="time">18:00</div>
-                        <div class="dot"></div>
-                        <div class="content">
+                    <div class="timeline-item reveal-up">
+                        <div class="timeline-time">18:30</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
                             <h3>Aperitivo</h3>
-                            <p>Signature cocktails & Mediterranean bites</p>
+                            <p>Cocktail d'autore e delizie mediterranee</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="time">20:00</div>
-                        <div class="dot"></div>
-                        <div class="content">
-                            <h3>Dinner</h3>
-                            <p>Fine Sicilian cuisine under the stars</p>
+                    <div class="timeline-item reveal-up">
+                        <div class="timeline-time">20:30</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Cena</h3>
+                            <p>Cucina siciliana d'eccellenza sotto le stelle</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="time">22:30</div>
-                        <div class="dot"></div>
-                        <div class="content">
+                    <div class="timeline-item reveal-up">
+                        <div class="timeline-time">23:00</div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
                             <h3>Party</h3>
-                            <p>Dancing the night away by the ocean</p>
+                            <p>Musica e balli fino all'alba</p>
                         </div>
                     </div>
                 </div>
@@ -200,17 +202,18 @@
         <!-- Gallery -->
         <section id="gallery" class="section bg-soft">
             <div class="container">
-                <div class="section-header">
-                    <span class="subtitle">Memories</span>
-                    <h2 class="title">Gallery</h2>
+                <div class="section-header text-center">
+                    <span class="subtitle reveal-up">I Nostri Ricordi</span>
+                    <h2 class="title reveal-up">Galleria</h2>
                 </div>
-                <div class="gallery-grid">
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800" alt="Wedding flowers and rings" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Ceremony setup at the beach" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&q=80&w=800" alt="Groom and bride celebrating" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=800" alt="Mediterranean wedding table setup" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800" alt="Wedding party celebration" loading="lazy"></div>
-                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&q=80&w=800" alt="Bride at the sunset" loading="lazy"></div>
+                <div class="gallery-grid" id="masonry-gallery">
+                    <!-- Images will be added here or via JS -->
+                    <div class="gallery-item reveal-up"><img src="https://nautical-template.thedigitalyes.com/assets/images/gallery-1.jpg" alt="Galleria 1"></div>
+                    <div class="gallery-item reveal-up"><img src="https://nautical-template.thedigitalyes.com/assets/images/gallery-2.jpg" alt="Galleria 2"></div>
+                    <div class="gallery-item reveal-up"><img src="https://nautical-template.thedigitalyes.com/assets/images/gallery-3.jpg" alt="Galleria 3"></div>
+                    <div class="gallery-item reveal-up"><img src="https://nautical-template.thedigitalyes.com/assets/images/gallery-4.jpg" alt="Galleria 4"></div>
+                    <div class="gallery-item reveal-up"><img src="https://nautical-template.thedigitalyes.com/assets/images/gallery-5.jpg" alt="Galleria 5"></div>
+                    <div class="gallery-item reveal-up"><img src="https://nautical-template.thedigitalyes.com/assets/images/gallery-6.jpg" alt="Galleria 6"></div>
                 </div>
             </div>
         </section>
@@ -218,58 +221,57 @@
         <!-- RSVP -->
         <section id="rsvp" class="section">
             <div class="container">
-                <div class="rsvp-card reveal-up">
-                    <div class="section-header">
-                        <span class="subtitle">Be Our Guest</span>
-                        <h2 class="title">RSVP</h2>
+                <div class="rsvp-card-container">
+                    <div class="section-header text-center">
+                        <span class="subtitle reveal-up">Sarete dei Nostri?</span>
+                        <h2 class="title reveal-up">RSVP</h2>
                     </div>
-                    <form id="rsvp-form" class="rsvp-form">
+                    <form id="rsvp-form" class="rsvp-form reveal-up">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" name="first-name" required placeholder="Elena">
+                                <label for="first-name">Nome</label>
+                                <input type="text" id="first-name" name="first-name" required>
                             </div>
                             <div class="form-group">
-                                <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" name="last-name" required placeholder="Rossi">
+                                <label for="last-name">Cognome</label>
+                                <input type="text" id="last-name" name="last-name" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="elena@example.com">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="attendance">Will you attend?</label>
+                                <label for="attendance">Parteciperai?</label>
                                 <select id="attendance" name="attendance" required>
-                                    <option value="">Select an option</option>
-                                    <option value="yes">Yes, I'll be there</option>
-                                    <option value="no">Regretfully, I can't</option>
+                                    <option value="">Seleziona un'opzione</option>
+                                    <option value="yes">Sì, con piacere</option>
+                                    <option value="no">Purtropalmente no</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="guests">Number of Guests</label>
+                                <label for="guests">Numero di Ospiti</label>
                                 <input type="number" id="guests" name="guests" min="1" max="10" value="1">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="meal">Meal Preference</label>
+                            <label for="meal">Preferenza Menu</label>
                             <select id="meal" name="meal">
-                                <option value="fish">Mediterranean Fish</option>
-                                <option value="meat">Premium Meat Selection</option>
-                                <option value="veg">Vegetarian Garden</option>
+                                <option value="fish">Pesce Mediterraneo</option>
+                                <option value="meat">Carne Premium</option>
+                                <option value="veg">Vegetariano</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="allergies">Food Allergies</label>
-                            <input type="text" id="allergies" name="allergies" placeholder="e.g. Nuts, Gluten">
+                            <label for="allergies">Intolleranze o Allergie</label>
+                            <input type="text" id="allergies" name="allergies" placeholder="es. Noci, Glutine...">
                         </div>
                         <div class="form-group">
-                            <label for="message">Message to the couple (Optional)</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Your warm wishes..."></textarea>
+                            <label for="message">Messaggio per gli sposi (Opzionale)</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
                         </div>
-                        <button type="submit" class="btn-primary">Send Response</button>
-                        <div id="rsvp-message" class="form-status" aria-live="polite"></div>
+                        <button type="submit" class="btn-primary">Invia Risposta</button>
                     </form>
                 </div>
             </div>
@@ -278,40 +280,38 @@
         <!-- FAQ -->
         <section id="faq" class="section bg-soft">
             <div class="container">
-                <div class="section-header">
-                    <span class="subtitle">Information</span>
-                    <h2 class="title">FAQ</h2>
+                <div class="section-header text-center">
+                    <span class="subtitle reveal-up">Domande Frequenti</span>
+                    <h2 class="title reveal-up">FAQ</h2>
                 </div>
-                <div class="faq-container">
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">What is the Dress Code? <span>+</span></button>
-                        <div class="faq-answer"><p>We'd love to see our guests in Mediterranean Elegant attire. For ladies, think airy midi or maxi dresses in soft tones. For gentlemen, linen suits or light-colored blazers without ties are perfect.</p></div>
+                <div class="faq-accordion">
+                    <div class="faq-item reveal-up">
+                        <button class="faq-trigger">Qual è il Dress Code? <span>+</span></button>
+                        <div class="faq-content">
+                            <p>Il tema è "Elegant Mediterraneo". Consigliamo tessuti freschi come il lino e colori chiari/pastello. Gradito l'abito formale ma senza eccessiva rigidità.</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">Are children welcome? <span>+</span></button>
-                        <div class="faq-answer"><p>To allow all guests a night of relaxation and uninhibited revelry, we have chosen for our wedding to be an adults-only occasion. We hope this advance notice means you are still able to share our big day!</p></div>
+                    <div class="faq-item reveal-up">
+                        <button class="faq-trigger">I bambini sono invitati? <span>+</span></button>
+                        <div class="faq-content">
+                            <p>Per permettere a tutti i genitori una serata di relax e divertimento, abbiamo scelto di celebrare un matrimonio "adults-only". Vi ringraziamo per la comprensione.</p>
+                        </div>
                     </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">Is there parking available? <span>+</span></button>
-                        <div class="faq-answer"><p>Yes, B Cool Beach offers private, secure parking for all our wedding guests right at the venue entrance.</p></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">Gifts and Registry? <span>+</span></button>
-                        <div class="faq-answer"><p>Your presence at our wedding is the greatest gift we could ask for. If you wish to honor us with a gift, a contribution towards our honeymoon in the Maldives would be sincerely appreciated.</p></div>
+                    <div class="faq-item reveal-up">
+                        <button class="faq-trigger">C'è il parcheggio? <span>+</span></button>
+                        <div class="faq-content">
+                            <p>Sì, B Cool Beach dispone di un ampio parcheggio privato riservato ai nostri ospiti direttamente all'ingresso della location.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <footer class="footer">
-            <div class="container">
+            <div class="container text-center">
                 <h2 class="footer-logo">Y&M</h2>
-                <p class="hashtag">#YessineAndMonica2027</p>
-                <div class="social-links">
-                    <a href="#" rel="noopener">Instagram</a>
-                    <a href="#" rel="noopener">Facebook</a>
-                </div>
-                <p class="thank-you">Thank you for being part of our story. See you in Sicily!</p>
+                <p class="hashtag">#YessineMonica2027</p>
+                <p class="thank-you">Non vediamo l'ora di festeggiare con voi. Ci vediamo in Sicilia!</p>
             </div>
         </footer>
     </main>

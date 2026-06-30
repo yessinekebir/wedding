@@ -1,137 +1,112 @@
-export function initEnvelope(onComplete) {
+export const initEnvelope = () => {
     const overlay = document.getElementById('intro-overlay');
     const envelope = document.getElementById('envelope');
-    const flap = document.querySelector('.envelope-flap');
     const waxSeal = document.getElementById('wax-seal');
     const enterBtn = document.getElementById('enter-btn');
     const skipBtn = document.getElementById('skip-intro');
-    const particlesContainer = document.getElementById('particles');
-    const invitation = document.querySelector('.invitation-card');
-    const labelTop = document.querySelector('.intro-label-top');
-    const labelNames = document.querySelector('.intro-label-names');
+    const mainContent = document.getElementById('main-content');
+    const introMusic = document.getElementById('intro-music');
 
-    // Create elegant floating particles (sea dust/light)
-    for (let i = 0; i < 30; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        const size = Math.random() * 4 + 2;
-        p.style.width = `${size}px`;
-        p.style.height = `${size}px`;
-        p.style.left = `${Math.random() * 100}%`;
-        p.style.top = `${Math.random() * 100}%`;
-        p.style.opacity = Math.random() * 0.3 + 0.1;
-        particlesContainer.appendChild(p);
-
-        gsap.to(p, {
-            y: "random(-100, 100)",
-            x: "random(-100, 100)",
-            duration: "random(6, 12)",
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut"
-        });
+    // Check if intro was already shown
+    if (sessionStorage.getItem('introShown')) {
+        overlay.style.display = 'none';
+        mainContent.style.opacity = '1';
+        mainContent.style.visibility = 'visible';
+        return;
     }
 
-    // Initial state
-    gsap.set(overlay, { opacity: 0 });
-    gsap.set(envelope, { scale: 0.8, opacity: 0, y: 50, rotationX: 10 });
-    gsap.set(flap, { rotationX: 0 });
-    gsap.set(invitation, { opacity: 0, y: 20 });
-    gsap.set([labelTop, labelNames], { opacity: 0, y: 20 });
+    // GSAP Sequence
+    const tl = gsap.timeline();
 
-    // Animation Sequence: The Arrival
-    const tl = gsap.timeline({ delay: 0.5 });
+    // 1. Initial fade in
+    tl.to('.intro-labels', { opacity: 1, y: 0, duration: 1.5, ease: 'power2.out' })
+      .to('.envelope-wrapper', { opacity: 1, scale: 1, duration: 1.2, ease: 'back.out(1.7)' }, '-=0.5')
+      .to('.skip-intro', { opacity: 1, duration: 1 }, '-=0.5');
 
-    tl.to(overlay, {
-        opacity: 1,
-        duration: 1.5,
-        ease: "power2.inOut"
-    })
-    .to([labelTop, labelNames], {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: "power3.out"
-    }, "-=0.8")
-    .to(envelope, {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        rotationX: 0,
-        duration: 2,
-        ease: "power4.out"
-    }, "-=0.5")
-    .to(envelope, {
-        y: -10,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-    });
+    // Floating particles
+    createParticles();
 
-    // Interaction logic
+    // Handle Click to Open
+    const openEnvelope = () => {
+        if (envelope.classList.contains('is-open')) return;
+
+        envelope.classList.add('is-open');
+
+        // Play music on first interaction
+        if (introMusic) {
+            introMusic.play().catch(e => console.log('Autoplay blocked', e));
+        }
+
+        const openTl = gsap.timeline();
+        openTl.to('.envelope-paper', {
+            y: -150,
+            duration: 1.5,
+            delay: 0.8,
+            ease: 'power2.inOut'
+        })
+        .to('.enter-btn', {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+        });
+    };
+
+    envelope.addEventListener('click', openEnvelope);
     waxSeal.addEventListener('click', (e) => {
         e.stopPropagation();
         openEnvelope();
     });
 
-    envelope.addEventListener('click', () => {
-        if (!envelope.classList.contains('opened')) {
-            openEnvelope();
-        }
-    });
+    // Handle Enter Website
+    const enterWebsite = () => {
+        sessionStorage.setItem('introShown', 'true');
 
-    function openEnvelope() {
-        if (envelope.classList.contains('opened')) return;
-        envelope.classList.add('opened');
-
-        // Stop the floating animation of the envelope
-        gsap.killTweensOf(envelope);
-
-        const openTl = gsap.timeline();
-
-        openTl.to([labelTop, labelNames], {
+        gsap.to(overlay, {
             opacity: 0,
-            y: -15,
-            duration: 0.8,
-            ease: "power3.in"
-        })
-        .to(waxSeal, {
-            scale: 1.3,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power3.in"
-        }, "-=0.4")
-        .to(flap, {
-            rotationX: 180,
             duration: 1.5,
-            ease: "power2.inOut"
-        }, "-=0.3")
-        .to('.envelope-paper', {
-            y: "-60%",
-            zIndex: 20,
-            duration: 1.8,
-            ease: "power3.out"
-        }, "-=0.8")
-        .to(invitation, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out"
-        }, "-=1.2")
-        .to(envelope, {
-            y: "15%",
-            scale: 0.95,
-            duration: 2,
-            ease: "power3.inOut"
-        }, "-=1.8");
+            ease: 'power2.inOut',
+            onComplete: () => {
+                overlay.style.display = 'none';
+                gsap.to(mainContent, {
+                    opacity: 1,
+                    visibility: 'visible',
+                    duration: 1,
+                    onComplete: () => {
+                         // Trigger main site animations
+                         window.dispatchEvent(new CustomEvent('site-entered'));
+                    }
+                });
+            }
+        });
+    };
+
+    enterBtn.addEventListener('click', enterWebsite);
+    skipBtn.addEventListener('click', enterWebsite);
+};
+
+function createParticles() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+
+    for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 3 + 1;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.top = `${Math.random() * 100}%`;
+        container.appendChild(p);
+
+        gsap.to(p, {
+            y: `-${Math.random() * 100 + 50}`,
+            x: `+=${Math.random() * 40 - 20}`,
+            opacity: 0,
+            duration: Math.random() * 3 + 2,
+            repeat: -1,
+            ease: 'none',
+            delay: Math.random() * 5
+        });
     }
-
-    enterBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        onComplete();
-    });
-
-    skipBtn.addEventListener('click', onComplete);
 }
