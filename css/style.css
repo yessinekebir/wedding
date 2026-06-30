@@ -13,6 +13,7 @@
 
     /* Typography */
     --font-serif: 'Cormorant Garamond', serif;
+    --font-script: 'Cormorant Garamond', serif;
     --font-sans: 'Montserrat', sans-serif;
 
     /* Spacing & Borders */
@@ -285,11 +286,6 @@ img {
     font-size: clamp(3rem, 12vw, 7rem);
     color: var(--color-white);
     margin-bottom: 1.5rem;
-    line-height: 1.5;
-}
-
-.hero-title span {
-    display: block;
 }
 
 .hero-date {
@@ -754,7 +750,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(26, 42, 68, 0.3), rgb(26 42 68 / 14%));
+    background: linear-gradient(to bottom, rgba(26,42,68,0.3), rgba(26,42,68,0.6));
     z-index: 1;
 }
 
@@ -762,4 +758,44 @@ img {
     position: relative;
     z-index: 2;
     text-align: center;
+}
+
+/* Voyage Section Specifics */
+.bg-background-15 { background-color: rgba(26, 42, 68, 0.15); }
+.text-primary { color: var(--color-gold-light); }
+.drop-shadow-subtle { filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4)); }
+.drop-shadow-strong { filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+
+.voyage-card {
+    background: rgba(251, 248, 241, 0.92);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 25px 50px -12px, rgba(0, 0, 0, 0.2) 0px 8px 16px -8px;
+    transform: rotate(-1.2deg);
+}
+
+.voyage-hook {
+    top: -1rem;
+    right: 2rem;
+    width: 1.5rem;
+    height: 3rem;
+    border-radius: 9999px 9999px 0 0;
+    border: 2.5px solid rgba(53, 79, 110, 0.4);
+    border-bottom: none;
+    transform: rotate(8deg);
+}
+
+.font-script {
+    font-family: var(--font-script); /* Falling back to Playfair Display as a "script-like" serif if needed, or use a real script font */
+    font-style: italic;
+}
+
+.text-sage-dark-90 { color: rgba(53, 79, 110, 0.9); }
+.text-sage-dark-70 { color: rgba(53, 79, 110, 0.7); }
+.text-base { font-size: 1rem; }
+.leading-relaxed { line-height: 1.625; }
+.space-y-3 > * + * { margin-top: 0.75rem; }
+
+@media (min-width: 640px) {
+    .sm-max-w-md { max-width: 28rem; }
+    .sm-text-lg { font-size: 1.125rem; }
+    .md-text-5xl { font-size: 3rem; }
 }

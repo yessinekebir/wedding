@@ -4,7 +4,7 @@ export const initEnvelope = () => {
     const waxSeal = document.getElementById('wax-seal');
     const skipBtn = document.getElementById('skip-intro');
     const mainContent = document.getElementById('main-content');
-    const introMusic = document.getElementById('intro-music');
+    const introMusic = document.getElementById('bg-music');
 
     if (!overlay || !envelope || !mainContent) return;
 
