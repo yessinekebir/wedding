@@ -1,6 +1,6 @@
 export const initAnimations = () => {
     // Register GSAP plugins
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
     // Initial check: if site is already entered, trigger entrance
     if (sessionStorage.getItem('introShown')) {
@@ -36,24 +36,28 @@ export const initAnimations = () => {
     // Parallax effect for story images
     const storyImages = document.querySelectorAll('.story-img img');
     storyImages.forEach((img) => {
-        gsap.to(img, {
-            scrollTrigger: {
-                trigger: img.parentElement,
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true
-            },
-            y: -60,
-            scale: 1.1,
-            ease: 'none'
-        });
+        if (img.parentElement) {
+            gsap.to(img, {
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                },
+                y: -60,
+                scale: 1.1,
+                ease: 'none'
+            });
+        }
     });
 
     // Smooth Scroll for Navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            const target = document.querySelector(href);
             if (target) {
                 gsap.to(window, {
                     duration: 1.5,
@@ -64,8 +68,10 @@ export const initAnimations = () => {
                 // Close mobile menu if open
                 const navLinks = document.querySelector('.nav-links');
                 const toggle = document.querySelector('.mobile-menu-toggle');
-                if (navLinks.classList.contains('active')) {
+                if (navLinks && navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
+                }
+                if (toggle && toggle.classList.contains('active')) {
                     toggle.classList.remove('active');
                 }
             }
@@ -76,10 +82,22 @@ export const initAnimations = () => {
 function triggerSiteEntrance() {
     const tl = gsap.timeline();
 
-    tl.to('#navbar', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' })
-      .to('.hero-subtitle', { opacity: 1, y: 0, duration: 1 }, '-=0.5')
-      .to('.hero-title', { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=0.8')
-      .to('.hero-date', { opacity: 1, y: 0, duration: 1 }, '-=0.8')
-      .to('.countdown', { opacity: 1, y: 0, duration: 1 }, '-=0.8')
-      .to('.scroll-indicator', { opacity: 1, duration: 1, y: 0 }, '-=0.5');
+    // Check if elements exist before animating
+    const nav = document.getElementById('navbar');
+    if (nav) tl.to(nav, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' });
+
+    const heroSub = document.querySelector('.hero-subtitle');
+    if (heroSub) tl.to(heroSub, { opacity: 1, y: 0, duration: 1 }, '-=0.5');
+
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) tl.to(heroTitle, { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out' }, '-=0.8');
+
+    const heroDate = document.querySelector('.hero-date');
+    if (heroDate) tl.to(heroDate, { opacity: 1, y: 0, duration: 1 }, '-=0.8');
+
+    const countdown = document.getElementById('countdown');
+    if (countdown) tl.to(countdown, { opacity: 1, y: 0, duration: 1 }, '-=0.8');
+
+    const scrollInd = document.querySelector('.scroll-indicator');
+    if (scrollInd) tl.to(scrollInd, { opacity: 1, duration: 1, y: 0 }, '-=0.5');
 }

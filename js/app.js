@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initNavbarScroll();
     initCountdown();
+    initFAQ();
 });
 
 function initMobileMenu() {
@@ -25,6 +26,7 @@ function initMobileMenu() {
 
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
+    if (!navbar) return;
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -66,15 +68,16 @@ function initCountdown() {
     updateCountdown();
 }
 
-// Add FAQ Logic
-document.addEventListener('DOMContentLoaded', () => {
+function initFAQ() {
     const faqTriggers = document.querySelectorAll('.faq-trigger');
     faqTriggers.forEach(trigger => {
         trigger.addEventListener('click', () => {
             const item = trigger.parentElement;
             item.classList.toggle('active');
             const span = trigger.querySelector('span');
-            span.textContent = item.classList.contains('active') ? '-' : '+';
+            if (span) {
+                span.textContent = item.classList.contains('active') ? '-' : '+';
+            }
         });
     });
-});
+}

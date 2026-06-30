@@ -7,6 +7,8 @@ export const initEnvelope = () => {
     const mainContent = document.getElementById('main-content');
     const introMusic = document.getElementById('intro-music');
 
+    if (!overlay || !envelope || !mainContent) return;
+
     // Check if intro was already shown
     if (sessionStorage.getItem('introShown')) {
         overlay.style.display = 'none';
@@ -53,10 +55,12 @@ export const initEnvelope = () => {
     };
 
     envelope.addEventListener('click', openEnvelope);
-    waxSeal.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openEnvelope();
-    });
+    if (waxSeal) {
+        waxSeal.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openEnvelope();
+        });
+    }
 
     // Handle Enter Website
     const enterWebsite = () => {
@@ -81,8 +85,8 @@ export const initEnvelope = () => {
         });
     };
 
-    enterBtn.addEventListener('click', enterWebsite);
-    skipBtn.addEventListener('click', enterWebsite);
+    if (enterBtn) enterBtn.addEventListener('click', enterWebsite);
+    if (skipBtn) skipBtn.addEventListener('click', enterWebsite);
 };
 
 function createParticles() {
