@@ -11,21 +11,21 @@ export function initEnvelope(onComplete) {
     const labelNames = document.querySelector('.intro-label-names');
 
     // Create elegant floating particles (sea dust/light)
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 30; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
-        const size = Math.random() * 5 + 2;
+        const size = Math.random() * 4 + 2;
         p.style.width = `${size}px`;
         p.style.height = `${size}px`;
         p.style.left = `${Math.random() * 100}%`;
         p.style.top = `${Math.random() * 100}%`;
-        p.style.opacity = Math.random() * 0.4 + 0.1;
+        p.style.opacity = Math.random() * 0.3 + 0.1;
         particlesContainer.appendChild(p);
 
         gsap.to(p, {
-            y: \`random(-150, 150)\`,
-            x: \`random(-100, 100)\`,
-            duration: \`random(5, 10)\`,
+            y: "random(-100, 100)",
+            x: "random(-100, 100)",
+            duration: "random(6, 12)",
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut"
@@ -34,37 +34,37 @@ export function initEnvelope(onComplete) {
 
     // Initial state
     gsap.set(overlay, { opacity: 0 });
-    gsap.set(envelope, { scale: 0.7, opacity: 0, y: 150, rotationX: 15 });
+    gsap.set(envelope, { scale: 0.8, opacity: 0, y: 50, rotationX: 10 });
     gsap.set(flap, { rotationX: 0 });
-    gsap.set(invitation, { opacity: 0, y: 40 });
+    gsap.set(invitation, { opacity: 0, y: 20 });
     gsap.set([labelTop, labelNames], { opacity: 0, y: 20 });
 
     // Animation Sequence: The Arrival
-    const tl = gsap.timeline({ delay: 0.8 });
+    const tl = gsap.timeline({ delay: 0.5 });
 
     tl.to(overlay, {
         opacity: 1,
-        duration: 2,
+        duration: 1.5,
         ease: "power2.inOut"
     })
     .to([labelTop, labelNames], {
         opacity: 1,
         y: 0,
-        duration: 1.5,
-        stagger: 0.3,
+        duration: 1.2,
+        stagger: 0.2,
         ease: "power3.out"
-    }, "-=1")
+    }, "-=0.8")
     .to(envelope, {
         opacity: 1,
         scale: 1,
         y: 0,
         rotationX: 0,
-        duration: 2.5,
+        duration: 2,
         ease: "power4.out"
-    }, "-=0.8")
+    }, "-=0.5")
     .to(envelope, {
-        y: -20,
-        duration: 4,
+        y: -10,
+        duration: 3,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut"
@@ -93,39 +93,39 @@ export function initEnvelope(onComplete) {
 
         openTl.to([labelTop, labelNames], {
             opacity: 0,
-            y: -20,
-            duration: 1,
+            y: -15,
+            duration: 0.8,
             ease: "power3.in"
         })
         .to(waxSeal, {
-            scale: 1.5,
+            scale: 1.3,
             opacity: 0,
-            duration: 0.8,
+            duration: 0.6,
             ease: "power3.in"
-        }, "-=0.5")
+        }, "-=0.4")
         .to(flap, {
             rotationX: 180,
-            duration: 2,
+            duration: 1.5,
             ease: "power2.inOut"
-        }, "-=0.4")
+        }, "-=0.3")
         .to('.envelope-paper', {
-            y: -320,
+            y: "-60%",
             zIndex: 20,
-            duration: 2.2,
+            duration: 1.8,
             ease: "power3.out"
-        }, "-=1.2")
+        }, "-=0.8")
         .to(invitation, {
             opacity: 1,
             y: 0,
-            duration: 1.5,
+            duration: 1,
             ease: "power2.out"
-        }, "-=1.5")
+        }, "-=1.2")
         .to(envelope, {
-            y: 180,
-            scale: 0.9,
-            duration: 2.5,
+            y: "15%",
+            scale: 0.95,
+            duration: 2,
             ease: "power3.inOut"
-        }, "-=2");
+        }, "-=1.8");
     }
 
     enterBtn.addEventListener('click', (e) => {

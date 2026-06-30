@@ -1,49 +1,31 @@
+/* --------------------------------------
+   RESPONSIVE OVERRIDES
+   -------------------------------------- */
+
 @media (max-width: 1024px) {
-    .hero-title {
-        font-size: 4rem;
-    }
+    .hero-title { font-size: clamp(3rem, 10vw, 5rem); }
+    .story-item { gap: 3rem; }
 }
 
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 3rem;
-    }
+    section { padding: var(--spacing-lg) 0; }
+    .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+    .nav-links { display: none; }
+    .mobile-menu-toggle { display: flex; }
 
-    .nav-links {
-        display: none; /* Mobile menu logic to be added */
-    }
+    .story-item { grid-template-columns: 1fr; text-align: center; }
+    .story-img { height: 350px; }
 
-    .envelope {
-        width: 280px;
-        height: 190px;
-    }
+    .timeline-item { padding-left: 40px; }
+    .timeline-item::before { left: 15px; }
 
-    .envelope-flap {
-        border-left-width: 140px;
-        border-right-width: 140px;
-        border-top-width: 100px;
-    }
-
-    .envelope-body::after {
-        width: 280px;
-        height: 190px;
-        bottom: -100px;
-        left: -140px;
-    }
-
-    .envelope-body {
-        border-left-width: 140px;
-        border-right-width: 140px;
-        border-bottom-width: 100px;
-    }
+    .rsvp-card { padding: 2rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
+    .intro-label-names { font-size: 1.8rem; }
+    .envelope-container { padding: 10px; }
+    .envelope-paper { padding: 1.5rem; }
+    .invitation-card .card-names { font-size: 1.3rem; }
 }

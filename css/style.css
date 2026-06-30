@@ -1,6 +1,6 @@
 :root {
     /* Color Palette - Luxury Mediterranean */
-    --color-bg: #FCFBF7; /* Soft Ivory */
+    --color-bg: #FDFCF8; /* Soft Ivory */
     --color-text: #2C3E50; /* Deep Navy Grey */
     --color-text-light: #7F8C8D;
     --color-accent: #C5A059; /* Elegant Gold */
@@ -125,7 +125,7 @@ section {
 }
 
 /* --------------------------------------
-   INTRO ENVELOPE
+   INTRO ENVELOPE - CLEAN & RESPONSIVE
    -------------------------------------- */
 .intro-overlay {
     position: fixed;
@@ -135,6 +135,7 @@ section {
     height: 100%;
     background-color: var(--color-bg);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 2000;
@@ -143,41 +144,46 @@ section {
 
 .envelope-container {
     position: relative;
-    perspective: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    perspective: 2000px;
     z-index: 10;
 }
 
-    position: absolute;
 /* Enhanced Intro Labels */
 .intro-labels {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     pointer-events: none;
+    z-index: 20;
 }
 
 .intro-label-top {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 5px;
     color: var(--color-accent);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     opacity: 0;
 }
 
 .intro-label-names {
     font-family: var(--font-header);
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     color: var(--color-text);
     font-weight: 300;
     opacity: 0;
 }
 
-    width: calc(100% - 30px);
 .envelope {
     position: relative;
-    width: 600px; /* Even bigger for impact */
-    height: 400px;
+    width: 100%;
+    aspect-ratio: 3 / 2;
     background: var(--color-navy);
     box-shadow: 0 40px 100px rgba(0,0,0,0.3), inset 0 0 100px rgba(255,255,255,0.05);
     transform-style: preserve-3d;
@@ -212,13 +218,13 @@ section {
 
 .envelope-paper {
     position: absolute;
-    top: 15px;
-    left: 20px;
-    width: calc(100% - 40px);
-    height: calc(100% - 30px);
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
     background: #fff;
     z-index: 2;
-    padding: 60px;
+    padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -227,52 +233,40 @@ section {
     border: 1px solid #eee;
 }
 
-.invitation-card .card-names {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-    height: calc(100% - 20px);
-    background: #fff;
-    z-index: 2;
-    padding: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(0,0,0,0.05);
-    border: 1px solid #f0f0f0;
+.invitation-card {
+    opacity: 0;
 }
 
 .invitation-card .card-subtitle {
     display: block;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
 }
 
 .invitation-card .card-names {
-    font-size: 2.2rem;
-    margin-bottom: 15px;
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
     font-family: var(--font-header);
     color: var(--color-text);
 }
 
 .invitation-card .card-date {
     font-family: var(--font-header);
-    font-size: 1.3rem;
-    margin-bottom: 25px;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
     color: var(--color-text-light);
 }
 
 .enter-btn {
-    padding: 12px 30px;
+    padding: 10px 25px;
     border: 1px solid var(--color-accent);
     color: var(--color-accent);
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 500;
     background: transparent;
     transition: var(--transition-smooth);
@@ -288,8 +282,8 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -15%);
-    width: 80px;
-    height: 80px;
+    width: clamp(60px, 12vw, 85px);
+    height: clamp(60px, 12vw, 85px);
     background: radial-gradient(circle, #a52a2a, #7a0000);
     border-radius: 50%;
     z-index: 15;
@@ -311,35 +305,34 @@ section {
 
 .seal-inner .initials {
     font-family: var(--font-header);
-    font-size: 14px;
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 1px;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .seal-inner .anchor-icon {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
 }
 
 .skip-intro {
     position: absolute;
-    bottom: 40px; z-index: 100;
+    bottom: 3rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: var(--color-text-light);
     opacity: 0.5;
     transition: opacity 0.3s;
+    z-index: 100;
 }
 
 .skip-intro:hover {
     opacity: 1;
 }
-
-/* --------------------------------------
    NAVIGATION
    -------------------------------------- */
 #navbar {
@@ -1085,4 +1078,52 @@ body::after {
     70% { transform: translate(0%, 15%); }
     80% { transform: translate(3%, 35%); }
     90% { transform: translate(-10%, 10%); }
+}
+
+/* Interaction Fixes */
+.intro-labels { pointer-events: none; }
+.envelope { z-index: 5; }
+.wax-seal { z-index: 100; pointer-events: auto; }
+.enter-btn { z-index: 110; pointer-events: auto; }
+.skip-intro { pointer-events: auto; z-index: 200; }
+.particles { z-index: 1; pointer-events: none; }
+.wax-seal {
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 1000 !important;
+}
+
+.envelope {
+    pointer-events: auto !important;
+}
+
+.intro-labels {
+    pointer-events: none !important;
+}
+
+#intro-overlay {
+    pointer-events: auto !important;
+}
+.intro-label-top {
+    font-weight: 400;
+    letter-spacing: 8px;
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+}
+
+.intro-label-names {
+    font-family: var(--font-header);
+    font-style: italic;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    letter-spacing: 2px;
+}
+
+.invitation-card {
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: linear-gradient(135deg, #fff 0%, #fdfcf8 100%);
+}
+
+.card-names {
+    font-style: italic;
 }
