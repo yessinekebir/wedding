@@ -6,6 +6,8 @@
     --color-accent: #C5A059; /* Elegant Gold */
     --color-accent-soft: #D4AF37;
     --color-sea-soft: #EBF5FB;
+    --color-navy: #1A2E35;
+    --color-sand: #EAE0D5;
     --color-sea-depth: #D6EAF8;
     --color-white: #FFFFFF;
     --color-error: #E74C3C;
@@ -145,14 +147,42 @@ section {
     z-index: 10;
 }
 
+    position: absolute;
+/* Enhanced Intro Labels */
+.intro-labels {
+    text-align: center;
+    margin-bottom: 4rem;
+    pointer-events: none;
+}
+
+.intro-label-top {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    opacity: 0;
+}
+
+.intro-label-names {
+    font-family: var(--font-header);
+    font-size: 3rem;
+    color: var(--color-text);
+    font-weight: 300;
+    opacity: 0;
+}
+
+    width: calc(100% - 30px);
 .envelope {
     position: relative;
-    width: 420px;
-    height: 280px;
-    background: #fff;
-    box-shadow: var(--shadow-medium);
+    width: 600px; /* Even bigger for impact */
+    height: 400px;
+    background: var(--color-navy);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.3), inset 0 0 100px rgba(255,255,255,0.05);
     transform-style: preserve-3d;
     cursor: pointer;
+    border-radius: 2px;
 }
 
 .envelope-flap {
@@ -161,11 +191,11 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fdfdfd;
+    background: #1e353d;
     clip-path: polygon(0 0, 100% 0, 50% 50%);
     z-index: 10;
     transform-origin: top;
-    box-shadow: inset 0 -2px 5px rgba(0,0,0,0.05);
+    box-shadow: inset 0 -2px 10px rgba(0,0,0,0.2);
 }
 
 .envelope-body {
@@ -174,17 +204,33 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: var(--color-navy);
     clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%);
     z-index: 5;
-    box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+    box-shadow: inset 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .envelope-paper {
     position: absolute;
-    top: 10px;
-    left: 15px;
-    width: calc(100% - 30px);
+    top: 15px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 30px);
+    background: #fff;
+    z-index: 2;
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+}
+
+.invitation-card .card-names {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
     height: calc(100% - 20px);
     background: #fff;
     z-index: 2;
@@ -278,7 +324,7 @@ section {
 
 .skip-intro {
     position: absolute;
-    bottom: -80px;
+    bottom: 40px; z-index: 100;
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.7rem;
@@ -929,8 +975,11 @@ section {
     .nav-links.active { display: flex; }
     .mobile-menu-toggle { display: flex; z-index: 1001; }
 
-    .envelope { width: 320px; height: 220px; }
-    .invitation-card .card-names { font-size: 1.6rem; }
+    .envelope { width: 300px; height: 200px; }
+    .intro-label-names { font-size: 1.8rem; }
+    .intro-label-top { font-size: 0.7rem; letter-spacing: 3px; }
+    .envelope-paper { padding: 30px; }
+    .invitation-card .card-names { font-size: 1.4rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -940,4 +989,100 @@ section {
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
+}
+/* Enhanced Typography & Lighting */
+:root {
+    --color-accent: #D4AF37; /* More Cartier Gold */
+    --color-bg: #FDFCF8; /* Slightly warmer ivory */
+}
+
+h1, h2, h3 {
+    letter-spacing: 5px;
+    font-weight: 300;
+}
+
+.section-header .subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    color: var(--color-accent);
+}
+
+/* Card Luxury */
+.details-card, .rsvp-card, .faq-item {
+    background: #fff;
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.02);
+}
+
+/* Button Micro-interactions */
+.btn-primary, .enter-btn {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-primary::before, .enter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.btn-primary:hover::before, .enter-btn:hover::before {
+    left: 100%;
+}
+
+/* Scroll Indicator */
+.scroll-indicator .mouse {
+    border: 1px solid var(--color-accent);
+}
+
+.scroll-indicator .wheel {
+    background: var(--color-accent);
+}
+
+/* Gallery Masonry Refinement */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.gallery-item img {
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+/* Film Grain Effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -10%); }
+    20% { transform: translate(-15%, 5%); }
+    30% { transform: translate(7%, -25%); }
+    40% { transform: translate(-5%, 25%); }
+    50% { transform: translate(-15%, 10%); }
+    60% { transform: translate(15%, 0%); }
+    70% { transform: translate(0%, 15%); }
+    80% { transform: translate(3%, 35%); }
+    90% { transform: translate(-10%, 10%); }
 }

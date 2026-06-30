@@ -7,6 +7,8 @@ export function initEnvelope(onComplete) {
     const skipBtn = document.getElementById('skip-intro');
     const particlesContainer = document.getElementById('particles');
     const invitation = document.querySelector('.invitation-card');
+    const labelTop = document.querySelector('.intro-label-top');
+    const labelNames = document.querySelector('.intro-label-names');
 
     // Create elegant floating particles (sea dust/light)
     for (let i = 0; i < 40; i++) {
@@ -21,9 +23,9 @@ export function initEnvelope(onComplete) {
         particlesContainer.appendChild(p);
 
         gsap.to(p, {
-            y: `random(-150, 150)`,
-            x: `random(-100, 100)`,
-            duration: `random(5, 10)`,
+            y: \`random(-150, 150)\`,
+            x: \`random(-100, 100)\`,
+            duration: \`random(5, 10)\`,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut"
@@ -32,29 +34,37 @@ export function initEnvelope(onComplete) {
 
     // Initial state
     gsap.set(overlay, { opacity: 0 });
-    gsap.set(envelope, { scale: 0.8, opacity: 0, y: 120, rotationX: 10 });
+    gsap.set(envelope, { scale: 0.7, opacity: 0, y: 150, rotationX: 15 });
     gsap.set(flap, { rotationX: 0 });
-    gsap.set(invitation, { opacity: 0, y: 30 });
+    gsap.set(invitation, { opacity: 0, y: 40 });
+    gsap.set([labelTop, labelNames], { opacity: 0, y: 20 });
 
     // Animation Sequence: The Arrival
-    const tl = gsap.timeline({ delay: 0.5 });
+    const tl = gsap.timeline({ delay: 0.8 });
 
     tl.to(overlay, {
         opacity: 1,
-        duration: 1.5,
+        duration: 2,
         ease: "power2.inOut"
     })
+    .to([labelTop, labelNames], {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        stagger: 0.3,
+        ease: "power3.out"
+    }, "-=1")
     .to(envelope, {
         opacity: 1,
         scale: 1,
         y: 0,
         rotationX: 0,
-        duration: 2,
+        duration: 2.5,
         ease: "power4.out"
-    }, "-=0.5")
+    }, "-=0.8")
     .to(envelope, {
-        y: -15,
-        duration: 3,
+        y: -20,
+        duration: 4,
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut"
@@ -81,40 +91,41 @@ export function initEnvelope(onComplete) {
 
         const openTl = gsap.timeline();
 
-        openTl.to(waxSeal, {
-            scale: 1.3,
+        openTl.to([labelTop, labelNames], {
             opacity: 0,
-            duration: 0.6,
+            y: -20,
+            duration: 1,
             ease: "power3.in"
         })
+        .to(waxSeal, {
+            scale: 1.5,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.in"
+        }, "-=0.5")
         .to(flap, {
             rotationX: 180,
-            duration: 1.5,
-            ease: "power2.inOut",
-            // Change shadow during rotation
-            onUpdate: function() {
-                const progress = this.progress();
-                flap.style.boxShadow = `0 ${progress * 10}px ${progress * 20}px rgba(0,0,0,0.1)`;
-            }
-        }, "-=0.3")
+            duration: 2,
+            ease: "power2.inOut"
+        }, "-=0.4")
         .to('.envelope-paper', {
-            y: -210,
+            y: -320,
             zIndex: 20,
-            duration: 1.8,
+            duration: 2.2,
             ease: "power3.out"
-        }, "-=0.8")
+        }, "-=1.2")
         .to(invitation, {
             opacity: 1,
             y: 0,
-            duration: 1,
+            duration: 1.5,
             ease: "power2.out"
-        }, "-=1.0")
+        }, "-=1.5")
         .to(envelope, {
-            y: 120,
-            scale: 0.95,
-            duration: 2,
+            y: 180,
+            scale: 0.9,
+            duration: 2.5,
             ease: "power3.inOut"
-        }, "-=1.8");
+        }, "-=2");
     }
 
     enterBtn.addEventListener('click', (e) => {
