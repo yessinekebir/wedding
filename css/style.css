@@ -192,6 +192,12 @@ img {
     padding: 0 var(--spacing-md);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .logo {
     font-family: var(--font-serif);
     font-size: 1.8rem;
@@ -899,10 +905,7 @@ img {
 
 /* Language Toggle */
 .lang-toggle-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
+    position: static;
 }
 
 .lang-toggle {
@@ -932,9 +935,11 @@ img {
 }
 
 @media (max-width: 768px) {
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
     .getting-there-container {
-        border-left-width: 15px;
-        border-right-width: 15px;
         margin: 0 15px;
     }
     .getting-there-inner {

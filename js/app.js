@@ -122,7 +122,9 @@ function initLanguageToggle() {
 
             // Update active state
             langBtns.forEach(b => b.classList.remove('active'));
+            langBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
 
             // Update content
             Object.keys(elements).forEach(key => {

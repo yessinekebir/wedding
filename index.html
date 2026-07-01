@@ -59,10 +59,18 @@
                     <li><a href="#gallery">Galleria</a></li>
                     <li><a href="#rsvp">RSVP</a></li>
                 </ul>
-                <button class="mobile-menu-toggle" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                </button>
+                <div class="nav-actions">
+                    <div class="lang-toggle-container">
+                        <div class="lang-toggle" id="lang-toggle" role="group" aria-label="Selezione lingua">
+                            <button type="button" class="lang-btn active" data-lang="it" aria-pressed="true">IT</button>
+                            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+                        </div>
+                    </div>
+                    <button class="mobile-menu-toggle" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </div>
         </nav>
 
@@ -144,14 +152,6 @@
         <!-- How to find us (Getting There) -->
         <section id="getting-there" class="getting-there-section">
             <div class="getting-there-container relative">
-                <!-- Language Toggle -->
-                <div class="lang-toggle-container">
-                    <div class="lang-toggle" id="lang-toggle">
-                        <button class="lang-btn active" data-lang="it">IT</button>
-                        <button class="lang-btn" data-lang="en">EN</button>
-                    </div>
-                </div>
-
                 <div class="getting-there-inner">
                     <div class="text-center mb-8 reveal-up">
                         <span class="getting-there-subtitle uppercase tracking-widest" data-content="subtitle">ARRIVARE LÌ</span>
@@ -203,6 +203,8 @@
             </div>
         </section>
 
+        <!-- Gallery -->
+        <section id="gallery" class="section bg-soft">
             <div class="container">
                 <div class="section-header text-center">
                     <span class="subtitle reveal-up">I Nostri Ricordi</span>
