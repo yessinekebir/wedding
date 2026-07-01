@@ -299,6 +299,7 @@ img {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -735,6 +736,10 @@ img {
     width: 100%;
     height: 100%;
     z-index: 0;
+}
+
+.hero-video-container .scroll-indicator {
+    bottom: 2rem;
 }
 
 .hero-video {
