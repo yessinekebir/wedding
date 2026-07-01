@@ -810,3 +810,186 @@ img {
 .rsvp-form input::placeholder {
     color: rgba(26, 42, 68, 0.4);
 }
+
+/* Utility Classes */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.overflow-hidden { overflow: hidden; }
+.max-w-2xl { max-width: 42rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-7 { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+.py-9 { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.uppercase { text-transform: uppercase; }
+.italic { font-style: italic; }
+.tracking-wide { letter-spacing: 0.025em; }
+.tracking-extra-wide { letter-spacing: 0.2em; }
+.font-display { font-family: var(--font-serif); }
+.font-body { font-family: var(--font-sans); }
+.font-light { font-weight: 300; }
+.text-white { color: #ffffff; }
+.text-4xl { font-size: 2.25rem; }
+.text-tiny { font-size: 0.7rem; }
+
+.section-padding {
+    padding: var(--spacing-xl) 0;
+}
+
+@media (min-width: 640px) {
+    .sm-text-xs { font-size: 0.75rem; }
+    .sm-text-2xl { font-size: 1.5rem; }
+    .sm-px-8 { padding-left: 2rem; padding-right: 2rem; }
+    .sm-py-9 { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+    .sm-text-tiny { font-size: 0.7rem; }
+}
+
+/* Fix for Voyage Section Clipping */
+#story {
+    overflow: visible; /* Allow shadows and rotated elements to breathe */
+    padding: var(--spacing-xl) 1rem;
+}
+
+.voyage-card {
+    margin: 2rem auto; /* Ensure space around the card */
+}
+
+.max-w-sm { max-width: 24rem; }
+
+/* Additional Spacing Utilities */
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-12 { margin-top: 3rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-9 { padding-top: 2.25rem; padding-bottom: 2.25rem; }
+
+/* More Utility Classes from HTML */
+.bg-soft-blue-5 { background-color: rgba(26, 42, 68, 0.05); }
+.text-sage-dark { color: #1a2a44; } /* Using Navy for Sage Dark as per previous agent convention */
+.text-sage-dark-85 { color: rgba(26, 42, 68, 0.85); }
+.text-sage-dark-75 { color: rgba(26, 42, 68, 0.75); }
+.text-sage-dark-45 { color: rgba(26, 42, 68, 0.45); }
+.text-sage-dark-35 { color: rgba(26, 42, 68, 0.35); }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-5xl { font-size: 3rem; }
+.w-px { width: 1px; }
+.h-5 { height: 1.25rem; }
+.bg-current { background-color: currentColor; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-center: center; }
+.gap-3 { gap: 0.75rem; }
+.w-full { width: 100%; }
+.h-px { height: 1px; }
+.w-12 { width: 3rem; }
+.w-9 { width: 2.25rem; }
+.h-9 { height: 2.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.my-3 { margin-top: 0.75rem; margin-bottom: 0.75rem; }
+.font-extrabold { font-weight: 800; }
+.drop-shadow-strong { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
+
+@media (min-width: 640px) {
+    .sm-text-xl { font-size: 1.25rem; }
+}
+
+/* Ensure images in gallery are premium */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.03);
+}
+
+.voyage-card {
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    position: relative;
+}
+
+/* Timeline & Other Utilities */
+.opacity-05 { opacity: 0.05; }
+.pointer-events-none { pointer-events: none; }
+.select-none { user-select: none; }
+.z-20 { z-index: 20; }
+.scallop-img {
+    top: -30px;
+    right: -20px;
+    width: 80px;
+    transform: rotate(15deg);
+}
+.oyster-img {
+    bottom: -40px;
+    left: -30px;
+    width: 100px;
+    transform: rotate(-10deg);
+}
+.timeline-inner-border {
+    border: 1.5px solid rgba(197, 160, 89, 0.15);
+}
+.bg-white-95 { background-color: rgba(255, 255, 255, 0.95); }
+.shadow-light { box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05); }
+.text-sage-dark-55 { color: rgba(26, 42, 68, 0.55); }
+.text-emboss {
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8), -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
+.sm-p-7 { padding: 1.75rem; }
+.sm-px-10 { padding-left: 2.5rem; padding-right: 2.5rem; }
+.sm-py-14 { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+.p-5 { padding: 1.25rem; }
+.px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+.py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+
+/* Font size adjustments for mobile */
+@media (max-width: 640px) {
+    .text-4xl { font-size: 1.8rem; }
+    .text-3xl { font-size: 1.5rem; }
+    .section-padding { padding: var(--spacing-lg) 0; }
+}
+
+/* Ensure the voyage card is fully visible */
+.voyage-card {
+    position: relative;
+    z-index: 5;
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 450px;
+}
+
+#story .container, #story .relative {
+    overflow: visible;
+}
+
+/* RSVP Enhancements */
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    border: 1px solid rgba(26, 42, 68, 0.1);
+    background-color: #ffffff;
+    color: var(--color-navy);
+    font-size: 1rem;
+    padding: 12px 16px;
+    border-radius: 4px;
+}
+
+.rsvp-form input:focus,
+.rsvp-form select:focus,
+.rsvp-form textarea:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
+}
