@@ -296,8 +296,11 @@ img {
 
 .hero-date {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 0.14em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
 }
 
 .scroll-indicator {
