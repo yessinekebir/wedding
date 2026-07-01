@@ -799,3 +799,14 @@ img {
     .sm-text-lg { font-size: 1.125rem; }
     .md-text-5xl { font-size: 3rem; }
 }
+
+/* RSVP Input Text Color Fix */
+.rsvp-form input,
+.rsvp-form select,
+.rsvp-form textarea {
+    color: var(--color-navy) !important;
+}
+
+.rsvp-form input::placeholder {
+    color: rgba(26, 42, 68, 0.4);
+}

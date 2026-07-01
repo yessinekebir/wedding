@@ -11,7 +11,7 @@ export const initAnimations = () => {
     });
 
     // Reveal animations
-    const revealContainers = ['#story', '.story-grid', '.details-grid', '.gallery-grid', '.timeline-wrapper', '#timeline', '.faq-accordion'];
+    const revealContainers = ['#story', '.story-grid', '.details-grid', '.gallery-grid', '.timeline-wrapper', '#timeline', '.faq-accordion', '#rsvp'];
 
     revealContainers.forEach(container => {
         const elements = document.querySelectorAll(`${container} .reveal-up`);
