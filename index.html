@@ -25,6 +25,9 @@
       rel="stylesheet"
     />
 
+    <!-- Intro gate seal: first paint of the site, worth preloading -->
+    <link rel="preload" as="image" href="assets/seal.png" />
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/animations.css" />
@@ -42,34 +45,50 @@
     </script>
   </head>
   <body>
-    <!-- Intro Envelope Overlay -->
-    <div id="intro-overlay" class="intro-overlay">
-      <div class="envelope-container">
-        <div class="intro-labels">
-          <span class="intro-label-top" data-i18n="intro.receivedFrom">Hai ricevuto un invito da</span>
-          <h1 class="intro-label-names">Yessine & Monica</h1>
-        </div>
-        <div class="envelope-wrapper">
-          <div class="envelope" id="envelope">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body"></div>
-            <div
-              class="wax-seal"
-              id="wax-seal"
-              role="button"
-              aria-label="Apri invito"
-              data-i18n-attr="aria-label"
-              data-i18n-key="intro.openInvitation"
-            >
-              <div class="seal-inner">
-                <span class="initials">Y & M</span>
+    <!-- Full-bleed envelope intro gate -->
+    <div id="intro-gate" class="gate" role="dialog" aria-modal="true">
+      <!-- .gate-lens sits OUTSIDE the perspective element: it carries the exit
+           blur, and a filter on a preserve-3d ancestor would flatten the scene. -->
+      <div class="gate-lens">
+        <div class="gate-stage">
+          <div class="gate-scene">
+            <div class="gate-back"><div class="gate-interior"></div></div>
+            <div class="gate-flap-shadow"></div>
+            <div class="gate-flap">
+              <div class="gate-face gate-face--front"></div>
+              <div class="gate-face gate-face--back"></div>
+            </div>
+            <div class="gate-pocket"></div>
+            <div class="gate-glow"></div>
+            <div class="gate-seal-slot">
+              <div class="gate-seal-ring"></div>
+              <div class="gate-seal-breath">
+                <button
+                  type="button"
+                  class="gate-seal"
+                  id="gate-seal"
+                  aria-label="Apri invito"
+                  data-i18n-attr="aria-label"
+                  data-i18n-key="intro.openInvitation"
+                >
+                  <img
+                    src="assets/seal.png"
+                    alt=""
+                    width="640"
+                    height="614"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                  <span class="gate-seal-sheen" aria-hidden="true">
+                    <span class="gate-seal-glint"></span>
+                  </span>
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <button id="skip-intro" class="skip-intro" data-i18n="intro.skip">Salta Intro</button>
       </div>
-      <div class="particles" id="particles"></div>
+      <div class="gate-wash"></div>
     </div>
 
     <!-- Main Website Content -->

@@ -1,183 +1,466 @@
-/* Intro Overlay Styles */
-.intro-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-bg-primary);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 2000px;
-    overflow: hidden;
+/* ==========================================================================
+   Full-bleed envelope intro gate
+   A single sheet of ivory paper fills the viewport, folded into an envelope.
+   Two diagonal seams cross at the centre; the wax seal rests on the crossing.
+   Timings and transforms are driven from js/envelope.js (GSAP).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Viewport unit
+   `dvh` is set through @supports rather than a fallback pair: an unknown unit
+   inside a custom property is invalid at computed-value time, and var() would
+   then resolve to nothing rather than to the previous declaration.
+   -------------------------------------------------------------------------- */
+:root {
+  --uh: 1vh;
+}
+@supports (height: 1dvh) {
+  :root {
+    --uh: 1dvh;
+  }
 }
 
-.envelope-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* --------------------------------------------------------------------------
+   Paper: two feTurbulence tiles + a laid ruling, over a lit/shaded gradient.
+
+   These are *background-images* — rasterized once, tiled and cached. Used as a
+   live `filter: url(#…)` on a fullscreen animated element the filter graph
+   re-runs every frame and the open sequence drops to single-digit fps.
+
+   Both use type="fractalNoise"; `turbulence` takes an absolute value and the
+   resulting hard speckle reads as TV static. Strength is baked into the SVG
+   rect opacity so no CSS `opacity` is needed on the paper elements (opacity < 1
+   would flatten transform-style — see "Two rules" below).
+   -------------------------------------------------------------------------- */
+:root {
+  /* fine fibre — authored 200px, painted 124px so cells go sub-pixel on retina */
+  --paper-noise-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='pf' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23pf)' opacity='0.055'/%3E%3C/svg%3E");
+  /* broad mottle — authored 600px, painted 760px */
+  --paper-noise-broad: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='pb' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23pb)' opacity='0.085'/%3E%3C/svg%3E");
+  /* laid ruling of cotton stock */
+  --paper-laid: repeating-linear-gradient(
+    0deg,
+    rgba(26, 42, 68, 0.016) 0 1px,
+    transparent 1px 4px
+  );
 }
 
-.intro-labels {
-    position: absolute;
-    top: 15%;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(-20px);
-    z-index: 10;
+/* --------------------------------------------------------------------------
+   Root overlay
+   -------------------------------------------------------------------------- */
+.gate {
+  /* Geometry. The apex depth is derived from the scene's WIDTH, not the
+     viewport's height, and the scene overscans horizontally. Since
+     apex = 0.28 x W, the seam half-angle is atan(2 x 0.28) = 29.3 degrees on
+     every device — the real-world DL envelope flap angle. 178dvh is the width
+     at which the apex lands exactly at 50% height, so on a phone you are
+     simply cropped into the middle of a large envelope.
+     Never overscan vertically: the hinge must sit on the viewport's top edge. */
+  --scene-h: calc(100 * var(--uh));
+  --scene-w: max(100vw, calc(178 * var(--uh)));
+  --apex-y: min(calc(var(--scene-w) * 0.28), calc(52 * var(--uh)));
+
+  --seal-w: clamp(104px, 12vmin, 152px);
+  --seal-h: calc(var(--seal-w) * 614 / 640);
+
+  --paper-a: #fffdf8;
+  --paper-b: #f3efe4;
+  --paper-in-a: #e9e2d2;
+  --paper-in-b: #d8cfbb;
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  cursor: pointer;
 }
 
-.intro-label-top {
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    font-size: 0.7rem;
-    color: var(--color-gold);
+/* The exit blur lives here, OUTSIDE the perspective element: a filter on a
+   preserve-3d ancestor forces transform-style back to flat. `.gate-stage`
+   establishes its own 3D rendering context, so flattening the lens is safe. */
+.gate-lens {
+  position: absolute;
+  inset: 0;
 }
 
-.intro-label-names {
-    font-size: 2.5rem;
-    color: var(--color-navy);
-    margin-top: 5px;
+/* perspective-origin is aimed at the seal. Points at the apex are then fixed
+   under z-translation, so the seams stay welded to the seal through the whole
+   camera push with no origin drift. */
+.gate-stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1200px;
+  perspective-origin: 50% var(--apex-y);
 }
 
-/* Fullscreen Envelope Structure */
-.envelope-wrapper {
-    position: relative;
-    width: 90vw;
-    height: 60vh;
-    max-width: 800px;
-    max-height: 500px;
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12));
-    opacity: 0;
-    transform: scale(0.95);
-    z-index: 5;
+/* --------------------------------------------------------------------------
+   TWO RULES THAT SILENTLY BREAK THIS SCENE IF VIOLATED
+   --------------------------------------------------------------------------
+   1. `clip-path`, `filter`, `opacity < 1`, `mask` and `overflow != visible`
+      force `transform-style` back to `flat`. So `.gate-scene` and `.gate-flap`
+      carry ONLY transform — every clip-path lives on a leaf child, and the
+      exit blur lives on `.gate-lens`, outside the perspective element.
+   2. Inside `preserve-3d`, `z-index` does not arbitrate against 3D-transformed
+      siblings; the browser depth-sorts by geometry. If the flap ever renders in
+      front of the pocket, the fix is `translateZ`, not `z-index`.
+   -------------------------------------------------------------------------- */
+
+/* Centred with left + negative margin, not translateX, so GSAP owns the
+   transform channel outright (it carries the dolly). */
+.gate-scene {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--scene-w);
+  height: var(--scene-h);
+  margin-left: calc(var(--scene-w) / -2);
+  transform-style: preserve-3d;
 }
 
-.envelope {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: #fcfcfc;
-    border-radius: 4px;
-    transform-style: preserve-3d;
-    cursor: pointer;
+/* Shared paper surface. Each element supplies its own --paper-sheet gradient. */
+.gate-back::before,
+.gate-pocket,
+.gate-face {
+  background-image: var(--paper-noise-fine), var(--paper-noise-broad),
+    var(--paper-laid), var(--paper-sheet);
+  background-size: 124px 124px, 760px 760px, auto, 100% 100%;
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  background-blend-mode: multiply, multiply, multiply, normal;
 }
 
-/* Envelope Flap */
-.envelope-flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background-color: #f9f9f9;
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    z-index: 4;
-    transform-origin: top;
-    border-top: 1px solid rgba(0,0,0,0.02);
+/* Envelope back — the full sheet. Also supplies the paper for the two side
+   wedges, which in a real envelope sit behind the front pocket fold. z: -40
+
+   The box stays at inset 0 so .gate-interior lines up with the flap's void; the
+   paper itself lives on an overscanned pseudo-element. A layer at negative z
+   projects SMALLER than the scene (1200/1240 = 0.968), which would otherwise
+   leave a bright rim of gate background around the viewport where the side
+   wedges meet the edges. The flap and pocket cannot be overscanned the same way
+   — their clip-path polygons are relative to their own boxes — but both sit at
+   positive z, so they over-cover instead. */
+.gate-back {
+  position: absolute;
+  inset: 0;
 }
 
-/* Envelope Body Sides */
-.envelope-body {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #fcfcfc;
-    z-index: 3;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 50% 50%);
-    background: linear-gradient(135deg, #fcfcfc 0%, #f1f1f1 100%);
+.gate-back::before {
+  --paper-sheet: linear-gradient(158deg, #f7f3ea, #e9e3d5);
+  content: "";
+  position: absolute;
+  inset: -8%;
 }
 
-.envelope::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background: linear-gradient(45deg, #fcfcfc 0%, #f8f8f8 100%);
-    clip-path: polygon(0 100%, 100% 100%, 50% 45%);
-    z-index: 3;
+/* Interior shading, revealed as the flap lifts. Clipped to the flap's void. */
+.gate-interior {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--apex-y);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  /* A warm greige, not the site navy: the inside of a cream envelope in shadow
+     is warm, and a cool tint over cream paper reads as a grey hole punched in
+     the sheet rather than as depth. */
+  background: linear-gradient(
+    180deg,
+    rgba(72, 58, 38, 0.26) 0%,
+    rgba(72, 58, 38, 0.11) 55%,
+    rgba(72, 58, 38, 0.02) 100%
+  );
+  opacity: 0;
 }
 
-/* Wax Seal */
-.wax-seal {
+/* Blurred cast shadow. Retreating this (scaleY 1 -> 0) is what sells the open:
+   past ~100 degrees the flap itself is off-screen above the viewport. z: -28 */
+.gate-flap-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--apex-y);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(26, 42, 68, 0.16) 0%,
+    rgba(26, 42, 68, 0.1) 60%,
+    rgba(26, 42, 68, 0.04) 100%
+  );
+  filter: blur(14px);
+  transform-origin: 50% 0;
+}
+
+/* Flap. Transform only — it has 3D children. z: 8 */
+.gate-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--apex-y);
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+}
+
+.gate-face {
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* `drop-shadow` respects `clip-path`, so the shadow traces the diagonals
+   exactly — no rotated pseudo-elements needed. */
+.gate-face--front {
+  --paper-sheet: linear-gradient(158deg, var(--paper-a), var(--paper-b));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 3px 5px rgba(26, 42, 68, 0.1));
+}
+
+/* The underside is an actual inside-of-paper, not a mirror: the clip-path is
+   PRE-FLIPPED (rotateX(180deg) mirrors the element vertically, so the front
+   polygon would draw an upward triangle), the light gradient is reversed to
+   202deg so the lit edge stays in the same world direction, and the tone is
+   the darker --paper-in-*. clip-path on a rotateX'd element clips in local
+   space before the transform maps it out, in Chrome, Safari and Firefox. */
+.gate-face--back {
+  --paper-sheet: linear-gradient(202deg, var(--paper-in-a), var(--paper-in-b));
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+  transform: rotateX(180deg);
+}
+
+/* Front pocket. The extra 1px upward stops the two antialiased clip-path
+   vertices meeting at the apex from leaving a light hairline. z: 24 */
+.gate-pocket {
+  /* Reversed angle so the lit edge stays in the same world direction, and a
+     slightly narrower tonal range than the flap so the fold still reads on a
+     phone, where the visible crop is only a thin slice of each gradient. */
+  --paper-sheet: linear-gradient(338deg, #fbf8f1, #eeeade);
+  position: absolute;
+  top: calc(var(--apex-y) - 1px);
+  left: 0;
+  width: 100%;
+  height: calc(var(--scene-h) - var(--apex-y) + 1px);
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+  filter: drop-shadow(0 -2px 4px rgba(26, 42, 68, 0.09));
+}
+
+/* Light spilling out of the envelope mouth. Warm white on normal compositing —
+   blend modes on 3D-transformed elements are unreliable across browsers. z: 30 */
+.gate-glow {
+  --glow-r: calc(var(--apex-y) * 1.7);
+  position: absolute;
+  top: var(--apex-y);
+  left: 50%;
+  width: calc(var(--glow-r) * 2);
+  height: calc(var(--glow-r) * 2);
+  margin-left: calc(var(--glow-r) * -1);
+  margin-top: calc(var(--glow-r) * -1);
+  pointer-events: none;
+  opacity: 0;
+  /* Biased slightly above the crossing: the mouth is the flap's void, so the
+     light comes from above the apex. A downward bias reads as the seam drifting. */
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    rgba(255, 249, 233, 0.95) 0%,
+    rgba(255, 243, 214, 0.5) 24%,
+    rgba(255, 240, 205, 0) 62%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Seal
+   The slot is centred exactly on the apex, which is also the perspective
+   origin, so the seal holds dead centre through the entire camera push. z: 34
+   -------------------------------------------------------------------------- */
+.gate-seal-slot {
+  position: absolute;
+  top: var(--apex-y);
+  left: 50%;
+  width: var(--seal-w);
+  height: var(--seal-h);
+  margin-left: calc(var(--seal-w) / -2);
+  margin-top: calc(var(--seal-h) / -2);
+}
+
+/* Idle cue 1: a gold ring pulsing outward. */
+.gate-seal-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--seal-w);
+  height: var(--seal-w);
+  margin: calc(var(--seal-w) / -2);
+  border: 1px solid var(--color-gold);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Idle cue 3: the breath lives on its own wrapper so the click timeline's
+   scale tweens (which target the button) never fight the idle loop. */
+.gate-seal-breath {
+  position: absolute;
+  inset: 0;
+}
+
+.gate-seal {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gate-seal img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 7px 13px rgba(26, 42, 68, 0.28));
+}
+
+.gate-seal:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 10px;
+  border-radius: 50%;
+}
+.gate-seal:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Idle cue 2: a specular sheen, masked to the wax silhouette so the highlight
+   is clipped to the seal rather than to a square. Mask URLs resolve relative
+   to the stylesheet, and the -webkit- prefix is still required.
+   The mask stays put on this wrapper; the moving streak is the child, so the
+   silhouette does not travel with the highlight. */
+.gate-seal-sheen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  -webkit-mask-image: url("../assets/seal.png");
+  mask-image: url("../assets/seal.png");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.gate-seal-glint {
+  position: absolute;
+  top: -25%;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background: linear-gradient(
+    104deg,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0) 62%
+  );
+}
+
+/* Gold bloom on hover — the only affordance beyond the three idle cues. */
+@media (hover: hover) {
+  .gate-seal::after {
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background: #a31d1d;
-    border-radius: 50%;
-    z-index: 10;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.seal-inner {
-    width: 60px;
-    height: 60px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.85);
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
-.skip-intro {
-    position: absolute;
-    bottom: 10%;
-    background: none;
-    border: none;
-    font-family: var(--font-sans);
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.65rem;
-    color: var(--color-text-muted);
-    cursor: pointer;
-    opacity: 0;
-    z-index: 10;
-}
-
-/* State: Open */
-.envelope.is-open .envelope-flap {
-    transform: rotateX(180deg);
-    z-index: 1;
-}
-
-.envelope.is-open .wax-seal {
-    opacity: 0;
+    width: 220%;
+    height: 220%;
+    margin: -110% 0 0 -110%;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+    transition: opacity 0.55s ease;
+    background: radial-gradient(
+      circle,
+      rgba(197, 160, 89, 0.3) 0%,
+      rgba(197, 160, 89, 0) 55%
+    );
+  }
+  .gate-seal:hover::after,
+  .gate-seal:focus-visible::after {
+    opacity: 1;
+  }
 }
 
-/* Particles */
-.particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
+/* --------------------------------------------------------------------------
+   Ivory whiteout. Sits outside .gate-lens so the exit blur never touches it,
+   and so it covers the peak 5.5x frame of the dolly (composited layers
+   rasterize at the scale in effect when created and are not re-rasterized
+   mid-animation, so the scene is a stretched 1x bitmap at the end).
+   -------------------------------------------------------------------------- */
+.gate-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--color-bg-primary);
+  opacity: 0;
 }
 
-.particle {
-    position: absolute;
-    background: var(--color-gold-light);
-    border-radius: 50%;
-    opacity: 0.25;
+/* --------------------------------------------------------------------------
+   will-change is added only for the open sequence. Left on during idle it pins
+   a large GPU texture for as long as the visitor looks at the seal.
+   -------------------------------------------------------------------------- */
+.gate.is-opening .gate-lens {
+  will-change: filter;
+}
+.gate.is-opening .gate-scene,
+.gate.is-opening .gate-flap,
+.gate.is-opening .gate-pocket,
+.gate.is-opening .gate-back,
+.gate.is-opening .gate-flap-shadow {
+  will-change: transform;
+}
+.gate.is-opening .gate-wash,
+.gate.is-opening .gate-glow,
+.gate.is-opening .gate-interior {
+  will-change: opacity;
+}
+
+/* Scroll lock. Removing the scrollbar also makes 100vw match the true viewport,
+   so the flap corners land on the real corners. */
+html.gate-open,
+html.gate-open body {
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Fallbacks
+   -------------------------------------------------------------------------- */
+
+/* GSAP blocked or offline: without this the site is a permanently blank page.
+   `.no-js` is set by the inline probe in index.html. */
+.no-js .gate {
+  display: none !important;
+}
+.no-js #main-content {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* No clip-path: collapse to a flat ivory panel rather than a broken layout. */
+@supports not (clip-path: polygon(0 0, 100% 0, 50% 100%)) {
+  .gate-flap,
+  .gate-flap-shadow,
+  .gate-pocket,
+  .gate-interior {
+    display: none;
+  }
+  .gate-back::before {
+    --paper-sheet: linear-gradient(158deg, var(--paper-a), var(--paper-b));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The idle loops are not built in JS on this path; hide the sheen outright
+     so no static highlight streak is left sitting on the wax. */
+  .gate-seal-sheen {
+    display: none;
+  }
 }
