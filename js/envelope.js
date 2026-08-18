@@ -22,6 +22,27 @@ export const initEnvelope = () => {
     html.classList.remove("gate-open");
   };
 
+  // Paint the page WITHOUT handing over to it. The mouth of the envelope is a
+  // real hole (see .gate-back::before), so the hero has to be on screen behind
+  // the gate for the flap to reveal anything. It stays inert and aria-hidden:
+  // it is scenery until revealSite() runs.
+  //
+  // The subtitle is pulled out of .reveal-up early and brought up on the click,
+  // because it is the one line that says what the site IS — a window onto the
+  // video alone is atmosphere, not a preview. The rest of the hero stays at
+  // opacity 0 until triggerSiteEntrance(), so this reads as a line of type
+  // waiting inside the envelope rather than as the whole hero arriving early.
+  // The later tween on the same element is then a no-op, not a second fade.
+  const previewContent = () => {
+    mainContent.style.opacity = "1";
+    mainContent.style.visibility = "visible";
+
+    const heroSubtitle = mainContent.querySelector(".hero-subtitle");
+    if (heroSubtitle) {
+      gsap.to(heroSubtitle, { opacity: 1, duration: 0.55, ease: "power2.out" });
+    }
+  };
+
   // GSAP blocked or offline. CSS `.no-js` already hides the gate; belt and
   // braces in case the class was not applied.
   if (typeof gsap === "undefined") {
@@ -244,6 +265,25 @@ export const initEnvelope = () => {
 
     tl.to(seal, { scale: 0.86, y: 3, duration: 0.13, ease: "power2.in" }, 0)
       .to(seal, { scale: 1.08, y: -10, duration: 0.22, ease: "power3.out" }, 0.13)
+      // Uncover the window. Not at 0.3 with the first degree of the swing: a
+      // flap tilted toward the camera projects WIDER at the hinge but SHORTER
+      // at its point (its apex vertex rides up as cos falls faster than the
+      // perspective scale grows), so from ~5 to ~25 degrees its two diagonals
+      // sit a few px inside the hole's and a bright ~10px band traces the X.
+      // By 0.6 the flap is past 30 degrees and the gap is a real opening rather
+      // than a seam artifact, so the ivory reads as the mouth, not as a leak.
+      // Faded, not switched, and to alpha 0 of the SAME navy — tweening to
+      // `transparent` interpolates toward transparent BLACK and dirties the
+      // midpoint. Only the hole is affected; .gate-back::before covers the rest.
+      .to(
+        gate,
+        {
+          backgroundColor: "rgba(22, 37, 60, 0)",
+          duration: 0.3,
+          ease: "power1.inOut",
+        },
+        0.6,
+      )
       // POSITIVE 180, not negative. Either sign lifts the flap above its hinge
       // past 90 degrees, but the sign decides which way it travels in z:
       //   -180 sends it AWAY (z = 8 - y*sin), so by ~11 degrees its lower half
@@ -269,7 +309,13 @@ export const initEnvelope = () => {
         0.32,
       )
       .to(interior, { opacity: 1, duration: 0.7, ease: "power1.out" }, 0.55)
-      .to(glow, { opacity: 1, duration: 0.85, ease: "power2.out" }, 0.7)
+      // Held well under 1 now that the mouth is a window: it used to be the only
+      // light in the scene, but it is now stacked on a lit video rather than on
+      // a near-black interior, and at full strength the two together flood the
+      // pocket and the sheet stops reading as navy at all. Worst on a phone,
+      // where the glow's radius is derived from the apex and the ellipse is
+      // nearly four times the viewport width.
+      .to(glow, { opacity: 0.55, duration: 0.85, ease: "power2.out" }, 0.7)
       // Crossover insurance, derived not guessed: for power2.inOut, output
       // 100/180 = 0.556 occurs at input 1 - sqrt(0.444/2) = 0.529, so
       // 0.30 + 0.529 x 1.05 = 0.86. Applied to the FACES, not to .gate-flap —
@@ -291,8 +337,11 @@ export const initEnvelope = () => {
       .to(scene, { z: 982, duration: 1.3, ease: "power2.in" }, 1.0)
       // The wash overlaps the dolly on purpose: composited layers rasterize
       // once at creation scale, so the peak 5.5x frame is a stretched 1x
-      // bitmap. At t=1.55 it is ~90% washed out by the time that frame lands.
-      .to(wash, { opacity: 1, duration: 0.72, ease: "power2.in" }, 1.55);
+      // bitmap. Pushed as late as it can go and still land at full opacity at
+      // 2.25, just under the dolly's peak at 2.3 — that frame has to be covered
+      // outright, not merely faded. Any later and the stretch shows; any longer
+      // and it is just more time on a blank screen.
+      .to(wash, { opacity: 1, duration: 0.3, ease: "power2.in" }, 1.95);
 
     if (allowBlur) {
       // Reads as motion blur, and makes raster blur indistinguishable from
@@ -305,12 +354,13 @@ export const initEnvelope = () => {
       );
     }
 
-    // The 0.65s dissolve deliberately overlaps triggerSiteEntrance(), so the
-    // hero is already animating as the ivory lifts.
-    tl.call(revealSite, null, 2.27).to(
+    // The dissolve deliberately overlaps triggerSiteEntrance(), so the hero is
+    // already animating as the ivory lifts. Kept short: the sheet is fully
+    // white by 2.25, and every extra frame here is a frame of blank screen.
+    tl.call(revealSite, null, 2.25).to(
       gate,
-      { opacity: 0, duration: 0.65, ease: "power2.out", onComplete: teardown },
-      2.3,
+      { opacity: 0, duration: 0.26, ease: "power2.out", onComplete: teardown },
+      2.26,
     );
 
     return tl;
@@ -355,6 +405,11 @@ export const initEnvelope = () => {
     }
     stopIdle();
     gate.classList.add("is-opening");
+
+    // Synchronous, so the page's first paint lands during the 0.3s seal press
+    // rather than on the frame the flap starts moving. Skipped under reduced
+    // motion: that path never opens the flap, so there is no window to fill.
+    if (!reduced) previewContent();
 
     openTl = reduced ? buildReducedTimeline() : buildOpenTimeline();
   };

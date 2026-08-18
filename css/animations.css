@@ -95,7 +95,11 @@
   z-index: 9999;
   overflow: hidden;
   /* Safety net behind the sheet — matches the recessed back, so any sub-pixel
-     gap at the viewport edge reads as envelope rather than as a bright rim. */
+     gap at the viewport edge reads as envelope rather than as a bright rim. It
+     is only load-bearing during the entrance, where the scene starts at z -180
+     and the back's -8% overscan is not yet wide enough to cover the viewport;
+     js/envelope.js clears it once the flap starts lifting, because from then on
+     it would be painting over the window cut into .gate-back::before. */
   background-color: #16253c;
   cursor: pointer;
 }
@@ -146,9 +150,14 @@
 .gate-back::before,
 .gate-pocket,
 .gate-face {
-  background-image: var(--paper-noise-fine), var(--paper-noise-broad),
-    var(--paper-laid), var(--paper-sheet);
-  background-size: 124px 124px, 760px 760px, auto, 100% 100%;
+  background-image:
+    var(--paper-noise-fine), var(--paper-noise-broad), var(--paper-laid),
+    var(--paper-sheet);
+  background-size:
+    124px 124px,
+    760px 760px,
+    auto,
+    100% 100%;
   background-repeat: repeat, repeat, repeat, no-repeat;
   /* The laid rule stays `normal` so its translucent white lines composite over
      the sheet directly; only the two noise layers blend. */
@@ -170,40 +179,77 @@
   inset: 0;
 }
 
+/* THE MOUTH IS A REAL HOLE, not a painted interior: the flap's void is cut out
+   of the backdrop so the live page underneath shows through it while the flap
+   lifts. js/envelope.js clears .gate's own background-color at the same moment,
+   since this pseudo-element is the only thing left covering the viewport.
+
+   Coordinates are in ::before's own box, which is 1.16x the scene in both axes
+   (inset -8% resolves against .gate-back = the scene box). So scene x maps to
+   x + 0.08W and scene y to y + 0.08H. The two vertices at y 0 carry the cut
+   straight up through the off-screen overscan; without them the notch would
+   taper before it reached the viewport's top edge and leave paper sitting in
+   the top corners of the window.
+
+   Punching the hole here rather than on a flat overlay in .gate is what makes
+   it survive the camera dolly — the hole is part of the sheet, so it scales
+   with it instead of the sheet sliding out from behind a fixed window. */
 .gate-back::before {
   --paper-sheet: linear-gradient(158deg, var(--paper-bk-a), var(--paper-bk-b));
   content: "";
   position: absolute;
   inset: -8%;
+  clip-path: polygon(
+    0 0,
+    calc(0.08 * var(--scene-w)) 0,
+    calc(0.08 * var(--scene-w)) calc(0.08 * var(--scene-h)),
+    calc(0.58 * var(--scene-w)) calc(0.08 * var(--scene-h) + var(--apex-y)),
+    calc(1.08 * var(--scene-w)) calc(0.08 * var(--scene-h)),
+    calc(1.08 * var(--scene-w)) 0,
+    100% 0,
+    100% 100%,
+    0 100%
+  );
 }
 
-/* Interior shading, revealed as the flap lifts. Clipped to the flap's void. */
+/* The envelope's inner lip, casting onto whatever is visible through the mouth.
+   Deliberately much lighter than an unlit interior would be: there is a video
+   playing behind this now, and the point of the window is that you can read it.
+   The heavy shading is carried by .gate-flap-shadow, which retreats. */
 .gate-interior {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--apex-y);
+  top: calc(var(--apex-y) * -0.05);
+  left: -2.5%;
+  width: 105%;
+  height: calc(var(--apex-y) * 1.05);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  /* Deep inside the envelope, unlit — near-black rather than a tint, since on
-     navy stock a mid shadow is indistinguishable from the paper itself. */
   background: linear-gradient(
     180deg,
-    rgba(2, 6, 13, 0.74) 0%,
-    rgba(2, 6, 13, 0.42) 55%,
-    rgba(2, 6, 13, 0.12) 100%
+    rgba(2, 6, 13, 0.62) 0%,
+    rgba(2, 6, 13, 0.22) 18%,
+    rgba(2, 6, 13, 0.04) 45%,
+    rgba(2, 6, 13, 0) 70%
   );
   opacity: 0;
 }
+
+/* Both triangles that shade the mouth are scaled 5% about the APEX, not about
+   their own centres — hence the paired top/left offsets. The apex is the
+   perspective origin, so scaling there is a pure enlargement along the same two
+   diagonals: the edges stay welded to the seams and only the coverage grows.
+   Without it they under-cover the window, because they sit at negative z and so
+   project smaller (1200/1240 = 0.968) than the hole cut into .gate-back::before,
+   which is carried up through the overscan and reaches the viewport's top edge.
+   The visible symptom is a bright unshaded strip along the top of the screen. */
 
 /* Blurred cast shadow. Retreating this (scaleY 1 -> 0) is what sells the open:
    past ~100 degrees the flap itself is off-screen above the viewport. z: -28 */
 .gate-flap-shadow {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--apex-y);
+  top: calc(var(--apex-y) * -0.05);
+  left: -2.5%;
+  width: 105%;
+  height: calc(var(--apex-y) * 1.05);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   background: linear-gradient(
     180deg,

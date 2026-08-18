@@ -20,6 +20,17 @@
     .hero-title {
         font-size: 3.5rem;
     }
+
+    /* At 0.9rem/0.5em this line is ~440px wide and runs off both edges of a
+       phone. The margin-left compensates the trailing letter-space, which is
+       painted after the last glyph and so drags centred text half of it to the
+       left — without it the line looks off-centre even once it fits. */
+    .hero-subtitle {
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        margin-left: 0.3em;
+        padding: 0 1rem;
+    }
 }
 
 /* Hover Effects */
