@@ -34,13 +34,14 @@
    -------------------------------------------------------------------------- */
 :root {
   /* fine fibre — authored 200px, painted 124px so cells go sub-pixel on retina */
-  --paper-noise-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='pf' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23pf)' opacity='0.055'/%3E%3C/svg%3E");
+  --paper-noise-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='pf' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23pf)' opacity='0.16'/%3E%3C/svg%3E");
   /* broad mottle — authored 600px, painted 760px */
-  --paper-noise-broad: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='pb' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23pb)' opacity='0.085'/%3E%3C/svg%3E");
-  /* laid ruling of cotton stock */
+  --paper-noise-broad: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='pb' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0' intercept='1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23pb)' opacity='0.12'/%3E%3C/svg%3E");
+  /* laid ruling of cotton stock — a light rule, since on navy stock the fibres
+     catch the light rather than absorbing it */
   --paper-laid: repeating-linear-gradient(
     0deg,
-    rgba(26, 42, 68, 0.016) 0 1px,
+    rgba(255, 255, 255, 0.022) 0 1px,
     transparent 1px 4px
   );
 }
@@ -63,16 +64,39 @@
   --seal-w: clamp(104px, 12vmin, 152px);
   --seal-h: calc(var(--seal-w) * 614 / 640);
 
-  --paper-a: #fffdf8;
-  --paper-b: #f3efe4;
-  --paper-in-a: #e9e2d2;
-  --paper-in-b: #d8cfbb;
+  /* ---- Envelope stock. Re-theme the whole gate from this block. ----
+     Navy, built around the site's --color-navy (#1a2a44). Each facet of the
+     fold gets its own tone so the X still reads without relying on the seam
+     shadows alone: flap catches the most light, the pocket fold a little less,
+     the recessed back and side wedges least. The `a -> b` pairs are the lit and
+     shaded ends of each facet's gradient. */
+  --paper-a: #2a4363; /* flap, lit */
+  --paper-b: #1a2c47; /* flap, shaded */
+  --paper-pk-a: #243a57; /* front pocket fold */
+  --paper-pk-b: #15243c;
+  --paper-bk-a: #1e3049; /* recessed back + side wedges */
+  --paper-bk-b: #101d31;
+  --paper-in-a: #182739; /* underside of the flap */
+  --paper-in-b: #0e1826;
+
+  /* On dark stock `multiply` noise is invisible — it can only darken, and the
+     mean of fractalNoise is mid-grey, so it just dims the sheet. `overlay` is
+     two-sided: samples above mid-grey lift, below it sink, which is what paper
+     fibre actually does to raking light. */
+  --paper-blend: overlay;
+
+  /* Seams and cast shadows must be near-black, not navy: a navy shadow on navy
+     stock has nothing to contrast against and the folds disappear. */
+  --seam-ink: rgba(0, 0, 0, 0.5);
+  --seam-ink-soft: rgba(0, 0, 0, 0.4);
 
   position: fixed;
   inset: 0;
   z-index: 9999;
   overflow: hidden;
-  background-color: var(--color-bg-primary);
+  /* Safety net behind the sheet — matches the recessed back, so any sub-pixel
+     gap at the viewport edge reads as envelope rather than as a bright rim. */
+  background-color: #16253c;
   cursor: pointer;
 }
 
@@ -126,7 +150,9 @@
     var(--paper-laid), var(--paper-sheet);
   background-size: 124px 124px, 760px 760px, auto, 100% 100%;
   background-repeat: repeat, repeat, repeat, no-repeat;
-  background-blend-mode: multiply, multiply, multiply, normal;
+  /* The laid rule stays `normal` so its translucent white lines composite over
+     the sheet directly; only the two noise layers blend. */
+  background-blend-mode: var(--paper-blend), var(--paper-blend), normal, normal;
 }
 
 /* Envelope back — the full sheet. Also supplies the paper for the two side
@@ -145,7 +171,7 @@
 }
 
 .gate-back::before {
-  --paper-sheet: linear-gradient(158deg, #f7f3ea, #e9e3d5);
+  --paper-sheet: linear-gradient(158deg, var(--paper-bk-a), var(--paper-bk-b));
   content: "";
   position: absolute;
   inset: -8%;
@@ -159,14 +185,13 @@
   width: 100%;
   height: var(--apex-y);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  /* A warm greige, not the site navy: the inside of a cream envelope in shadow
-     is warm, and a cool tint over cream paper reads as a grey hole punched in
-     the sheet rather than as depth. */
+  /* Deep inside the envelope, unlit — near-black rather than a tint, since on
+     navy stock a mid shadow is indistinguishable from the paper itself. */
   background: linear-gradient(
     180deg,
-    rgba(72, 58, 38, 0.26) 0%,
-    rgba(72, 58, 38, 0.11) 55%,
-    rgba(72, 58, 38, 0.02) 100%
+    rgba(2, 6, 13, 0.74) 0%,
+    rgba(2, 6, 13, 0.42) 55%,
+    rgba(2, 6, 13, 0.12) 100%
   );
   opacity: 0;
 }
@@ -182,9 +207,9 @@
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   background: linear-gradient(
     180deg,
-    rgba(26, 42, 68, 0.16) 0%,
-    rgba(26, 42, 68, 0.1) 60%,
-    rgba(26, 42, 68, 0.04) 100%
+    rgba(0, 0, 0, 0.42) 0%,
+    rgba(0, 0, 0, 0.26) 60%,
+    rgba(0, 0, 0, 0.09) 100%
   );
   filter: blur(14px);
   transform-origin: 50% 0;
@@ -213,7 +238,7 @@
 .gate-face--front {
   --paper-sheet: linear-gradient(158deg, var(--paper-a), var(--paper-b));
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  filter: drop-shadow(0 3px 5px rgba(26, 42, 68, 0.1));
+  filter: drop-shadow(0 3px 6px var(--seam-ink));
 }
 
 /* The underside is an actual inside-of-paper, not a mirror: the clip-path is
@@ -234,14 +259,14 @@
   /* Reversed angle so the lit edge stays in the same world direction, and a
      slightly narrower tonal range than the flap so the fold still reads on a
      phone, where the visible crop is only a thin slice of each gradient. */
-  --paper-sheet: linear-gradient(338deg, #fbf8f1, #eeeade);
+  --paper-sheet: linear-gradient(338deg, var(--paper-pk-a), var(--paper-pk-b));
   position: absolute;
   top: calc(var(--apex-y) - 1px);
   left: 0;
   width: 100%;
   height: calc(var(--scene-h) - var(--apex-y) + 1px);
   clip-path: polygon(0 100%, 100% 100%, 50% 0);
-  filter: drop-shadow(0 -2px 4px rgba(26, 42, 68, 0.09));
+  filter: drop-shadow(0 -2px 5px var(--seam-ink-soft));
 }
 
 /* Light spilling out of the envelope mouth. Warm white on normal compositing —
@@ -269,8 +294,10 @@
 
 /* --------------------------------------------------------------------------
    Seal
-   The slot is centred exactly on the apex, which is also the perspective
-   origin, so the seal holds dead centre through the entire camera push. z: 34
+   A flat overlay, a sibling of .gate-stage rather than a layer inside the
+   scene — see the note in index.html. .gate-lens and .gate-stage share the same
+   box (inset 0), so `top: var(--apex-y); left: 50%` lands the slot on exactly
+   the same pixel as the scene's apex, which is also the perspective origin.
    -------------------------------------------------------------------------- */
 .gate-seal-slot {
   position: absolute;
@@ -319,7 +346,7 @@
   display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 7px 13px rgba(26, 42, 68, 0.28));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
 }
 
 .gate-seal:focus-visible {
@@ -453,7 +480,7 @@ html.gate-open body {
     display: none;
   }
   .gate-back::before {
-    --paper-sheet: linear-gradient(158deg, var(--paper-a), var(--paper-b));
+    --paper-sheet: linear-gradient(158deg, var(--paper-a), var(--paper-bk-b));
   }
 }
 

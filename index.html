@@ -60,31 +60,37 @@
             </div>
             <div class="gate-pocket"></div>
             <div class="gate-glow"></div>
-            <div class="gate-seal-slot">
-              <div class="gate-seal-ring"></div>
-              <div class="gate-seal-breath">
-                <button
-                  type="button"
-                  class="gate-seal"
-                  id="gate-seal"
-                  aria-label="Apri invito"
-                  data-i18n-attr="aria-label"
-                  data-i18n-key="intro.openInvitation"
-                >
-                  <img
-                    src="assets/seal.png"
-                    alt=""
-                    width="640"
-                    height="614"
-                    fetchpriority="high"
-                    decoding="async"
-                  />
-                  <span class="gate-seal-sheen" aria-hidden="true">
-                    <span class="gate-seal-glint"></span>
-                  </span>
-                </button>
-              </div>
-            </div>
+          </div>
+        </div>
+        <!-- The seal sits OUTSIDE .gate-stage, not inside the scene: the flap
+             swings toward the camera to z 546, so anything sharing the scene's
+             3D context gets depth-sorted behind it and the seal is clipped into
+             a crescent mid-swing. Out here it is a flat overlay pinned to the
+             apex, always on top. It costs nothing — the seal has already exited
+             before the camera dolly starts. -->
+        <div class="gate-seal-slot">
+          <div class="gate-seal-ring"></div>
+          <div class="gate-seal-breath">
+            <button
+              type="button"
+              class="gate-seal"
+              id="gate-seal"
+              aria-label="Apri invito"
+              data-i18n-attr="aria-label"
+              data-i18n-key="intro.openInvitation"
+            >
+              <img
+                src="assets/seal.png"
+                alt=""
+                width="640"
+                height="614"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <span class="gate-seal-sheen" aria-hidden="true">
+                <span class="gate-seal-glint"></span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -347,7 +353,7 @@
               <span class="subtitle" data-i18n="rsvp.eyebrow">Sarete dei Nostri?</span>
               <h2 class="title" data-i18n="rsvp.title">RSVP</h2>
             </div>
-            <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbzS5UGL9rINHs8iSy7UxvUK_rmkPPpslFwHj-upfwvIsHwARAZmf0pM2cjoiler8Ga2eQ/exec" method="POST">
+            <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbywtu2GYWJ2EphBB85uviqq1mb1Dp7e-Y40-wiKprlGhsnTHAT_waucTnEyMSC2zkcWsQ/exec" method="POST">
               <div class="form-row">
                 <div class="form-group">
                   <label for="first-name" data-i18n="rsvp.firstName">Nome</label>
@@ -363,36 +369,50 @@
                   <input type="text" id="last-name" name="last-name" required />
                 </div>
               </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="attendance" data-i18n="rsvp.attendance">Parteciperai?</label>
-                  <select id="attendance" name="attendance" required>
-                    <option value="" data-i18n="rsvp.attendancePlaceholder">Seleziona un'opzione</option>
-                    <option value="SI" data-i18n="rsvp.attending">Sì, con piacere</option>
-                    <option value="NO" data-i18n="rsvp.notAttending">Purtroppo no</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="guests" data-i18n="rsvp.guests">Numero di Ospiti</label>
-                  <input
-                    type="number"
-                    id="guests"
-                    name="guests"
-                    min="1"
-                    max="10"
-                    value="1"
-                    required
-                  />
-                </div>
-              </div>
               <div class="form-group">
-                <label for="meal" data-i18n="rsvp.meal">Preferenza Menu</label>
-                <select id="meal" name="meal" required>
-                  <option value="Menu di pesce" data-i18n="rsvp.fish">Menu di pesce</option>
-                  <option value="Menu di carne" data-i18n="rsvp.meat">Menu di carne</option>
-                  <option value="Menu Vegetariano" data-i18n="rsvp.vegetarian">Menu Vegetariano</option>
+                <label for="attendance" data-i18n="rsvp.attendance">Parteciperai?</label>
+                <select id="attendance" name="attendance" required>
+                  <option value="" data-i18n="rsvp.attendancePlaceholder">Seleziona un'opzione</option>
+                  <option value="SI" data-i18n="rsvp.attending">Sì, con piacere</option>
+                  <option value="NO" data-i18n="rsvp.notAttending">Purtroppo no</option>
                 </select>
               </div>
+              <fieldset id="guests-fieldset" class="form-fieldset" hidden disabled>
+                <legend data-i18n="rsvp.guests">Ospiti</legend>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="adults" data-i18n="rsvp.adults">Adulti</label>
+                    <input
+                      type="number"
+                      id="adults"
+                      name="adults"
+                      min="1"
+                      max="10"
+                      value="1"
+                      inputmode="numeric"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="children" data-i18n="rsvp.children">Bambini</label>
+                    <input
+                      type="number"
+                      id="children"
+                      name="children"
+                      min="0"
+                      max="10"
+                      value="0"
+                      inputmode="numeric"
+                      required
+                    />
+                  </div>
+                </div>
+                <p class="form-hint" data-i18n="rsvp.childrenHint">
+                  Per i più piccoli è previsto un menu dedicato.
+                </p>
+                <span class="form-subtitle" data-i18n="rsvp.meal">Preferenza Menu</span>
+                <div id="meal-list" class="meal-list"></div>
+              </fieldset>
               <div class="form-group">
                 <label for="allergies" data-i18n="rsvp.allergies">Intolleranze o Allergie</label>
                 <input

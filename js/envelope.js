@@ -81,7 +81,8 @@ export const initEnvelope = () => {
   gsap.set(flap, { z: 8, transformOrigin: "50% 0" });
   gsap.set(pocket, { z: 24 });
   gsap.set(glow, { z: 30 });
-  gsap.set(slot, { z: 34 });
+  // No z on the seal slot — it lives outside .gate-stage (see index.html) so it
+  // is not part of the scene's 3D context at all.
 
   // Modal semantics while the gate is up.
   html.classList.add("gate-open");
@@ -243,7 +244,17 @@ export const initEnvelope = () => {
 
     tl.to(seal, { scale: 0.86, y: 3, duration: 0.13, ease: "power2.in" }, 0)
       .to(seal, { scale: 1.08, y: -10, duration: 0.22, ease: "power3.out" }, 0.13)
-      .to(flap, { rotationX: -180, duration: 1.05, ease: "power2.inOut" }, 0.3)
+      // POSITIVE 180, not negative. Either sign lifts the flap above its hinge
+      // past 90 degrees, but the sign decides which way it travels in z:
+      //   -180 sends it AWAY (z = 8 - y*sin), so by ~11 degrees its lower half
+      //         has already crossed the cast-shadow plane at z -28 and
+      //         .gate-back at z -40, and those planes depth-sort in front of
+      //         it — a hard horizontal edge sweeps down the flap with a dark
+      //         band below it, exactly the artifact rule 2 warns about.
+      //   +180 brings it TOWARD the camera (z = 8 + y*sin, max 546 at 90deg),
+      //         so it stays in front of every other layer for the whole swing
+      //         and reads as the lid opening at you before it lifts away.
+      .to(flap, { rotationX: 180, duration: 1.05, ease: "power2.inOut" }, 0.3)
       .to(flapShadow, { scaleY: 0, duration: 0.75, ease: "power2.in" }, 0.3)
       .to(
         seal,

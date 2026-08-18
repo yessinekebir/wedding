@@ -752,8 +752,57 @@ img {
   resize: vertical;
 }
 
+.form-fieldset {
+  border: 1px solid rgba(26, 42, 68, 0.1);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin: 0 0 var(--spacing-md);
+  min-width: 0;
+}
+
+.form-fieldset[hidden] {
+  display: none;
+}
+
+.form-fieldset legend,
+.form-subtitle {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.form-fieldset legend {
+  padding: 0 8px;
+}
+
+.form-subtitle {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-hint {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: rgba(26, 42, 68, 0.6);
+  margin: calc(-1 * var(--spacing-sm)) 0 var(--spacing-md);
+}
+
+.meal-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.meal-list .form-group {
+  margin-bottom: 0;
+}
+
 @media (max-width: 600px) {
-  .form-row {
+  .form-row,
+  .meal-list {
     grid-template-columns: 1fr;
   }
   .rsvp-card-container {
