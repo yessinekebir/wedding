@@ -3,12 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yessine & Monica | Matrimonio</title>
+    <title>Yessine & Monica | Wedding</title>
     <meta
       name="description"
       content="Il matrimonio di Yessine & Monica - 26 Giugno 2027 a Gela, Sicilia"
     />
-
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32x32.png"
+    />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,6 +32,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script>
+      // If GSAP is not available (blocked/offline), mark document so CSS shows content.
+      if (!window.gsap) {
+        document.documentElement.classList.add('no-js');
+      }
+    </script>
   </head>
   <body>
     <!-- Intro Envelope Overlay -->
@@ -128,7 +140,7 @@
         id="story"
         class="relative section-padding"
         style="
-          background-image: url(&quot;https://nautical-template.thedigitalyes.com/assets/our-story-bg-WFGEJs6e.jpg&quot;);
+          background-image: url(/assets/school-bg.png);
           background-size: cover;
           background-position: center center;
         "
@@ -189,8 +201,8 @@
       <section id="details" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle reveal-up">Unitevi a Noi</span>
-            <h2 class="title reveal-up">Dettagli del Matrimonio</h2>
+            <span class="subtitle">Unitevi a Noi</span>
+            <h2 class="title">Dettagli del Matrimonio</h2>
           </div>
           <div class="details-grid">
             <div class="details-card reveal-up">
@@ -200,7 +212,7 @@
               <a
                 href="https://maps.google.com/?q=B+Cool+Beach+Gela"
                 target="_blank"
-                class="btn-text"
+                class="cards-link"
                 >Ottieni Indicazioni</a
               >
             </div>
@@ -208,13 +220,8 @@
               <div class="card-icon">📅</div>
               <h3>Quando</h3>
               <p>Sabato, 26 Giugno 2027<br />Ore 16:30</p>
+              <a class="cards-link" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Yessine+%26+Monica&dates=20270626T163000/20270626T213000&details=Celebrazione+al+B+Cool+Beach+di+Gela&location=B+Cool+Beach+Gela" target="_blank" rel="noopener">Salva su Google Calendar</a>
             </div>
-            <div class="details-card reveal-up" style="transition-delay: 0.2s">
-              <div class="card-icon">👔</div>
-              <h3>Dress Code</h3>
-              <p>Elegant Mediterraneo<br />Tessuti leggeri e toni chiari</p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -273,43 +280,6 @@
                 condurrà direttamente a Gela e al B Cool Beach.
               </p>
             </div>
-
-            <!-- Stripes separator -->
-            <div class="section-stripes reveal-up"></div>
-
-            <!-- By Train -->
-            <div class="transport-option text-center reveal-up">
-              <div class="transport-icon mb-4">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="w-12 h-12 mx-auto"
-                >
-                  <rect x="4" y="3" width="16" height="15" rx="2"></rect>
-                  <path d="M4 11h16"></path>
-                  <path d="M8 15h.01"></path>
-                  <path d="M16 15h.01"></path>
-                  <path d="M7 21l2-3"></path>
-                  <path d="M17 21l-2-3"></path>
-                </svg>
-              </div>
-              <h3
-                class="transport-title italic mb-4"
-                data-content="train-title"
-              >
-                In treno
-              </h3>
-              <p class="transport-text" data-content="train-text">
-                Treni regionali per la stazione di Gela da Catania, Siracusa o
-                Palermo. Dalla stazione, il B Cool Beach è facilmente
-                raggiungibile in taxi o con un breve tragitto in auto lungo la
-                costa — circa 10 minuti per arrivare a destinazione.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -318,45 +288,18 @@
       <section id="gallery" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle reveal-up">I Nostri Ricordi</span>
-            <h2 class="title reveal-up">Galleria</h2>
+            <span class="subtitle">I Nostri Ricordi</span>
+            <h2 class="title">Galleria</h2>
           </div>
           <div class="gallery-grid" id="masonry-gallery">
             <div class="gallery-item reveal-up">
-              <img
-                src="https://nautical-template.thedigitalyes.com/assets/gallery-1.jpg"
-                alt="Galleria 1"
-              />
+              <img src="/assets/gallery-1.jpg" alt="Galleria 1" />
             </div>
             <div class="gallery-item reveal-up">
-              <img
-                src="https://nautical-template.thedigitalyes.com/assets/gallery-2.jpg"
-                alt="Galleria 2"
-              />
+              <img src="/assets/gallery-1.jpg" alt="Galleria 2" />
             </div>
             <div class="gallery-item reveal-up">
-              <img
-                src="https://nautical-template.thedigitalyes.com/assets/gallery-3.jpg"
-                alt="Galleria 3"
-              />
-            </div>
-            <div class="gallery-item reveal-up">
-              <img
-                src="https://nautical-template.thedigitalyes.com/assets/gallery-4.jpg"
-                alt="Galleria 4"
-              />
-            </div>
-            <div class="gallery-item reveal-up">
-              <img
-                src="https://nautical-template.thedigitalyes.com/assets/gallery-5.jpg"
-                alt="Galleria 5"
-              />
-            </div>
-            <div class="gallery-item reveal-up">
-              <img
-                src="https://nautical-template.thedigitalyes.com/assets/gallery-6.jpg"
-                alt="Galleria 6"
-              />
+              <img src="/assets/gallery-1.jpg" alt="Galleria 3" />
             </div>
           </div>
         </div>
@@ -367,10 +310,10 @@
         <div class="container">
           <div class="rsvp-card-container">
             <div class="section-header text-center">
-              <span class="subtitle reveal-up">Sarete dei Nostri?</span>
-              <h2 class="title reveal-up">RSVP</h2>
+              <span class="subtitle">Sarete dei Nostri?</span>
+              <h2 class="title">RSVP</h2>
             </div>
-            <form id="rsvp-form" class="rsvp-form reveal-up">
+            <form id="rsvp-form" class="rsvp-form">
               <div class="form-row">
                 <div class="form-group">
                   <label for="first-name">Nome</label>
@@ -396,7 +339,7 @@
                   <select id="attendance" name="attendance" required>
                     <option value="">Seleziona un'opzione</option>
                     <option value="yes">Sì, con piacere</option>
-                    <option value="no">Purtropalmente no</option>
+                    <option value="no">Purtroppo no</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -414,8 +357,8 @@
               <div class="form-group">
                 <label for="meal">Preferenza Menu</label>
                 <select id="meal" name="meal">
-                  <option value="fish">Pesce Mediterraneo</option>
-                  <option value="meat">Carne Premium</option>
+                  <option value="fish">Menu di pesce</option>
+                  <option value="meat">Menu di carne</option>
                   <option value="veg">Vegetariano</option>
                 </select>
               </div>
@@ -438,12 +381,39 @@
         </div>
       </section>
 
+         <!-- Contribution / IBAN section -->
+      <section id="contribute" class="section bg-soft">
+        <div class="container">
+          <div class="section-header text-center">
+            <span class="subtitle">Contribuisci</span>
+            <h2 class="title">Partecipare ai nostri sogni</h2>
+          </div>
+          <div class="contribute-card text-center">
+            <p>
+              Se desiderate partecipare concretamente alla realizzazione dei
+              nostri progetti, potete effettuare un versamento sul seguente
+              IBAN.
+            </p>
+            <p class="iban" style="font-size:1.1rem; margin:0.5rem 0">
+              <strong>IT00 0000 0000 0000 0000 0000 000</strong>
+            </p>
+            <button class="btn-primary btn-copy-iban" type="button">Copia IBAN</button>
+          </div>
+            <div style="margin:0.75rem 0; text-align:left; display:inline-block;">
+              <p style="margin:0.35rem 0"><strong>Intestatario:</strong> <span class="contrib-intestatario">Yessine Kebir - Monica Di Vita</span></p>
+              <p style="margin:0.35rem 0"><strong>Banca:</strong> <span class="contrib-bank">Revolut Bank</span></p>
+              <p style="margin:0.35rem 0"><strong>BIC / SWIFT:</strong> <span class="contrib-bic">BCITITMMXXX</span></p>
+            </div>
+            <p class="muted" style="margin-top:0.75rem; text-align: center">Grazie di cuore — la vostra presenza è il dono più grande.</p>
+        </div>
+      </section>
+      
       <!-- FAQ -->
       <section id="faq" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle reveal-up">Domande Frequenti</span>
-            <h2 class="title reveal-up">FAQ</h2>
+            <span class="subtitle">Domande Frequenti</span>
+            <h2 class="title">FAQ</h2>
           </div>
           <div class="faq-accordion">
             <div class="faq-item reveal-up">
@@ -451,22 +421,17 @@
                 Qual è il Dress Code? <span>+</span>
               </button>
               <div class="faq-content">
-                <p>
-                  Il tema è "Elegant Mediterraneo". Consigliamo tessuti freschi
-                  come il lino e colori chiari/pastello. Gradito l'abito formale
-                  ma senza eccessiva rigidità.
-                </p>
+                <p>Per l'occasione, é semplicemente richiesto di indossare un
+                  abbigliamento elegante, nessun dress code specifico.</p>
               </div>
             </div>
             <div class="faq-item reveal-up">
               <button class="faq-trigger">
-                I bambini sono invitati? <span>+</span>
+                Dove si celebrerà il rito? <span>+</span>
               </button>
               <div class="faq-content">
                 <p>
-                  Per permettere a tutti i genitori una serata di relax e
-                  divertimento, abbiamo scelto di celebrare un matrimonio
-                  "adults-only". Vi ringraziamo per la comprensione.
+                  Il rito si terrà presso il B Cool Beach di Gela — location dove si terrá l'intero evento.
                 </p>
               </div>
             </div>
@@ -486,40 +451,40 @@
         </div>
       </section>
 
+   
+
       <footer class="footer">
         <div class="container text-center">
           <h2 class="footer-logo">Y&M</h2>
           <p class="hashtag">#YessineMonica2027</p>
           <p class="thank-you">
-            Non vediamo l'ora di festeggiare con voi. Ci vediamo in Sicilia!
+            Non vediamo l'ora di festeggiare con voi !
           </p>
         </div>
       </footer>
     </main>
 
-    <!-- Audio Control -->
-    <button id="audio-toggle" class="audio-btn" aria-label="Toggle music">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path class="speaker-icon" d="M11 5L6 9H2V15H6L11 19V5Z"></path>
-        <path
-          class="wave-icon"
-          d="M15.54 8.46C16.4774 9.39764 17.004 10.6692 17.004 11.995C17.004 13.3208 16.4774 14.5924 15.54 15.53M19.07 4.93C20.9447 6.80528 21.9979 9.34836 21.9979 12C21.9979 14.6516 20.9447 17.1947 19.07 19.07"
-        ></path>
-      </svg>
-    </button>
-    <audio id="bg-music" loop>
-      <source
-        src="https://nautical-template.thedigitalyes.com/assets/music/intro-music-wdGCmJlJ.mp3"
-        type="audio/mpeg"
-      />
-    </audio>
-
     <!-- JS Modules -->
     <script type="module" src="js/app.js"></script>
+    <script>
+      document.addEventListener('click', function (e) {
+        if (e.target.matches('.btn-copy-iban')) {
+          const ibanEl = document.querySelector('.iban strong');
+          const text = ibanEl ? ibanEl.textContent.replace(/\s+/g, '') : '';
+          if (!text) return;
+          navigator.clipboard
+            .writeText(text)
+            .then(() => {
+              const btn = e.target;
+              const prev = btn.textContent;
+              btn.textContent = 'IBAN copiato';
+              setTimeout(() => (btn.textContent = prev), 2000);
+            })
+            .catch(() => {
+              alert("Copia non riuscita. Seleziona e copia manualmente l'IBAN.");
+            });
+        }
+      });
+    </script>
   </body>
 </html>
