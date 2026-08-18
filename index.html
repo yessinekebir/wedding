@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yessine & Monica | Wedding</title>
+    <title data-i18n="meta.title">Yessine & Monica | Wedding</title>
     <meta
       name="description"
+      data-i18n-attr="content"
+      data-i18n-key="meta.description"
       content="Il matrimonio di Yessine & Monica - 26 Giugno 2027 a Gela, Sicilia"
     />
     <meta name="robots" content="noindex, nofollow" />
@@ -44,7 +46,7 @@
     <div id="intro-overlay" class="intro-overlay">
       <div class="envelope-container">
         <div class="intro-labels">
-          <span class="intro-label-top">Hai ricevuto un invito da</span>
+          <span class="intro-label-top" data-i18n="intro.receivedFrom">Hai ricevuto un invito da</span>
           <h1 class="intro-label-names">Yessine & Monica</h1>
         </div>
         <div class="envelope-wrapper">
@@ -56,6 +58,8 @@
               id="wax-seal"
               role="button"
               aria-label="Apri invito"
+              data-i18n-attr="aria-label"
+              data-i18n-key="intro.openInvitation"
             >
               <div class="seal-inner">
                 <span class="initials">Y & M</span>
@@ -63,7 +67,7 @@
             </div>
           </div>
         </div>
-        <button id="skip-intro" class="skip-intro">Salta Intro</button>
+        <button id="skip-intro" class="skip-intro" data-i18n="intro.skip">Salta Intro</button>
       </div>
       <div class="particles" id="particles"></div>
     </div>
@@ -74,12 +78,12 @@
         <div class="nav-container">
           <a href="#home" class="logo">Y&M</a>
           <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#story">La Nostra Storia</a></li>
-            <li><a href="#details">Dettagli</a></li>
-            <li><a href="#getting-there">Come Arrivare</a></li>
-            <li><a href="#gallery">Galleria</a></li>
-            <li><a href="#rsvp">RSVP</a></li>
+            <li><a href="#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="#story" data-i18n="nav.story">La Nostra Storia</a></li>
+            <li><a href="#details" data-i18n="nav.details">Dettagli</a></li>
+            <li><a href="#getting-there" data-i18n="nav.gettingThere">Come Arrivare</a></li>
+            <li><a href="#gallery" data-i18n="nav.gallery">Galleria</a></li>
+            <li><a href="#rsvp" data-i18n="nav.rsvp">RSVP</a></li>
           </ul>
           <div class="nav-actions">
             <div class="lang-toggle-container">
@@ -88,6 +92,8 @@
                 id="lang-toggle"
                 role="group"
                 aria-label="Selezione lingua"
+                data-i18n-attr="aria-label"
+                data-i18n-key="nav.languageSelection"
               >
                 <button
                   type="button"
@@ -107,7 +113,12 @@
                 </button>
               </div>
             </div>
-            <button class="mobile-menu-toggle" aria-label="Menu">
+            <button
+              class="mobile-menu-toggle"
+              aria-label="Menu"
+              data-i18n-attr="aria-label"
+              data-i18n-key="nav.menu"
+            >
               <span></span>
               <span></span>
             </button>
@@ -123,12 +134,12 @@
           </video>
           <div class="hero-overlay"></div>
           <div class="scroll-indicator">
-            <span>Scorri</span>
+            <span data-i18n="hero.scroll">Scorri</span>
             <div class="line"></div>
           </div>
         </div>
         <div class="hero-content">
-          <h2 class="hero-subtitle reveal-up">Il Matrimonio di</h2>
+          <h2 class="hero-subtitle reveal-up" data-i18n="hero.subtitle">Il Matrimonio di</h2>
           <h1 class="hero-title reveal-up">Yessine & Monica</h1>
           <p class="hero-date reveal-up">26.06.2027</p>
           <div id="countdown" class="countdown reveal-up" role="timer"></div>
@@ -150,11 +161,13 @@
           <div class="text-center mb-10 reveal-up">
             <p
               class="text-tiny sm-text-xs tracking-extra-wide uppercase font-body mb-4 drop-shadow-subtle text-white"
+              data-i18n="story.eyebrow"
             >
               Com'è iniziato
             </p>
             <h2
               class="font-display italic text-4xl sm-text-4xl md-text-5xl text-white font-light tracking-wide drop-shadow-strong"
+              data-i18n="story.title"
             >
               Il Nostro Viaggio
             </h2>
@@ -164,18 +177,18 @@
           >
             <div class="absolute voyage-hook" aria-hidden="true"></div>
             <div class="px-6 sm-px-8 py-7 sm-py-9">
-              <p class="font-script sm-text-2xl text-sage-dark mb-3 text-4xl">
+              <p class="font-script sm-text-2xl text-sage-dark mb-3 text-4xl" data-i18n="story.greeting">
                 La nostra storia,
               </p>
               <div
                 class="space-y-3 font-script text-base sm-text-lg leading-relaxed text-sage-dark-90"
               >
-                <p>
+                <p data-i18n="story.paragraph1">
                   Tutto è iniziato in un pomeriggio senza vento nelle Cinque
                   Terre — un cappello di paglia in prestito, un bicchiere di
                   limoncello e una risata che ricordiamo ancora.
                 </p>
-                <p>
+                <p data-i18n="story.paragraph2">
                   E in un tramonto autunnale, ancorati in una caletta
                   silenziosa, una semplice domanda. Conoscete già la risposta.
                 </p>
@@ -183,6 +196,7 @@
               <div class="mt-6 text-right">
                 <p
                   class="font-body text-tiny sm-text-tiny tracking-wide uppercase text-sage-dark-70 mb-2"
+                  data-i18n="story.signoff"
                 >
                   Con amore,
                 </p>
@@ -201,26 +215,27 @@
       <section id="details" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle">Unitevi a Noi</span>
-            <h2 class="title">Dettagli del Matrimonio</h2>
+            <span class="subtitle" data-i18n="details.eyebrow">Unitevi a Noi</span>
+            <h2 class="title" data-i18n="details.title">Dettagli del Matrimonio</h2>
           </div>
           <div class="details-grid">
             <div class="details-card reveal-up">
               <div class="card-icon">⚓</div>
-              <h3>La Location</h3>
-              <p>B Cool Beach, Gela<br />Sicilia, Italia</p>
+              <h3 data-i18n="details.locationTitle">La Location</h3>
+              <p data-i18n-html="details.locationAddress">B Cool Beach, Gela<br />Sicilia, Italia</p>
               <a
                 href="https://maps.google.com/?q=B+Cool+Beach+Gela"
                 target="_blank"
                 class="cards-link"
+                data-i18n="details.directions"
                 >Ottieni Indicazioni</a
               >
             </div>
             <div class="details-card reveal-up" style="transition-delay: 0.1s">
               <div class="card-icon">📅</div>
-              <h3>Quando</h3>
-              <p>Sabato, 26 Giugno 2027<br />Ore 16:30</p>
-              <a class="cards-link" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Yessine+%26+Monica&dates=20270626T163000/20270626T213000&details=Celebrazione+al+B+Cool+Beach+di+Gela&location=B+Cool+Beach+Gela" target="_blank" rel="noopener">Salva su Google Calendar</a>
+              <h3 data-i18n="details.whenTitle">Quando</h3>
+              <p data-i18n-html="details.whenValue">Sabato, 26 Giugno 2027<br />Ore 16:30</p>
+              <a class="cards-link" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Matrimonio+Yessine+%26+Monica&dates=20270626T163000/20270626T213000&details=Celebrazione+al+B+Cool+Beach+di+Gela&location=B+Cool+Beach+Gela" target="_blank" rel="noopener" data-i18n="details.calendar">Salva su Google Calendar</a>
             </div>
         </div>
       </section>
@@ -232,10 +247,10 @@
             <div class="text-center mb-8 reveal-up">
               <span
                 class="getting-there-subtitle uppercase tracking-widest"
-                data-content="subtitle"
+                data-i18n="travel.eyebrow"
                 >ARRIVARE LÌ</span
               >
-              <h2 class="getting-there-title italic" data-content="title">
+              <h2 class="getting-there-title italic" data-i18n="travel.title">
                 Come trovarci
               </h2>
               <div class="getting-there-divider"></div>
@@ -243,7 +258,7 @@
 
             <div
               class="getting-there-description text-center mb-12 reveal-up"
-              data-content="description"
+              data-i18n="travel.description"
             >
               Gela si affaccia sul Golfo di Gela, incastonata tra la costa
               mediterranea e le fertili pianure della Sicilia meridionale. Ci
@@ -270,10 +285,10 @@
                   ></path>
                 </svg>
               </div>
-              <h3 class="transport-title italic mb-4" data-content="air-title">
+              <h3 class="transport-title italic mb-4" data-i18n="travel.airTitle">
                 In aereo
               </h3>
-              <p class="transport-text" data-content="air-text">
+              <p class="transport-text" data-i18n="travel.airText">
                 Aeroporto di Catania-Fontanarossa (CTA), a circa 100 km di
                 distanza, o Aeroporto di Comiso (CIY), a circa 45 km. Da lì, un
                 trasferimento privato o un'auto lungo la SS115 o la SS417 vi
@@ -288,18 +303,18 @@
       <section id="gallery" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle">I Nostri Ricordi</span>
-            <h2 class="title">Galleria</h2>
+            <span class="subtitle" data-i18n="gallery.eyebrow">I Nostri Ricordi</span>
+            <h2 class="title" data-i18n="gallery.title">Galleria</h2>
           </div>
           <div class="gallery-grid" id="masonry-gallery">
             <div class="gallery-item reveal-up">
-              <img src="/assets/gallery-1.jpg" alt="Galleria 1" />
+              <img src="/assets/gallery-1.jpg" alt="Galleria 1" data-i18n-attr="alt" data-i18n-key="gallery.image1Alt" />
             </div>
             <div class="gallery-item reveal-up">
-              <img src="/assets/gallery-1.jpg" alt="Galleria 2" />
+              <img src="/assets/gallery-1.jpg" alt="Galleria 2" data-i18n-attr="alt" data-i18n-key="gallery.image2Alt" />
             </div>
             <div class="gallery-item reveal-up">
-              <img src="/assets/gallery-1.jpg" alt="Galleria 3" />
+              <img src="/assets/gallery-1.jpg" alt="Galleria 3" data-i18n-attr="alt" data-i18n-key="gallery.image3Alt" />
             </div>
           </div>
         </div>
@@ -310,13 +325,13 @@
         <div class="container">
           <div class="rsvp-card-container">
             <div class="section-header text-center">
-              <span class="subtitle">Sarete dei Nostri?</span>
-              <h2 class="title">RSVP</h2>
+              <span class="subtitle" data-i18n="rsvp.eyebrow">Sarete dei Nostri?</span>
+              <h2 class="title" data-i18n="rsvp.title">RSVP</h2>
             </div>
             <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbzS5UGL9rINHs8iSy7UxvUK_rmkPPpslFwHj-upfwvIsHwARAZmf0pM2cjoiler8Ga2eQ/exec" method="POST">
               <div class="form-row">
                 <div class="form-group">
-                  <label for="first-name">Nome</label>
+                  <label for="first-name" data-i18n="rsvp.firstName">Nome</label>
                   <input
                     type="text"
                     id="first-name"
@@ -325,21 +340,21 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="last-name">Cognome</label>
+                  <label for="last-name" data-i18n="rsvp.lastName">Cognome</label>
                   <input type="text" id="last-name" name="last-name" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
-                  <label for="attendance">Parteciperai?</label>
+                  <label for="attendance" data-i18n="rsvp.attendance">Parteciperai?</label>
                   <select id="attendance" name="attendance" required>
-                    <option value="">Seleziona un'opzione</option>
-                    <option value="SI">Sì, con piacere</option>
-                    <option value="NO">Purtroppo no</option>
+                    <option value="" data-i18n="rsvp.attendancePlaceholder">Seleziona un'opzione</option>
+                    <option value="SI" data-i18n="rsvp.attending">Sì, con piacere</option>
+                    <option value="NO" data-i18n="rsvp.notAttending">Purtroppo no</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="guests">Numero di Ospiti</label>
+                  <label for="guests" data-i18n="rsvp.guests">Numero di Ospiti</label>
                   <input
                     type="number"
                     id="guests"
@@ -352,27 +367,29 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="meal">Preferenza Menu</label>
+                <label for="meal" data-i18n="rsvp.meal">Preferenza Menu</label>
                 <select id="meal" name="meal" required>
-                  <option value="Menu di pesce">Menu di pesce</option>
-                  <option value="Menu di carne">Menu di carne</option>
-                  <option value="Menu Vegetariano">Menu Vegetariano</option>
+                  <option value="Menu di pesce" data-i18n="rsvp.fish">Menu di pesce</option>
+                  <option value="Menu di carne" data-i18n="rsvp.meat">Menu di carne</option>
+                  <option value="Menu Vegetariano" data-i18n="rsvp.vegetarian">Menu Vegetariano</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="allergies">Intolleranze o Allergie</label>
+                <label for="allergies" data-i18n="rsvp.allergies">Intolleranze o Allergie</label>
                 <input
                   type="text"
                   id="allergies"
                   name="allergies"
                   placeholder="es. Noci, Glutine..."
+                  data-i18n-attr="placeholder"
+                  data-i18n-key="rsvp.allergiesPlaceholder"
                 />
               </div>
               <div class="form-group">
-                <label for="message">Messaggio per gli sposi (Opzionale)</label>
+                <label for="message" data-i18n="rsvp.message">Messaggio per gli sposi (Opzionale)</label>
                 <textarea id="message" name="message" rows="4"></textarea>
               </div>
-              <button type="submit" class="btn-primary">Invia Risposta</button>
+              <button type="submit" class="btn-primary" data-i18n="rsvp.submit">Invia Risposta</button>
             </form>
           </div>
         </div>
@@ -382,11 +399,11 @@
       <section id="contribute" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle">Contribuisci</span>
-            <h2 class="title">Partecipare ai nostri sogni</h2>
+            <span class="subtitle" data-i18n="contribution.eyebrow">Contribuisci</span>
+            <h2 class="title" data-i18n="contribution.title">Partecipare ai nostri sogni</h2>
           </div>
           <div class="contribute-card text-center">
-            <p>
+            <p data-i18n="contribution.description">
               Se desiderate partecipare concretamente alla realizzazione dei
               nostri progetti, potete effettuare un versamento sul seguente
               IBAN.
@@ -394,14 +411,14 @@
             <p class="iban" style="font-size:1.1rem; margin:0.5rem 0">
               <strong>IT00 0000 0000 0000 0000 0000 000</strong>
             </p>
-            <button class="btn-primary btn-copy-iban" type="button">Copia IBAN</button>
+            <button class="btn-primary btn-copy-iban" type="button" data-i18n="contribution.copy" data-copy-target=".iban strong">Copia IBAN</button>
           </div>
             <div style="margin:0.75rem 0; text-align:left; display:inline-block;">
-              <p style="margin:0.35rem 0"><strong>Intestatario:</strong> <span class="contrib-intestatario">Yessine Kebir - Monica Di Vita</span></p>
-              <p style="margin:0.35rem 0"><strong>Banca:</strong> <span class="contrib-bank">Revolut Bank</span></p>
+              <p style="margin:0.35rem 0"><strong data-i18n="contribution.holder">Intestatario:</strong> <span class="contrib-intestatario">Yessine Kebir - Monica Di Vita</span></p>
+              <p style="margin:0.35rem 0"><strong data-i18n="contribution.bank">Banca:</strong> <span class="contrib-bank">Revolut Bank</span></p>
               <p style="margin:0.35rem 0"><strong>BIC / SWIFT:</strong> <span class="contrib-bic">BCITITMMXXX</span></p>
             </div>
-            <p class="muted" style="margin-top:0.75rem; text-align: center">Grazie di cuore — la vostra presenza è il dono più grande.</p>
+            <p class="muted" style="margin-top:0.75rem; text-align: center" data-i18n="contribution.thanks">Grazie di cuore — la vostra presenza è il dono più grande.</p>
         </div>
       </section>
       
@@ -409,35 +426,35 @@
       <section id="faq" class="section bg-soft">
         <div class="container">
           <div class="section-header text-center">
-            <span class="subtitle">Domande Frequenti</span>
-            <h2 class="title">FAQ</h2>
+            <span class="subtitle" data-i18n="faq.eyebrow">Domande Frequenti</span>
+            <h2 class="title" data-i18n="faq.title">FAQ</h2>
           </div>
           <div class="faq-accordion">
             <div class="faq-item reveal-up">
               <button class="faq-trigger">
-                Qual è il Dress Code? <span>+</span>
+                <span data-i18n="faq.dressQuestion">Qual è il Dress Code?</span> <span class="faq-icon">+</span>
               </button>
               <div class="faq-content">
-                <p>Per l'occasione, é semplicemente richiesto di indossare un
+                <p data-i18n="faq.dressAnswer">Per l'occasione, è semplicemente richiesto di indossare un
                   abbigliamento elegante, nessun dress code specifico.</p>
               </div>
             </div>
             <div class="faq-item reveal-up">
               <button class="faq-trigger">
-                Dove si celebrerà il rito? <span>+</span>
+                <span data-i18n="faq.ceremonyQuestion">Dove si celebrerà il rito?</span> <span class="faq-icon">+</span>
               </button>
               <div class="faq-content">
-                <p>
-                  Il rito si terrà presso il B Cool Beach di Gela — location dove si terrá l'intero evento.
+                <p data-i18n="faq.ceremonyAnswer">
+                  Il rito si terrà presso il B Cool Beach di Gela — location dove si terrà l'intero evento.
                 </p>
               </div>
             </div>
             <div class="faq-item reveal-up">
               <button class="faq-trigger">
-                C'è il parcheggio? <span>+</span>
+                <span data-i18n="faq.parkingQuestion">C'è il parcheggio?</span> <span class="faq-icon">+</span>
               </button>
               <div class="faq-content">
-                <p>
+                <p data-i18n="faq.parkingAnswer">
                   Sì, B Cool Beach dispone di un ampio parcheggio privato
                   riservato ai nostri ospiti direttamente all'ingresso della
                   location.
@@ -455,7 +472,7 @@
           <h2 class="footer-logo">Y&M</h2>
           <p class="hashtag">#YessineMonica2027</p>
           <p class="thank-you">
-            Non vediamo l'ora di festeggiare con voi !
+            <span data-i18n="footer.thanks">Non vediamo l'ora di festeggiare con voi !</span>
           </p>
           <p class="made-by">© 2026 Yessine & Monica</p>
         </div>
@@ -464,67 +481,5 @@
 
     <!-- JS Modules -->
     <script type="module" src="js/app.js"></script>
-    <script>
-      // General copy handler for buttons with data-copy-target
-      document.addEventListener('click', function (e) {
-        const copyBtn = e.target.closest('[data-copy-target]') || (e.target.matches('.btn-copy-iban') ? e.target : null);
-        if (!copyBtn) return;
-
-        // support legacy .btn-copy-iban: target the .iban strong
-        let selector = copyBtn.getAttribute ? copyBtn.getAttribute('data-copy-target') : null;
-        if (!selector && copyBtn.classList && copyBtn.classList.contains('btn-copy-iban')) selector = '.iban strong';
-        const targetEl = selector ? document.querySelector(selector) : null;
-        if (!targetEl) return;
-        const text = targetEl.textContent.trim().replace(/\s+/g, ' ');
-        if (!text) return;
-        navigator.clipboard
-          .writeText(text)
-          .then(() => {
-            const prev = copyBtn.textContent;
-            copyBtn.textContent = copyBtn.getAttribute('data-copied-text') || 'Copiato';
-            setTimeout(() => (copyBtn.textContent = prev), 2000);
-          })
-          .catch(() => alert('Copia non riuscita. Copia manualmente il testo.'));
-      });
-
-      // RSVP form submission via fetch to Google Apps Script Web App
-      (function () {
-        const form = document.getElementById('rsvp-form');
-        if (!form) return;
-        form.addEventListener('submit', function (ev) {
-          ev.preventDefault();
-          if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-          }
-          const submitBtn = form.querySelector('[type="submit"]');
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Invio in corso...';
-
-          const action = form.getAttribute('action');
-          // Send as form POST to the Apps Script web app
-          fetch(action, {
-            method: 'POST',
-            body: new FormData(form),
-            mode: 'cors',
-          })
-            .then((resp) => {
-              if (!resp.ok) throw new Error('Network response was not ok');
-              return resp.text();
-            })
-            .then(() => {
-              // Replace form with thank you message
-              const container = form.parentElement;
-              container.innerHTML = '<p class="font-body" style="font-size:1.1rem">Grazie! La tua risposta è stata registrata. Spero tu possa essere presente, non vediamo l\'ora di festeggiare insieme questo giorno.</p>';
-            })
-            .catch((err) => {
-              console.error(err);
-              alert('Si è verificato un errore durante l\'invio. Riprovare più tardi.');
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Invia Risposta';
-            });
-        });
-      })();
-    </script>
   </body>
 </html>
