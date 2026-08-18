@@ -401,6 +401,15 @@ img {
   margin: 0 auto;
 }
 
+/* Footer small attribution */
+.made-by {
+  color: var(--color-gold-light);
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  letter-spacing: 0.12em;
+}
+
 /* Helper for GSAP reveals */
 .reveal-up {
   opacity: 0;

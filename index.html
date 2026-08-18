@@ -313,7 +313,7 @@
               <span class="subtitle">Sarete dei Nostri?</span>
               <h2 class="title">RSVP</h2>
             </div>
-            <form id="rsvp-form" class="rsvp-form">
+            <form id="rsvp-form" class="rsvp-form" action="https://script.google.com/macros/s/AKfycbzS5UGL9rINHs8iSy7UxvUK_rmkPPpslFwHj-upfwvIsHwARAZmf0pM2cjoiler8Ga2eQ/exec" method="POST">
               <div class="form-row">
                 <div class="form-group">
                   <label for="first-name">Nome</label>
@@ -329,17 +329,13 @@
                   <input type="text" id="last-name" name="last-name" required />
                 </div>
               </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required />
-              </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="attendance">Parteciperai?</label>
                   <select id="attendance" name="attendance" required>
                     <option value="">Seleziona un'opzione</option>
-                    <option value="yes">Sì, con piacere</option>
-                    <option value="no">Purtroppo no</option>
+                    <option value="SI">Sì, con piacere</option>
+                    <option value="NO">Purtroppo no</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -351,15 +347,16 @@
                     min="1"
                     max="10"
                     value="1"
+                    required
                   />
                 </div>
               </div>
               <div class="form-group">
                 <label for="meal">Preferenza Menu</label>
-                <select id="meal" name="meal">
-                  <option value="fish">Menu di pesce</option>
-                  <option value="meat">Menu di carne</option>
-                  <option value="veg">Vegetariano</option>
+                <select id="meal" name="meal" required>
+                  <option value="Menu di pesce">Menu di pesce</option>
+                  <option value="Menu di carne">Menu di carne</option>
+                  <option value="Menu Vegetariano">Menu Vegetariano</option>
                 </select>
               </div>
               <div class="form-group">
@@ -460,6 +457,7 @@
           <p class="thank-you">
             Non vediamo l'ora di festeggiare con voi !
           </p>
+          <p class="made-by">© 2026 Yessine & Monica</p>
         </div>
       </footer>
     </main>
@@ -467,24 +465,66 @@
     <!-- JS Modules -->
     <script type="module" src="js/app.js"></script>
     <script>
+      // General copy handler for buttons with data-copy-target
       document.addEventListener('click', function (e) {
-        if (e.target.matches('.btn-copy-iban')) {
-          const ibanEl = document.querySelector('.iban strong');
-          const text = ibanEl ? ibanEl.textContent.replace(/\s+/g, '') : '';
-          if (!text) return;
-          navigator.clipboard
-            .writeText(text)
-            .then(() => {
-              const btn = e.target;
-              const prev = btn.textContent;
-              btn.textContent = 'IBAN copiato';
-              setTimeout(() => (btn.textContent = prev), 2000);
-            })
-            .catch(() => {
-              alert("Copia non riuscita. Seleziona e copia manualmente l'IBAN.");
-            });
-        }
+        const copyBtn = e.target.closest('[data-copy-target]') || (e.target.matches('.btn-copy-iban') ? e.target : null);
+        if (!copyBtn) return;
+
+        // support legacy .btn-copy-iban: target the .iban strong
+        let selector = copyBtn.getAttribute ? copyBtn.getAttribute('data-copy-target') : null;
+        if (!selector && copyBtn.classList && copyBtn.classList.contains('btn-copy-iban')) selector = '.iban strong';
+        const targetEl = selector ? document.querySelector(selector) : null;
+        if (!targetEl) return;
+        const text = targetEl.textContent.trim().replace(/\s+/g, ' ');
+        if (!text) return;
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            const prev = copyBtn.textContent;
+            copyBtn.textContent = copyBtn.getAttribute('data-copied-text') || 'Copiato';
+            setTimeout(() => (copyBtn.textContent = prev), 2000);
+          })
+          .catch(() => alert('Copia non riuscita. Copia manualmente il testo.'));
       });
+
+      // RSVP form submission via fetch to Google Apps Script Web App
+      (function () {
+        const form = document.getElementById('rsvp-form');
+        if (!form) return;
+        form.addEventListener('submit', function (ev) {
+          ev.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          const submitBtn = form.querySelector('[type="submit"]');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Invio in corso...';
+
+          const action = form.getAttribute('action');
+          // Send as form POST to the Apps Script web app
+          fetch(action, {
+            method: 'POST',
+            body: new FormData(form),
+            mode: 'cors',
+          })
+            .then((resp) => {
+              if (!resp.ok) throw new Error('Network response was not ok');
+              return resp.text();
+            })
+            .then(() => {
+              // Replace form with thank you message
+              const container = form.parentElement;
+              container.innerHTML = '<p class="font-body" style="font-size:1.1rem">Grazie! La tua risposta è stata registrata. Spero tu possa essere presente, non vediamo l\'ora di festeggiare insieme questo giorno.</p>';
+            })
+            .catch((err) => {
+              console.error(err);
+              alert('Si è verificato un errore durante l\'invio. Riprovare più tardi.');
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Invia Risposta';
+            });
+        });
+      })();
     </script>
   </body>
 </html>
