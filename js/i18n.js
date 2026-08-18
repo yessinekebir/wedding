@@ -80,6 +80,7 @@ const translations = {
     "contribution.title": "Partecipare ai nostri sogni",
     "contribution.description":
       "Se desiderate partecipare concretamente alla realizzazione dei nostri progetti, potete effettuare un versamento sul seguente IBAN.",
+    "contribution.reveal": "Mostra dati bancari",
     "contribution.copy": "Copia IBAN",
     "contribution.copied": "Copiato",
     "contribution.copyError": "Copia non riuscita. Copia manualmente il testo.",
@@ -97,7 +98,7 @@ const translations = {
       "Il rito si terrà presso il B Cool Beach di Gela — location dove si terrà l'intero evento.",
     "faq.parkingQuestion": "C'è il parcheggio?",
     "faq.parkingAnswer":
-      "Sì, B Cool Beach dispone di un ampio parcheggio privato riservato ai nostri ospiti direttamente all'ingresso della location.",
+      "Sì, B Cool Beach dispone di un ampio parcheggio pubblico gratuito, esattamente davanti l'ingresso della location.",
     "footer.thanks": "Non vediamo l'ora di festeggiare con voi !",
   },
   en: {
@@ -181,6 +182,7 @@ const translations = {
     "contribution.title": "Be Part of Our Dreams",
     "contribution.description":
       "If you would like to help us bring our plans to life, you can make a contribution using the following IBAN.",
+    "contribution.reveal": "Show bank details",
     "contribution.copy": "Copy IBAN",
     "contribution.copied": "Copied",
     "contribution.copyError": "Copy failed. Please copy the text manually.",
@@ -198,7 +200,7 @@ const translations = {
       "The ceremony will take place at B Cool Beach in Gela, where the entire event will be held.",
     "faq.parkingQuestion": "Is parking available?",
     "faq.parkingAnswer":
-      "Yes, B Cool Beach has a large private car park reserved for our guests directly at the venue entrance.",
+      "Yes, B Cool Beach has a large public car park free of charge, exactly in front of the venue entrance.",
     "footer.thanks": "We cannot wait to celebrate with you!",
   },
 };
