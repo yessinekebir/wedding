@@ -56,15 +56,6 @@ export const initEnvelope = () => {
     return;
   }
 
-  // Second visit: no gate at all. js/animations.js reads the same flag and
-  // fires triggerSiteEntrance() itself, so do not dispatch `site-entered` here
-  // or the hero timeline runs twice.
-  if (sessionStorage.getItem("introShown")) {
-    gate.remove();
-    showContent();
-    return;
-  }
-
   const q = (sel) => gate.querySelector(sel);
   const lens = q(".gate-lens");
   const scene = q(".gate-scene");
@@ -131,7 +122,6 @@ export const initEnvelope = () => {
     if (revealed) return;
     revealed = true;
 
-    sessionStorage.setItem("introShown", "true");
     // Drop the fullscreen GPU texture the moment it stops being visible.
     lens.style.display = "none";
     gate.classList.remove("is-opening");
@@ -251,10 +241,14 @@ export const initEnvelope = () => {
         },
         1.31,
       )
-      .call(() => {
-        startIdle();
-        focusSeal();
-      }, null, 1.35);
+      .call(
+        () => {
+          startIdle();
+          focusSeal();
+        },
+        null,
+        1.35,
+      );
   }
 
   /* ----------------------------------------------------------------------
@@ -264,7 +258,11 @@ export const initEnvelope = () => {
     const tl = gsap.timeline();
 
     tl.to(seal, { scale: 0.86, y: 3, duration: 0.13, ease: "power2.in" }, 0)
-      .to(seal, { scale: 1.08, y: -10, duration: 0.22, ease: "power3.out" }, 0.13)
+      .to(
+        seal,
+        { scale: 1.08, y: -10, duration: 0.22, ease: "power3.out" },
+        0.13,
+      )
       // Uncover the window. Not at 0.3 with the first degree of the swing: a
       // flap tilted toward the camera projects WIDER at the hinge but SHORTER
       // at its point (its apex vertex rides up as cos falls faster than the
@@ -441,7 +439,10 @@ export const initEnvelope = () => {
     if (["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(e.key)) return;
     // Enter and Space on the focused button already synthesise a click; letting
     // them through here as well would open twice.
-    if ((e.key === "Enter" || e.key === " ") && document.activeElement === seal) {
+    if (
+      (e.key === "Enter" || e.key === " ") &&
+      document.activeElement === seal
+    ) {
       return;
     }
     openGate();

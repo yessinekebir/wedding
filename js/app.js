@@ -4,6 +4,11 @@ import { initAnimations } from "./animations.js";
 import { initRSVP } from "./rsvp.js";
 import { initClipboard } from "./clipboard.js";
 
+if (history.scrollRestoration) {
+  history.scrollRestoration = "manual";
+}
+window.scrollTo(0, 0);
+
 document.addEventListener("DOMContentLoaded", () => {
   initI18n();
   initEnvelope();

@@ -1,11 +1,6 @@
 export const initAnimations = () => {
   gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
-  // Entrance logic
-  if (sessionStorage.getItem("introShown")) {
-    setTimeout(triggerSiteEntrance, 100);
-  }
-
   window.addEventListener("site-entered", () => {
     triggerSiteEntrance();
   });

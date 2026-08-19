@@ -25,10 +25,9 @@ const translations = {
     "story.title": "Il Nostro Viaggio",
     "story.greeting": "La nostra storia,",
     "story.paragraph1":
-      "Tutto è iniziato in un pomeriggio senza vento nelle Cinque Terre — un cappello di paglia in prestito, un bicchiere di limoncello e una risata che ricordiamo ancora.",
+      "Un giorno, quasi per caso, i loro sguardi si incrociarono in un corridoio di scuola. Fu un incontro semplice, apparentemente come tanti, ma destinato, senza che lo sapessero, a cambiare per sempre le loro vite. Da quel momento iniziarono a conoscersi e, passo dopo passo, scoprirono quanto fossero simili e quanto, allo stesso tempo, riuscissero a completarsi. Come due piatti della stessa bilancia, trovarono il loro equilibrio: lui portò calma nella sua vita, lei portò energia, colore e un pizzico di follia.",
     "story.paragraph2":
-      "E in un tramonto autunnale, ancorati in una caletta silenziosa, una semplice domanda. Conoscete già la risposta.",
-    "story.signoff": "Con amore,",
+      "Gli anni passarono, ma una cosa non cambiò mai: continuarono a scegliersi, ogni giorno. La passione per il mare e per i viaggi li portò a condividere esperienze, scoprire nuovi luoghi e vivere insieme avventure che li unirono ancora di più, trasformando ogni viaggio in un nuovo ricordo da custodire. Oggi si amano, si sostengono e continuano a camminare insieme, rimanendo l’uno per l’altra un punto fermo, un complice e una delle presenze più importanti della loro vita. E quel corridoio di scuola, dove un giorno i loro sguardi si incontrarono quasi per caso, è diventato l’inizio della loro storia più bella. La storia di due persone che, senza saperlo, quel giorno avevano appena iniziato a scrivere il loro per sempre.",
     "details.eyebrow": "Unitevi a Noi",
     "details.title": "Dettagli del Matrimonio",
     "details.locationTitle": "La Location",
@@ -127,10 +126,9 @@ const translations = {
     "story.title": "Our Journey",
     "story.greeting": "Our story,",
     "story.paragraph1":
-      "It all began on a windless afternoon in the Cinque Terre — a borrowed straw hat, a glass of limoncello, and a laugh we still remember.",
+      "One day, almost by chance, their eyes met in a school corridor. It was a simple encounter, seemingly like so many others, but one that would unknowingly change their lives forever. From that moment on, they began to get to know each other and, little by little, discovered how much they had in common and, at the same time, how perfectly they complemented one another. Like two sides of the same scale, they found their balance: he brought calm into her life, while she brought energy, colour, and a little touch of madness into his.",
     "story.paragraph2":
-      "Then, at an autumn sunset, anchored in a quiet cove, came one simple question. You already know the answer.",
-    "story.signoff": "With love,",
+      "Years passed, but one thing never changed: they continued to choose each other, every single day. Their shared passion for the sea and travelling brought them even closer, giving them the chance to experience new adventures, discover new places, and create memories that made their bond stronger with every journey. Today, they love, support, and walk through life together, remaining for one another a steady presence, a partner in every adventure, and one of the most important people in each other’s lives. And that school corridor, where their eyes first met almost by chance, became the beginning of their most beautiful story. The story of two people who, without knowing it, had just begun to write their forever.",
     "details.eyebrow": "Join Us",
     "details.title": "Wedding Details",
     "details.locationTitle": "The Venue",
