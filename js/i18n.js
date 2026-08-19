@@ -28,7 +28,7 @@ const translations = {
       "Un giorno, quasi per caso, i loro sguardi si incrociarono in un corridoio di scuola. Fu un incontro semplice, apparentemente come tanti, ma destinato, senza che lo sapessero, a cambiare per sempre le loro vite. Da quel momento iniziarono a conoscersi e, passo dopo passo, scoprirono quanto fossero simili e quanto, allo stesso tempo, riuscissero a completarsi. Come due piatti della stessa bilancia, trovarono il loro equilibrio: lui portò calma nella sua vita, lei portò energia, colore e un pizzico di follia.",
     "story.paragraph2":
       "Gli anni passarono, ma una cosa non cambiò mai: continuarono a scegliersi, ogni giorno. La passione per il mare e per i viaggi li portò a condividere esperienze, scoprire nuovi luoghi e vivere insieme avventure che li unirono ancora di più, trasformando ogni viaggio in un nuovo ricordo da custodire. Oggi si amano, si sostengono e continuano a camminare insieme, rimanendo l’uno per l’altra un punto fermo, un complice e una delle presenze più importanti della loro vita. E quel corridoio di scuola, dove un giorno i loro sguardi si incontrarono quasi per caso, è diventato l’inizio della loro storia più bella. La storia di due persone che, senza saperlo, quel giorno avevano appena iniziato a scrivere il loro per sempre.",
-    "details.eyebrow": "Unitevi a Noi",
+    "details.eyebrow": "Il grande evento",
     "details.title": "Dettagli del Matrimonio",
     "details.locationTitle": "La Location",
     "details.locationAddress": "B Cool Beach, Gela<br />Sicilia, Italia",
@@ -78,7 +78,7 @@ const translations = {
     "contribution.eyebrow": "Contribuisci",
     "contribution.title": "Partecipare ai nostri sogni",
     "contribution.description":
-      "Se desiderate partecipare concretamente alla realizzazione dei nostri progetti, potete effettuare un versamento sul seguente IBAN.",
+      "Per noi, ogni viaggio è un ricordo da custodire. Amiamo scoprire nuovi luoghi, perderci tra strade sconosciute e collezionare momenti da raccontare. Se vorrete farci un regalo, potrete contribuire al nostro prossimo viaggio, aiutandoci a trasformare un sogno in una nuova, meravigliosa avventura insieme.",
     "contribution.reveal": "Mostra dati bancari",
     "contribution.copy": "Copia IBAN",
     "contribution.copied": "Copiato",
@@ -86,7 +86,7 @@ const translations = {
     "contribution.holder": "Intestatario:",
     "contribution.bank": "Banca:",
     "contribution.thanks":
-      "Grazie di cuore — la vostra presenza è il dono più grande.",
+      "La vostra presenza al nostro fianco è già il regalo più bello. Grazie di cuore.",
     "faq.eyebrow": "Domande Frequenti",
     "faq.title": "FAQ",
     "faq.dressQuestion": "Qual è il Dress Code?",
@@ -129,7 +129,7 @@ const translations = {
       "One day, almost by chance, their eyes met in a school corridor. It was a simple encounter, seemingly like so many others, but one that would unknowingly change their lives forever. From that moment on, they began to get to know each other and, little by little, discovered how much they had in common and, at the same time, how perfectly they complemented one another. Like two sides of the same scale, they found their balance: he brought calm into her life, while she brought energy, colour, and a little touch of madness into his.",
     "story.paragraph2":
       "Years passed, but one thing never changed: they continued to choose each other, every single day. Their shared passion for the sea and travelling brought them even closer, giving them the chance to experience new adventures, discover new places, and create memories that made their bond stronger with every journey. Today, they love, support, and walk through life together, remaining for one another a steady presence, a partner in every adventure, and one of the most important people in each other’s lives. And that school corridor, where their eyes first met almost by chance, became the beginning of their most beautiful story. The story of two people who, without knowing it, had just begun to write their forever.",
-    "details.eyebrow": "Join Us",
+    "details.eyebrow": "The Big Event",
     "details.title": "Wedding Details",
     "details.locationTitle": "The Venue",
     "details.locationAddress": "B Cool Beach, Gela<br />Sicily, Italy",
@@ -179,7 +179,7 @@ const translations = {
     "contribution.eyebrow": "Contribute",
     "contribution.title": "Be Part of Our Dreams",
     "contribution.description":
-      "If you would like to help us bring our plans to life, you can make a contribution using the following IBAN.",
+      "For us, every journey is a memory to cherish. We love discovering new places, getting lost in unfamiliar streets, and collecting moments to tell stories about. If you would like to give us a gift, you can contribute to our next trip, helping us turn a dream into a new, wonderful adventure together.",
     "contribution.reveal": "Show bank details",
     "contribution.copy": "Copy IBAN",
     "contribution.copied": "Copied",
@@ -187,7 +187,7 @@ const translations = {
     "contribution.holder": "Account holder:",
     "contribution.bank": "Bank:",
     "contribution.thanks":
-      "Thank you from the bottom of our hearts — your presence is the greatest gift.",
+      "Having you by our side is already the most beautiful gift. Thank you from the bottom of our hearts.",
     "faq.eyebrow": "Frequently Asked Questions",
     "faq.title": "FAQ",
     "faq.dressQuestion": "What is the Dress Code?",
