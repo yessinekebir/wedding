@@ -68,9 +68,7 @@ export const initEnvelope = () => {
   const glow = q(".gate-glow");
   const slot = q(".gate-seal-slot");
   const ring = q(".gate-seal-ring");
-  const breath = q(".gate-seal-breath");
   const seal = q(".gate-seal");
-  const glint = q(".gate-seal-glint");
   const wash = q(".gate-wash");
   const music = document.getElementById("bg-music");
 
@@ -136,8 +134,8 @@ export const initEnvelope = () => {
   };
 
   /* ----------------------------------------------------------------------
-     Idle affordance — three stacked cues, no text.
-     ---------------------------------------------------------------------- */
+      Idle affordance — one pulsing ring, no text.
+      ---------------------------------------------------------------------- */
   const startIdle = () => {
     idleTweens.push(
       gsap.fromTo(
@@ -153,34 +151,11 @@ export const initEnvelope = () => {
         },
       ),
     );
-    idleTweens.push(
-      gsap.fromTo(
-        glint,
-        { xPercent: -145 },
-        {
-          xPercent: 145,
-          duration: 1.5,
-          ease: "power2.inOut",
-          repeat: -1,
-          repeatDelay: 2.6,
-        },
-      ),
-    );
-    idleTweens.push(
-      gsap.to(breath, {
-        scale: 1.032,
-        duration: 2.4,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      }),
-    );
   };
 
   const stopIdle = () => {
     idleTweens.forEach((t) => t.kill());
     idleTweens.length = 0;
-    gsap.set(breath, { scale: 1 });
     gsap.set(ring, { opacity: 0 });
   };
 

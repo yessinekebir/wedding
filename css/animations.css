@@ -355,7 +355,7 @@
   margin-top: calc(var(--seal-h) / -2);
 }
 
-/* Idle cue 1: a gold ring pulsing outward. */
+/* A gold ring pulses outward to invite interaction. */
 .gate-seal-ring {
   position: absolute;
   top: 50%;
@@ -367,13 +367,6 @@
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;
-}
-
-/* Idle cue 3: the breath lives on its own wrapper so the click timeline's
-   scale tweens (which target the button) never fight the idle loop. */
-.gate-seal-breath {
-  position: absolute;
-  inset: 0;
 }
 
 .gate-seal {
@@ -404,40 +397,7 @@
   outline: none;
 }
 
-/* Idle cue 2: a specular sheen, masked to the wax silhouette so the highlight
-   is clipped to the seal rather than to a square. Mask URLs resolve relative
-   to the stylesheet, and the -webkit- prefix is still required.
-   The mask stays put on this wrapper; the moving streak is the child, so the
-   silhouette does not travel with the highlight. */
-.gate-seal-sheen {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  -webkit-mask-image: url("../assets/seal.png");
-  mask-image: url("../assets/seal.png");
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
-.gate-seal-glint {
-  position: absolute;
-  top: -25%;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  background: linear-gradient(
-    104deg,
-    rgba(255, 255, 255, 0) 38%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0) 62%
-  );
-}
-
-/* Gold bloom on hover — the only affordance beyond the three idle cues. */
+/* Gold bloom on hover reinforces the ring affordance. */
 @media (hover: hover) {
   .gate-seal::after {
     content: "";
@@ -527,13 +487,5 @@ html.gate-open body {
   }
   .gate-back::before {
     --paper-sheet: linear-gradient(158deg, var(--paper-a), var(--paper-bk-b));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /* The idle loops are not built in JS on this path; hide the sheen outright
-     so no static highlight streak is left sitting on the wax. */
-  .gate-seal-sheen {
-    display: none;
   }
 }
