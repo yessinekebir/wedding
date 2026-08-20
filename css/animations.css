@@ -395,7 +395,7 @@
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.5));
 }
 
-.gate-seal:focus-visible {
+.gate.is-keyboard-nav .gate-seal:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 10px;
   border-radius: 50%;

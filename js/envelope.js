@@ -431,6 +431,7 @@ export const initEnvelope = () => {
     // Focus is trapped on the seal for as long as the gate is up.
     if (e.key === "Tab") {
       e.preventDefault();
+      gate.classList.add("is-keyboard-nav");
       if (!opened) focusSeal();
       return;
     }
