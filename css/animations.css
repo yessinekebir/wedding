@@ -393,7 +393,8 @@
   outline-offset: 10px;
   border-radius: 50%;
 }
-.gate-seal:focus:not(:focus-visible) {
+.gate-seal:focus,
+.gate-seal:focus-visible {
   outline: none;
 }
 
