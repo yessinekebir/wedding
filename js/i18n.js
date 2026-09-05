@@ -25,9 +25,9 @@ const translations = {
     "story.title": "Il Nostro Viaggio",
     "story.greeting": "La nostra storia,",
     "story.paragraph1":
-      "Un giorno, quasi per caso, i loro sguardi si incrociarono in un corridoio di scuola. Fu un incontro semplice, apparentemente come tanti, ma destinato, senza che lo sapessero, a cambiare per sempre le loro vite. Da quel momento iniziarono a conoscersi e, passo dopo passo, scoprirono quanto fossero simili e quanto, allo stesso tempo, riuscissero a completarsi. Come due piatti della stessa bilancia, trovarono il loro equilibrio: lui portò calma nella sua vita, lei portò energia, colore e un pizzico di follia.",
+      "Un giorno, quasi per caso, ci siamo incrociati in un corridoio di scuola. Eravamo piccoli e curiosi e non sapevamo ancora che quel momento così semplice sarebbe diventato l’inizio di qualcosa di importante. Ci siamo trovati e ci siamo resi conto di essere molto simili e fatti l’uno per l’altro.",
     "story.paragraph2":
-      "Gli anni passarono, ma una cosa non cambiò mai: continuarono a scegliersi, ogni giorno. La passione per il mare e per i viaggi li portò a condividere esperienze, scoprire nuovi luoghi e vivere insieme avventure che li unirono ancora di più, trasformando ogni viaggio in un nuovo ricordo da custodire. Oggi si amano, si sostengono e continuano a camminare insieme, rimanendo l’uno per l’altra un punto fermo, un complice e una delle presenze più importanti della loro vita. E quel corridoio di scuola, dove un giorno i loro sguardi si incontrarono quasi per caso, è diventato l’inizio della loro storia più bella. La storia di due persone che, senza saperlo, quel giorno avevano appena iniziato a scrivere il loro per sempre.",
+      "Da Caltagirone abbiamo iniziato il nostro viaggio, scoprendo il mondo e costruendo, passo dopo passo, la nostra casa e la nostra famiglia.  Oggi siamo ancora noi, innamorati come allora,  pronti a compiere il passo più bello e a scegliere, ancora una volta, di costruire il nostro futuro insieme.",
     "details.eyebrow": "Il grande evento",
     "details.title": "Dettagli del Matrimonio",
     "details.locationTitle": "La Location",
@@ -54,8 +54,8 @@ const translations = {
     "rsvp.lastName": "Cognome",
     "rsvp.attendance": "Parteciperai?",
     "rsvp.attendancePlaceholder": "Seleziona un'opzione",
-    "rsvp.attending": "Sì, con piacere",
-    "rsvp.notAttending": "Purtroppo no",
+    "rsvp.attending": "Sì",
+    "rsvp.notAttending": "No",
     "rsvp.guests": "Ospiti",
     "rsvp.adults": "Adulti",
     "rsvp.children": "Bambini",
@@ -69,14 +69,14 @@ const translations = {
     "rsvp.allergies": "Intolleranze o Allergie",
     "rsvp.allergiesPlaceholder": "es. Noci, Glutine...",
     "rsvp.message": "Messaggio per gli sposi (Opzionale)",
-    "rsvp.submit": "Invia Risposta",
+    "rsvp.submit": "Invia",
     "rsvp.submitting": "Invio in corso...",
     "rsvp.success":
       "Grazie! La tua risposta è stata registrata. Spero tu possa essere presente, non vediamo l'ora di festeggiare insieme questo giorno.",
     "rsvp.error":
       "Si è verificato un errore durante l'invio. Riprovare più tardi.",
-    "contribution.eyebrow": "Contribuisci",
-    "contribution.title": "Partecipare ai nostri sogni",
+    "contribution.eyebrow": "Il nostro prossimo viaggio",
+    "contribution.title": "Un nuovo ricordo da costruire insieme",
     "contribution.description":
       "Per noi, ogni viaggio è un ricordo da custodire. Amiamo scoprire nuovi luoghi, perderci tra strade sconosciute e collezionare momenti da raccontare. Se vorrete farci un regalo, potrete contribuire al nostro prossimo viaggio, aiutandoci a trasformare un sogno in una nuova, meravigliosa avventura insieme.",
     "contribution.reveal": "Mostra dati bancari",
@@ -98,6 +98,7 @@ const translations = {
     "faq.parkingQuestion": "C'è il parcheggio?",
     "faq.parkingAnswer":
       "Sì, B Cool Beach dispone di un ampio parcheggio pubblico gratuito, esattamente davanti l'ingresso della location.",
+    "footer.date": "26 Giugno 2027",
     "footer.thanks": "Non vediamo l'ora di festeggiare con voi !",
   },
   en: {
@@ -126,9 +127,9 @@ const translations = {
     "story.title": "Our Journey",
     "story.greeting": "Our story,",
     "story.paragraph1":
-      "One day, almost by chance, their eyes met in a school corridor. It was a simple encounter, seemingly like so many others, but one that would unknowingly change their lives forever. From that moment on, they began to get to know each other and, little by little, discovered how much they had in common and, at the same time, how perfectly they complemented one another. Like two sides of the same scale, they found their balance: he brought calm into her life, while she brought energy, colour, and a little touch of madness into his.",
+      "One day, almost by chance, our paths crossed in a school hallway. We were young and curious, unaware that such a simple moment would become the beginning of something important. We found each other and soon realized how alike we were, and that we were made for one another.",
     "story.paragraph2":
-      "Years passed, but one thing never changed: they continued to choose each other, every single day. Their shared passion for the sea and travelling brought them even closer, giving them the chance to experience new adventures, discover new places, and create memories that made their bond stronger with every journey. Today, they love, support, and walk through life together, remaining for one another a steady presence, a partner in every adventure, and one of the most important people in each other’s lives. And that school corridor, where their eyes first met almost by chance, became the beginning of their most beautiful story. The story of two people who, without knowing it, had just begun to write their forever.",
+      "Our journey began in Caltagirone, leading us to discover the world and, step by step, build our home and our family. Today, we are still the same two people, as much in love as we were then, ready to take our most beautiful step yet and choose, once again, to build our future together.",
     "details.eyebrow": "The Big Event",
     "details.title": "Wedding Details",
     "details.locationTitle": "The Venue",
@@ -155,8 +156,8 @@ const translations = {
     "rsvp.lastName": "Last Name",
     "rsvp.attendance": "Will you attend?",
     "rsvp.attendancePlaceholder": "Select an option",
-    "rsvp.attending": "Yes, with pleasure",
-    "rsvp.notAttending": "Unfortunately not",
+    "rsvp.attending": "Yes",
+    "rsvp.notAttending": "No",
     "rsvp.guests": "Guests",
     "rsvp.adults": "Adults",
     "rsvp.children": "Children",
@@ -170,14 +171,14 @@ const translations = {
     "rsvp.allergies": "Intolerances or Allergies",
     "rsvp.allergiesPlaceholder": "e.g. Nuts, Gluten...",
     "rsvp.message": "Message for the couple (Optional)",
-    "rsvp.submit": "Send Response",
+    "rsvp.submit": "Send",
     "rsvp.submitting": "Sending...",
     "rsvp.success":
       "Thank you! Your response has been recorded. We hope you can join us and we cannot wait to celebrate this day together.",
     "rsvp.error":
       "An error occurred while sending your response. Please try again later.",
-    "contribution.eyebrow": "Contribute",
-    "contribution.title": "Be Part of Our Dreams",
+    "contribution.eyebrow": "Our next journey",
+    "contribution.title": "A new memory to create together",
     "contribution.description":
       "For us, every journey is a memory to cherish. We love discovering new places, getting lost in unfamiliar streets, and collecting moments to tell stories about. If you would like to give us a gift, you can contribute to our next trip, helping us turn a dream into a new, wonderful adventure together.",
     "contribution.reveal": "Show bank details",
@@ -199,6 +200,7 @@ const translations = {
     "faq.parkingQuestion": "Is parking available?",
     "faq.parkingAnswer":
       "Yes, B Cool Beach has a large public car park free of charge, exactly in front of the venue entrance.",
+    "footer.date": "June 26, 2027",
     "footer.thanks": "We cannot wait to celebrate with you!",
   },
 };
