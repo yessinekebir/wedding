@@ -39,7 +39,7 @@ export const initEnvelope = () => {
 
     const heroSubtitle = mainContent.querySelector(".hero-subtitle");
     if (heroSubtitle) {
-      gsap.to(heroSubtitle, { opacity: 1, duration: 0.55, ease: "power2.out" });
+      gsap.to(heroSubtitle, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" });
     }
   };
 

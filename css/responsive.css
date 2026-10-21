@@ -33,6 +33,12 @@
     }
 }
 
+@media (max-height: 500px) {
+    .hero-content {
+        top: 0;
+    }
+}
+
 /* Hover Effects */
 .nav-links a::after {
     content: '';

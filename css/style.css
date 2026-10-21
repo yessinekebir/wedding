@@ -868,6 +868,7 @@ img {
 
 .hero-content {
   position: relative;
+  top: calc(-1 * clamp(32px, 10vh, 120px));
   z-index: 2;
   text-align: center;
 }
