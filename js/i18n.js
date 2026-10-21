@@ -78,7 +78,7 @@ const translations = {
     "contribution.eyebrow": "Il nostro prossimo viaggio",
     "contribution.title": "Un nuovo ricordo da costruire insieme",
     "contribution.description":
-      "Per noi, ogni viaggio è un ricordo da custodire. Amiamo scoprire nuovi luoghi, perderci tra strade sconosciute e collezionare momenti da raccontare.<br />Se vorrete farci un regalo, potrete contribuire al nostro prossimo viaggio, aiutandoci a trasformare un sogno in una nuova, meravigliosa avventura insieme.",
+      "Per noi, ogni viaggio è un ricordo da custodire. Amiamo scoprire nuovi luoghi, perderci tra strade sconosciute e collezionare momenti da raccontare.<br />Se vorrete farci un regalo, potrete contribuire al nostro prossimo viaggio, aiutandoci a trasformare un sogno in una nuova avventura insieme.",
     "contribution.reveal": "Mostra dati bancari",
     "contribution.copy": "Copia IBAN",
     "contribution.copied": "Copiato",
@@ -86,7 +86,7 @@ const translations = {
     "contribution.holder": "Intestatario:",
     "contribution.bank": "Banca:",
     "contribution.thanks":
-      "La vostra presenza al nostro fianco è già il regalo più bello. Grazie di cuore.",
+      "La vostra presenza al nostro fianco è già il regalo più bello.<br />Grazie di cuore ❤️.",
     "faq.eyebrow": "Domande Frequenti",
     "faq.title": "FAQ",
     "faq.dressQuestion": "Qual è il Dress Code?",
@@ -174,7 +174,7 @@ const translations = {
     "rsvp.submit": "Send",
     "rsvp.submitting": "Sending...",
     "rsvp.success":
-      "Thank you! Your response has been recorded. We hope you can join us and we cannot wait to celebrate this day together.",
+      "Thank you! Your response has been recorded. We hope you can join us and we can't wait to celebrate this day together.",
     "rsvp.error":
       "An error occurred while sending your response. Please try again later.",
     "contribution.eyebrow": "Our next journey",
@@ -188,7 +188,7 @@ const translations = {
     "contribution.holder": "Account holder:",
     "contribution.bank": "Bank:",
     "contribution.thanks":
-      "Having you by our side is already the most beautiful gift. Thank you from the bottom of our hearts.",
+      "Having you by our side is already the most beautiful gift.<br/> Thank you from the bottom of our hearts ❤️.",
     "faq.eyebrow": "Frequently Asked Questions",
     "faq.title": "FAQ",
     "faq.dressQuestion": "What is the Dress Code?",
@@ -201,7 +201,7 @@ const translations = {
     "faq.parkingAnswer":
       "Yes, B Cool Beach has a large public car park free of charge, exactly in front of the venue entrance.",
     "footer.date": "June 26, 2027",
-    "footer.thanks": "We cannot wait to celebrate with you!",
+    "footer.thanks": "We can't wait to celebrate with you!",
   },
 };
 
