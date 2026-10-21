@@ -34,7 +34,7 @@ const translations = {
     "details.locationAddress": "B Cool Beach, Gela<br />Sicilia, Italia",
     "details.directions": "Ottieni Indicazioni",
     "details.whenTitle": "Quando",
-    "details.whenValue": "Sabato, 26 Giugno 2027<br />Ore 16:30",
+    "details.whenValue": "Sabato, 26 Giugno 2027<br />Ore 18:30",
     "details.calendar": "Salva su Google Calendar",
     "travel.eyebrow": "ARRIVARE LÌ",
     "travel.title": "Come trovarci",

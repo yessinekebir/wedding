@@ -46,7 +46,7 @@ function initNavbarScroll() {
 }
 
 function initCountdown() {
-  const countdownDate = new Date("June 26, 2027 16:30:00").getTime();
+  const countdownDate = new Date("June 26, 2027 18:30:00").getTime();
   const countdownEl = document.getElementById("countdown");
 
   if (!countdownEl) return;
