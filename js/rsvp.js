@@ -42,6 +42,43 @@ const createMealField = (index, selectedValue) => {
   return group;
 };
 
+// Public reCAPTCHA v3 site key. Leave empty to disable until configured.
+const RECAPTCHA_SITE_KEY = "6Lf9afotAAAAALKb75CzBS80aYDT9xgF20iJcsyW";
+
+const loadRecaptcha = () =>
+  new Promise((resolve, reject) => {
+    if (window.grecaptcha) return resolve();
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.append(script);
+  });
+
+const getRecaptchaToken = () =>
+  loadRecaptcha().then(
+    () =>
+      new Promise((resolve, reject) =>
+        window.grecaptcha.ready(() =>
+          window.grecaptcha
+            .execute(RECAPTCHA_SITE_KEY, { action: "rsvp" })
+            .then(resolve, reject),
+        ),
+      ),
+  );
+
+const MIN_FILL_MS = 4000;
+const COOLDOWN_MS = 60000;
+const COOLDOWN_KEY = "rsvp-last-submit";
+const NAME_PATTERN = /^[\p{L}][\p{L}\p{M}' .-]{0,49}$/u;
+const LOOKS_SPAMMY = /https?:|www\.|<|>|@|\[url|\d{4,}/i;
+
+const isValidName = (value) => {
+  const name = value.trim();
+  return NAME_PATTERN.test(name) && !LOOKS_SPAMMY.test(name);
+};
+
 export const initRSVP = () => {
   const rsvpForm = document.getElementById("rsvp-form");
 
@@ -90,6 +127,21 @@ export const initRSVP = () => {
   renderMealFields();
   syncAttendance();
 
+  const loadedAt = Date.now();
+
+  // Bots that only see the HTML never run this, so a missing token or
+  // timestamp can be rejected by the Apps Script backend as well.
+  const addHidden = (name, value) => {
+    let input = rsvpForm.querySelector(`input[name="${name}"]`);
+    if (!input) {
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      rsvpForm.append(input);
+    }
+    input.value = value;
+  };
+
   rsvpForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -98,14 +150,53 @@ export const initRSVP = () => {
       return;
     }
 
+    const firstName = rsvpForm.querySelector("#first-name");
+    const lastName = rsvpForm.querySelector("#last-name");
+
+    if (!isValidName(firstName.value) || !isValidName(lastName.value)) {
+      alert(t("rsvp.error"));
+      return;
+    }
+
+    const honeypot = rsvpForm.querySelector("#website").value;
+    const tooFast = Date.now() - loadedAt < MIN_FILL_MS;
+    const lastSubmit = Number(localStorage.getItem(COOLDOWN_KEY) || 0);
+
+    // Pretend to succeed for bots so they do not adapt.
+    if (honeypot || tooFast) {
+      rsvpForm.replaceWith(
+        Object.assign(document.createElement("p"), {
+          className: "font-body",
+          textContent: t("rsvp.success"),
+        }),
+      );
+      return;
+    }
+
+    if (Date.now() - lastSubmit < COOLDOWN_MS) {
+      alert(t("rsvp.error"));
+      return;
+    }
+
+    addHidden("elapsed", String(Date.now() - loadedAt));
+    addHidden("token", btoa(`${loadedAt}:${Date.now()}`));
+    localStorage.setItem(COOLDOWN_KEY, String(Date.now()));
+
     submitButton.textContent = t("rsvp.submitting");
     submitButton.disabled = true;
 
-    fetch(rsvpForm.action, {
-      method: "POST",
-      body: new FormData(rsvpForm),
-      mode: "cors",
-    })
+    const tokenPromise = RECAPTCHA_SITE_KEY
+      ? getRecaptchaToken().then((token) => addHidden("g-recaptcha-response", token))
+      : Promise.resolve();
+
+    tokenPromise
+      .then(() =>
+        fetch(rsvpForm.action, {
+          method: "POST",
+          body: new FormData(rsvpForm),
+          mode: "cors",
+        }),
+      )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

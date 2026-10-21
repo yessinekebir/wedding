@@ -75,7 +75,7 @@ const translations = {
     "rsvp.submit": "Invia",
     "rsvp.submitting": "Invio in corso...",
     "rsvp.success":
-      "Grazie! La tua risposta è stata registrata. Spero tu possa essere presente, non vediamo l'ora di festeggiare insieme questo giorno.",
+      "Grazie! La tua risposta è stata registrata. Speriamo tu possa essere presente, non vediamo l'ora di festeggiare insieme questo giorno.",
     "rsvp.error":
       "Si è verificato un errore durante l'invio. Riprovare più tardi.",
     "contribution.eyebrow": "Il nostro prossimo viaggio",
