@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavbarScroll();
   initCountdown();
   initFAQ();
+  initFlipCards();
 });
 
 function initMobileMenu() {
@@ -78,6 +79,26 @@ function initCountdown() {
   const timer = setInterval(updateCountdown, 1000);
   updateCountdown();
   document.addEventListener("languagechange", updateCountdown);
+}
+
+function initFlipCards() {
+  document.querySelectorAll(".flip-card").forEach((card) => {
+    const toggle = () => {
+      const flipped = card.classList.toggle("is-flipped");
+      card.setAttribute("aria-pressed", String(flipped));
+    };
+    card.addEventListener("click", (event) => {
+      if (event.target.closest("a")) return;
+      toggle();
+    });
+    card.addEventListener("keydown", (event) => {
+      if (event.target !== card) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggle();
+      }
+    });
+  });
 }
 
 function initFAQ() {
