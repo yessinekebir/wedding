@@ -368,6 +368,7 @@ img {
 
 /* Flip card (La Location) */
 .flip-card {
+  position: relative;
   perspective: 1400px;
   cursor: pointer;
   min-height: 380px;
