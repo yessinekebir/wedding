@@ -3,6 +3,7 @@ import { initEnvelope } from "./envelope.js";
 import { initAnimations } from "./animations.js";
 import { initRSVP } from "./rsvp.js";
 import { initClipboard } from "./clipboard.js";
+import { initHeroVideo } from "./hero-video.js";
 
 if (history.scrollRestoration) {
   history.scrollRestoration = "manual";
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAnimations();
   initRSVP();
   initClipboard();
+  initHeroVideo();
   initMobileMenu();
   initNavbarScroll();
   initCountdown();

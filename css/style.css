@@ -280,6 +280,18 @@ img {
   object-fit: cover;
 }
 
+.hero-video {
+  pointer-events: none;
+}
+
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-overlay-play-button,
+.hero-video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 .hero-overlay {
   position: absolute;
   top: 0;
